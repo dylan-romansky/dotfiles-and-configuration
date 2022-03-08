@@ -1,1 +1,1 @@
-This repo serves as a central location to store all the files used to configure utilities I use on a regular basis
+Items are organized based on whether they are machine specific or if they're used across multiple machines I use regularly
