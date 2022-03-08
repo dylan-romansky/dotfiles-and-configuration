@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#just a real small, simple script to remove orphaned packages
+#and clean the cache afterwards
+
+pacman -Rsn $(pacman -Qqdt)
+paccache -r

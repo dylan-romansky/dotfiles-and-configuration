@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#automates the removal of a portion of mtgo's eula agreement
+#file so that wine is capable of running mtgo without crashing
+
+find ~/.wine*/drive_c/ -name 'EULA_en.rtf' -exec sed -e '/^{\\pict/,/^}/ d' -ibck "{}" \;

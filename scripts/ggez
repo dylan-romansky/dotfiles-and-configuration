@@ -1,0 +1,106 @@
+#!/bin/bash
+
+#intended as a means of executing a series of git commands
+#all in one line. there are a number of issues with it
+#currently so debugging is ongoing
+
+if [ -z $1 ]; then
+    echo "Error: no actions specified"
+fi
+
+while [ $# -ne 0 ]; do
+    case $1 in
+
+        -r)
+            if [ -n $REMOTE ]; then
+                echo "Error: remote already set"
+                exit
+            fi
+            shift
+            REMOTE="$1"
+            ;;
+
+        -b)
+            if [ -n $BRANCH ]; then
+                echo "Error: branch already set"
+                exit
+            fi
+            shift
+            BRANCH="$1"
+            ;;
+
+        -m)
+            shift
+            MSG+=("$1")
+            ;;
+
+        add)
+            CASE=$1
+            ;;
+
+        rm)
+            CASE=$1
+            ;;
+
+        mv)
+            CASE=$1
+            ;;
+
+        *)
+            case $CASE in
+
+                add)
+                    PFILES+=("$1")
+                    ;;
+
+                rm)
+                    RFILES+=("$1")
+                    ;;
+
+                mv)
+                    MFILES+=("$1")
+                    ;;
+
+                *)
+                    echo "Error: actions unspecified"
+                    exit
+                    ;;
+            esac
+
+    esac
+    shift
+done
+REMOTE=${REMOTE:-$(git remote)}
+BRANCH=${BRANCH:-$(git status -sb 2> /dev/null | sed -e "s/\.\.\./ /" -ne "s/^## //p" | awk '{print $1}')}
+if [ -z "$(git remote | grep "$REMOTE")" ]; then
+    echo "Error: invalid remote $?"
+    exit
+fi
+if [ -z "$(git branch | grep "$BRANCH")" ]; then
+    echo "Error: invalid branch $?"
+    exit
+fi
+if [ -z "${PFILES[*]}" ] && [ -z "${RFILES[*]}" ] && [ -z "${MFILES[*]}" ]; then
+    echo "Error: no files to add/move/remove"
+    exit
+fi
+if [ -n "${MFILES[*]}" ]; then
+	if [ $((${#MFILES[@]} % 2)) -ne 0 ]; then
+		echo "Error: missing mv source or destination"
+		exit
+	fi
+	while [ ${#MFILES[@]} -ne 0 ]; do
+		$(git mv "${MFILES[@]:0:2}")
+		MFILES=("${MFILES[@]:2}")
+	done
+fi
+if [ -n "${PFILES[*]}" ]; then
+	$(git add "${PFILES[@]}")
+fi
+if [ -n "${RFILES[*]}" ]; then
+	$(git rm "${RFILES[@]}")
+fi
+if [ -z "${MSG[*]}" ]; then
+    read -e -p 'enter commit message: ' MSG
+fi
+$(git commit -m "${MSG[@]}"; git push "$REMOTE" "$BRANCH")

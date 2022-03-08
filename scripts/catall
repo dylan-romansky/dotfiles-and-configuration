@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#for when cat * isn't eneough
+#TODO: some form of filtering so you don't have to deal with
+#      binary files in your output
+function catall () {
+	for ITEM in `ls $1`; do
+		echo $ITEM
+		cat $ITEM
+		echo
+	done;
+}
+
+catall | less

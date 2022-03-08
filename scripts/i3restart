@@ -1,0 +1,8 @@
+#!/bin/sh
+WS=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name')
+`/usr/myshit/nempty`
+i3-msg "restart"
+if [ -z "$(pidof budgie-panel)" ]; then
+	`budgie-panel`
+fi
+i3-msg "workspace number $WS"

@@ -1,0 +1,15 @@
+#!/bin/bash
+cd $HOME/builds
+for REPO in $(ls); do
+	cd $REPO
+	echo $REPO
+	git reset --hard
+	STATUS=$(git pull)
+	if [[ $STATUS != *"Already up to date."* ]]; then
+		echo "Updating..."
+		makepkg -si --noconfirm
+	else
+		echo "Already up to date."
+	fi
+	cd ..
+done

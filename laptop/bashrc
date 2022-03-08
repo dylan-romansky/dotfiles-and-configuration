@@ -33,7 +33,7 @@ function cd () {
 	DIR=${DIR:-"$HOME"}
 	builtin cd "$DIR"
 	if [ $? -eq 0 ]; then
-		fuck_ls -G
+		fu_ls -G
 	fi
 }
 
@@ -85,13 +85,15 @@ alias rm='mv -ft $HOME/Trash/'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias ln='ln -iv'
-alias ls='/usr/myshit/fuck_ls -G'
+alias ls='fu_ls -G'
 alias ping='ping -c 4'
 alias shutdown='shutdown now'
 alias calculator="gnome-calculator"
 alias clone='git clone'
 alias cpp='clang++ -Wall -Werror -Wextra'
 alias dicc='diff -C0'
+alias newsh='newscript -sh'
+alias newpy='newscript -py3'
 
 # renamed for easier memory
 

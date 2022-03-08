@@ -31,15 +31,15 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 #exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id volcunt up
-bindsym XF86AudioLowerVolume exec --no-startup-id volcunt down
-bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id volcunt smup
-bindsym Shift+XF86AudioLowerVolume exec --no-startup-id volcunt smdown
-bindsym Ctrl+XF86AudioRaiseVolume exec --no-startup-id volcunt micup
-bindsym Ctrl+XF86AudioLowerVolume exec --no-startup-id volcunt micdown
-bindsym Ctrl+Shift+XF86AudioRaiseVolume exec --no-startup-id volcunt smicup
-bindsym Ctrl+Shift+XF86AudioLowerVolume exec --no-startup-id volcunt smicdown
-bindsym XF86AudioMute exec --no-startup-id volcunt mute #pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id volcont up
+bindsym XF86AudioLowerVolume exec --no-startup-id volcont down
+bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id volcont smup
+bindsym Shift+XF86AudioLowerVolume exec --no-startup-id volcont smdown
+bindsym Ctrl+XF86AudioRaiseVolume exec --no-startup-id volcont micup
+bindsym Ctrl+XF86AudioLowerVolume exec --no-startup-id volcont micdown
+bindsym Ctrl+Shift+XF86AudioRaiseVolume exec --no-startup-id volcont smicup
+bindsym Ctrl+Shift+XF86AudioLowerVolume exec --no-startup-id volcont smicdown
+bindsym XF86AudioMute exec --no-startup-id volcont mute #pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Notification daemon runs on startup
 exec --no-startup-id /usr/lib/notify-osd/notify-osd
@@ -211,8 +211,8 @@ mode "settings" {
 
 bindsym Shift+$mod+s mode "settings"
 
-bindsym --release $mod+shift+p exec /usr/myshit/scrotum -s
-bindsym --release $mod+p exec /usr/myshit/scrotum
+bindsym --release $mod+shift+p exec /usr/myshit/ScrotUM -s
+bindsym --release $mod+p exec /usr/myshit/ScrotUM
 bindsym Shift+$mod+w exec --no-startup-id wineserver -k
 bindsym --release XF86PowerOff exec shutdown now
 bindsym --release $mod+XF86PowerOff exec reboot

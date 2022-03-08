@@ -1,0 +1,7 @@
+#!/bin/sh
+# Scrot Utility Manager
+
+cd $HOME/Pictures/scrot
+scrot $@
+killall notify-osd
+notify-send "Screenshot taken"

@@ -1,0 +1,77 @@
+#!/bin/bash
+
+#this script allows me to use keybindings in i3 to control the
+#volume and microphone levels of my system. It still has some
+#issues because I'm still learning how sound routing works in
+#a "build it yourself" environment
+
+function noty {
+	killall notify-osd
+	case $1 in
+
+		Volume)
+			sendstr="$1: $(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+		if [[ "$(pactl list sinks | grep Mute)" == *"yes"* ]]; then
+			sendstr+=" (Mute)"
+		fi
+		notify-send "$sendstr"
+			;;
+
+		Mic)
+			notify-send "$1: $(pactl list sources | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 2 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+			;;
+	esac
+}	
+
+case $1 in
+
+	up)
+		pactl set-sink-volume @DEFAULT_SINK@ +10%
+		noty Volume
+		;;
+	
+	down)
+		pactl set-sink-volume @DEFAULT_SINK@ -10%
+		noty Volume
+		;;
+
+	smup)
+		pactl set-sink-volume @DEFAULT_SINK@ +5%
+		noty Volume
+		;;
+	
+	smdown)
+		pactl set-sink-volume @DEFAULT_SINK@ -5%
+		noty Volume
+		;;
+	
+	micup)
+		pactl set-source-volume 1 +10%
+		noty Mic
+		;;
+
+	micdown)
+		pactl set-source-volume 1 -10%
+		noty Mic
+		;;
+
+	smicup)
+		pactl set-source-volume 1 +5%
+		noty Mic
+		;;
+
+	smicdown)
+		pactl set-source-volume 1 -5%
+		noty Mic
+		;;
+
+	mute)
+		pactl set-sink-mute @DEFAULT_SINK@ toggle
+		killall notify-osd
+		if [[ "$(pactl list sinks | grep Mute)" == *"yes"* ]]; then
+			notify-send "Volume: Mute"
+		else
+			notify-send "Volume: Unmute"
+		fi
+		;;
+esac

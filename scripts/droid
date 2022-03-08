@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#adb pull /sdcard/Download/magisk_patched.img
+
+DIR="$HOME/Documents/android/"
+BL=${2:-"magisk_patched"}
+
+adb reboot bootloader
+case $1 in
+
+	boot)
+		fastboot boot $DIR/$BL.img
+		;;
+
+	flash)
+		fastboot flash boot $DIR$BL.img
+		fastboot boot $DIR$BL.img
+		;;
+
+	*)
+		echo "usage: droid [boot | flash]"
+		;;
+
+esac

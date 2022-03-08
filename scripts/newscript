@@ -1,0 +1,91 @@
+#!/bin/sh
+
+#The base of this script was written by my good friend. He can
+#be found on GitHub as alanbarnett. In his original design,
+#this script generates a blank file to write a bash script.
+#I built on this by adding the ability to take user input and
+#to be able to generate a few different kinds of script. It is
+#intended to only use 2 arguments, the first one designating
+#the type of script, and the second designating the name of
+#the file to be created. However, in the event that I miss
+#parts of the input, it will prompt me for the missing pieces
+#and run basic sanity checks
+
+$SCRTYPE
+$SCRNAME
+
+function typeinput () {
+	echo "Type of script:"
+	echo "1) Bash 2) Python3"
+	read INPUT
+	case $INPUT in
+		1)
+			SCRTYPE="-sh"
+			;;
+		2)
+			SCRTYPE="-py3"
+			;;
+		*)
+			echo "Error: bad type. Aborting"
+			exit
+			;;
+	esac
+}
+
+function typecheck () {
+	case $1 in
+		-sh)
+			SCRTYPE="#!/bin/bash"
+			;;
+		-py3)
+			SCRTYPE="#!/usr/bin/env python3"
+			;;
+		*)
+			if [ -z "$SCRNAME" ]; then
+				SCRNAME=$1
+			else
+				echo "Error: bad input"
+				exit
+			fi
+
+			if [ -z $2 ]; then
+				typeinput
+				typecheck "$SCRTYPE"
+			else
+				typecheck "$2"
+			fi
+			;;
+	esac
+}
+
+if [ ${#} -gt 2 ]; then
+	echo "Error: too many arguments"
+	exit
+fi
+
+if [ -z $1 ]; then
+	typeinput
+else
+	SCRTYPE=$1
+	shift
+fi
+
+typecheck "$SCRTYPE" "${@}"
+
+if [ -z $SCRNAME ]; then
+	if [ -z $1 ]; then
+		echo "Please enter a filename:"
+		read SCRNAME
+	else
+		SCRNAME=$1;
+	fi
+fi
+
+if [ -f "$SCRNAME" ]; then
+    echo "File exists! Aborting."
+    exit
+fi
+
+echo "$SCRTYPE" > "$SCRNAME"
+chmod 755 "$SCRNAME"
+$EDITOR "$SCRNAME"

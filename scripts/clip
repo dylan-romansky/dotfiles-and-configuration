@@ -1,0 +1,11 @@
+#!/bin/bash
+
+## potential future improvements: offer a line range
+## or regex matching to grab pieces of the input file.
+## copy everything starting at a giving string and ending
+## at another given string.
+if [ -p /dev/stdin ]; then
+	cat | xclip -selection c
+elif [ -n "$1" ]; then
+	cat "$1" | xclip -selection c
+fi

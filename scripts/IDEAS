@@ -1,0 +1,12 @@
+Renaming filenames from upper -> lower case. Newsgroup posters are so goddamn inconsiderate sometimes!
+
+https://www.reddit.com/r/linuxadmin/comments/wkk81/can_you_guys_give_me_some_random_ideas_for_bash/
+
+What I think is also useful to know is which unix programs to use in which situations. These examples should help
+
+Use sed to replace and insert text into an XML file
+Use sed to match multiple lines
+Use find to perform an action on every file that matches some criteria (this would lead on to the backup script)
+Use lsof to find all connections to a certain port open longer than 24 hours and kill them.
+https://wiki.archlinux.org/title/vim#Configuration
+https://www.nomachine.com/
