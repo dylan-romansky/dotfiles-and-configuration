@@ -1,0 +1,130 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Setup extract alias
+x () {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1 ;;
+      *.tar.gz)    tar xzf $1 ;;
+      *.bz2)       bunzip2 $1 ;;
+      *.rar)       rar x $1 ;;
+      *.gz)        gunzip $1 ;;
+      *.tar)       tar xvf $1 ;;
+      *.tbz2)      tar xjf $1 ;;
+      *.tgz)       tar xzf $1 ;;
+      *.zip)       unzip $1 ;;
+      *.Z)         uncompress $1 ;;
+      *.7z)        7za x $1 ;;
+      *.xz)        xz -d $1 ;;
+      *)           echo "'$1' cannot be extracted via extract()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+function cd () {
+	DIR="$1"
+	DIR=${DIR:-"$HOME"}
+	builtin cd "$DIR"
+	if [ $? -eq 0 ]; then
+		fuck_ls -G
+	fi
+}
+
+function vcp () {
+	if [ $# -eq 2 ]; then
+		cp $1 $2
+		vim $2
+	fi
+}
+
+function vbak () {
+	if [ $# -eq 2 ]; then
+		cp $1 $2
+		vim $1
+	fi
+}
+
+source $HOME/bin/ptheme/prompt_bigdigsquig.sh
+
+# config
+
+alias bconf='vim $HOME/.bashrc'
+alias binit='source $HOME/.bashrc'
+alias i3c='vim $HOME/.config/i3/config'
+
+# always needs sudo
+
+alias pacman='sudo pacman'
+alias update='sudo pacman -Syu --noconfirm'
+alias paccache='sudo paccache'
+alias please='sudo $(history -p !!)'
+alias assman='sudo systemctl'
+alias gparted='sudo gparted'
+alias vim='sudo vim'
+alias chmod='sudo chmod'
+alias cpu-x='sudo cpu-x'
+alias fastboot='sudo fastboot'
+alias fdisk='sudo fdisk'
+alias iptables='sudo iptables'
+alias du='sudo du'
+alias netctl='sudo netctl'
+alias ip='sudo ip'
+alias lldb='sudo lldb'
+
+# modified functionality (flags, better names, or otherwise)
+
+alias valor='valgrind --track-origins=yes'
+alias rm='mv -ft $HOME/Trash/'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias ln='ln -iv'
+alias ls='/usr/myshit/fuck_ls -G'
+alias ping='ping -c 4'
+alias shutdown='shutdown now'
+alias calculator="gnome-calculator"
+alias clone='git clone'
+alias cpp='clang++ -Wall -Werror -Wextra'
+alias dicc='diff -C0'
+
+# renamed for easier memory
+
+alias schootar='tar -zxvf'
+alias xwinfo='xprop'
+alias nut='python $HOME/Downloads/nut-2.6/nut.py'
+alias mirros='sudo reflector --sort age --country US --fastest 20 --protocol https --save /etc/pacman.d/mirrorlist'
+
+# fun
+
+alias clap='$HOME/Documents/scripts/clap.sh'
+alias spongebob='$HOME/Documents/scripts/spongebob.sh'
+alias haha="printf '\e[0;31;46mB00B135\e[0m\n'"
+
+# games
+
+alias mtgo='wine $HOME/Desktop/mtgo.exe'
+alias minecraft='minecraft-launcher'
+alias clean='make clean'
+alias doom='chocolate-doom -iwad ~/Documents/dos/Doom/DOOM.WAD -window'
+alias blipblop='cd $HOME/Documents/games/blip-blop/vc-projects/Blip_n_Blop_3/; ./blipblop; cd -'
+
+# vm/ssh
+
+alias skoger='VBoxManage startvm "skoger ryline" --type headless; ssh Nuthouse'
+alias phone='ssh -i ~/.ssh/id_phone -p 8022'
+
+# system related
+
+alias sys-update='sudo reflector --latest 20 --sort rate --save /etc/pacman.d/mirrorlist; pacman -Syu $@ --noconfirm; aur-update'
+alias disk='sudo du -hd1 /'
+alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
+alias browse='(thunar $PWD &>/dev/null & disown)'
+
+HISTCONTROL=ignoreboth:erasedups
+HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c"
