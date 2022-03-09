@@ -9,7 +9,9 @@
 #the type of script, and the second designating the name of
 #the file to be created. However, in the event that I miss
 #parts of the input, it will prompt me for the missing pieces
-#and run basic sanity checks
+#and run basic sanity checks. As I pick up more scripting
+#languages, I will be extending the functionality of this
+#script
 
 $SCRTYPE
 $SCRNAME
