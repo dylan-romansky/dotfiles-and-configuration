@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#A wrapper for finding all files in a directory that contain a
+#given string and replacing that string with a new one. Useful
+#for any time I come up with a new organization scheme for an
+#extensive list of files and want to do them all in one go.
+#I need to brush up on my regex to verify that everything
+#behaves properly
+
+if [ ${#} -ne 2 ]; then
+	echo "Usage: mass_rename {target string} {replacement string}"
+	exit
+fi
+
+for MATCH in $(ls -1 | grep $1); do
+	NEWNAME=$(echo $MATCH | sed s/$1/$2/)
+	mv $MATCH $NEWNAME
+done
