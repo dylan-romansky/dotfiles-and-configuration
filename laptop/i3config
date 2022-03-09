@@ -164,7 +164,7 @@ bindsym $mod+0 workspace $ws10
 bindsym Ctrl+$mod+Right workspace next_on_output
 bindsym Ctrl+$mod+Left workspace prev_on_output
 workspace_auto_back_and_forth yes
-bindsym Ctrl+$mod+o exec --no-startup-id /usr/myshit/nempty
+bindsym Ctrl+$mod+o exec --no-startup-id nempty
 
 
 # move focused container to workspace
@@ -211,8 +211,8 @@ mode "settings" {
 
 bindsym Shift+$mod+s mode "settings"
 
-bindsym --release $mod+shift+p exec /usr/myshit/ScrotUM -s
-bindsym --release $mod+p exec /usr/myshit/ScrotUM
+bindsym --release $mod+shift+p exec ScrotUM -s
+bindsym --release $mod+p exec ScrotUM
 bindsym Shift+$mod+w exec --no-startup-id wineserver -k
 bindsym --release XF86PowerOff exec shutdown now
 bindsym --release $mod+XF86PowerOff exec reboot
@@ -270,7 +270,7 @@ client.focused_inactive	#250436 #250436		#FFFFFF #3e0859
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec --no-startup-id /usr/myshit/i3restart
+bindsym $mod+Shift+r exec --no-startup-id i3restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
