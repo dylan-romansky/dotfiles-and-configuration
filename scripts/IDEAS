@@ -10,3 +10,7 @@ Use find to perform an action on every file that matches some criteria (this wou
 Use lsof to find all connections to a certain port open longer than 24 hours and kill them.
 https://wiki.archlinux.org/title/vim#Configuration
 https://www.nomachine.com/
+
+script to add google calendar events
+
+update bashrc with cd that asks to make directory if it doesn't already exist

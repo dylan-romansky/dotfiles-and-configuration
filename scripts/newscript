@@ -84,7 +84,7 @@ if [ -z $SCRNAME ]; then
 fi
 
 if [ -f "$SCRNAME" ]; then
-    echo "File exists! Aborting."
+	$EDITOR "$SCRNAME"
     exit
 fi
 
