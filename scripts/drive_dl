@@ -23,7 +23,7 @@ if len(sys.argv) < 2:
 	dl_set = [user_input()]
 else:
 	dl_set = sys.argv[1:]
-drive = drive_handling.drive_setup(SCOPES)
+drive = drive_handling.drive_setup(SCOPES, start_dir)
 for item in dl_set:
 	pwd = os.getcwd()
 	if os.path.exists(item) == False:

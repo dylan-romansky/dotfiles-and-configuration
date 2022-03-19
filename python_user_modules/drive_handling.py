@@ -20,6 +20,11 @@
 #as soon as I figure out a reasonable way to implement account
 #switching, I will be a very happy coder
 
+#temporary fix for the above, when invoking drive_setup you
+#should pass in both the SCOPES you want it to be able to
+#use as well as the directory where you want it to look for
+#token.json
+
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -34,21 +39,21 @@ import io
 import re
 
 creds_path = '/home/dromansk/Documents/config/python_user_modules/'
-def drive_setup(SCOPES):
+def drive_setup(SCOPES, token_dir):
 	pwd = os.getcwd()
 	os.chdir(creds_path)
 	if not SCOPES:
 		raise Exception("No scope")
 	creds = None
-	if os.path.exists('token.json'):
-		creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+	if os.path.exists(token_dir + 'token.json'):
+		creds = Credentials.from_authorized_user_file(token_dir + 'token.json', SCOPES)
 	if not creds or not creds.valid:
 		if creds and creds.expired and creds.refresh_token:
 			creds.refresh(Request())
 		else:
 			flow = InstalledAppFlow.from_client_secrets_file(creds_path + 'credentials.json', SCOPES)
 			creds = flow.run_local_server(port=0)
-		with open('token.json', 'w') as token:
+		with open(token_dir + 'token.json', 'w') as token:
 			token.write(creds.to_json())
 	os.chdir(pwd)
 	return build('drive', 'v3', credentials = creds)
