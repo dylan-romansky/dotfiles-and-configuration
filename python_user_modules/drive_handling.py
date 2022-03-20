@@ -38,8 +38,10 @@ import os
 import io
 import re
 
-creds_path = '/home/dromansk/Documents/config/python_user_modules/'
-def drive_setup(SCOPES, token_dir):
+#edit the following with your own preferred default path
+creds_path = os.path.expandvars('$HOME/Documents/config/python_user_modules/')
+
+def drive_setup(SCOPES='https://www.googleapis.com/drive.metadata.readonly', token_dir=creds_path):
 	pwd = os.getcwd()
 	os.chdir(creds_path)
 	if not SCOPES:
@@ -58,14 +60,15 @@ def drive_setup(SCOPES, token_dir):
 	os.chdir(pwd)
 	return build('drive', 'v3', credentials = creds)
 
+#generalize this function by giving it the ability to tell
+#the difference between folders and files, creating
+#subdirectories in the drive upload location accordingly
 def drive_fill(DRIVE_DIR, DRIVE):
 	print('from: ' + str(date.today()))
 	DEST_META = {'name': str(date.today()), 'mimeType': "application/vnd.google-apps.folder", 'parents': [DRIVE_DIR['files'][0]['id']]}
 	DEST = DRIVE.files().create(body=DEST_META, fields="id").execute()
 	ID = DEST.get('id')
 	for file in os.listdir():
-		if not re.match(r'.*\.txt$', file):
-			continue
 		print('upload: ' + file)
 		META = {"name": file, "parents": [ID]}
 		DATA = MediaFileUpload(file)
@@ -90,7 +93,8 @@ def dl_items(drive, item):
 		print(file)
 		if file['mimeType'] == 'application/vnd.google-apps.folder':
 			pwd = os.getcwd
-			os.mkdir(file['name'])
+			if not os.path.exists(file['name']):
+				os.mkdir(file['name'])
 			os.chdir(file['name'])
 			dl_items(drive, file['name'])
 			os.chdir(pwd)

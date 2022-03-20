@@ -7,7 +7,7 @@ import os
 import sys
 import drive_handling
 
-SCOPES = ['https://www.googleapis.com/auth/drive']
+SCOPE = ['https://www.googleapis.com/auth/drive']
 start_dir = '/home/dromansk/Documents'
 os.chdir(start_dir)
 if os.path.exists('instruments') == False:
@@ -23,7 +23,7 @@ if len(sys.argv) < 2:
 	dl_set = [user_input()]
 else:
 	dl_set = sys.argv[1:]
-drive = drive_handling.drive_setup(SCOPES, start_dir)
+drive = drive_handling.drive_setup(SCOPES=SCOPE, token_dir=start_dir)
 for item in dl_set:
 	pwd = os.getcwd()
 	if os.path.exists(item) == False:
