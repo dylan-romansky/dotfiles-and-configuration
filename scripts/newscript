@@ -2,7 +2,9 @@
 
 #The base of this script was written by my good friend. He can
 #be found on GitHub as alanbarnett. In his original design,
-#this script generates a blank file to write a bash script.
+#this script generates a blank file to write a bash script
+#with the given name passed as argument.
+
 #I built on this by adding the ability to take user input and
 #to be able to generate a few different kinds of script. It is
 #intended to only use 2 arguments, the first one designating
