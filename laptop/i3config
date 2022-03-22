@@ -45,7 +45,8 @@ bindsym XF86AudioMute exec --no-startup-id volcont mute #pactl set-sink-mute @DE
 exec --no-startup-id /usr/lib/notify-osd/notify-osd
 
 # Wifi startup and management
-exec --no-startup-id wifi-manager start
+#exec --no-startup-id wifi-manager start
+exec --no-startup-id nm-applet
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
