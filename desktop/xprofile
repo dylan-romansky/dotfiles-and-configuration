@@ -1,0 +1,4 @@
+xset s off
+xset -dpms
+xset r rate 200 25
+export $(dbus-launch)
