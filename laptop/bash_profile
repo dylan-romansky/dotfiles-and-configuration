@@ -11,6 +11,6 @@ export PATH="/usr/myshit:$PATH:$HOME/Documents/scripts:$HOME/.local/bin:$HOME/Do
 export PROMPT_THEME=bigdigsquig
 export QT_QPA_PLATFORMTHEME=gtk2
 export TERMINAL="mate-terminal"
-export PYTHONPATH="$PYTHONPATH:/home/dromansk/Documents/config/python_user_modules"
+export PYTHONPATH="$PYTHONPATH:$HOME/Documents/config/python_user_modules"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc

@@ -92,7 +92,7 @@ def dl_items(drive, item):
 	for file in fileset:
 		print(file)
 		if file['mimeType'] == 'application/vnd.google-apps.folder':
-			pwd = os.getcwd
+			pwd = os.getcwd()
 			if not os.path.exists(file['name']):
 				os.mkdir(file['name'])
 			os.chdir(file['name'])

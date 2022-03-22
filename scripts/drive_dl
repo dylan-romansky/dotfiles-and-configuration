@@ -8,11 +8,11 @@ import sys
 import drive_handling
 
 SCOPE = ['https://www.googleapis.com/auth/drive']
-start_dir = '/home/dromansk/Documents'
+start_dir = os.path.expandvars('$HOME/Downloads')
 os.chdir(start_dir)
-if os.path.exists('instruments') == False:
-	os.mkdir('instruments')
-os.chdir('instruments')
+if os.path.exists('drive_dl') == False:
+	os.mkdir('drive_dl')
+os.chdir('drive_dl')
 
 def user_input():
 	print("Enter name of folder to download")
