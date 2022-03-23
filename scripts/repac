@@ -3,7 +3,7 @@
 #longer downloads. this script forces it to complete the
 #update or die trying
 
-sudo pacman -Syu --noconfirm
+sudo pacman $@ -Syu --noconfirm
 while [ $? -ne 0 ]; do
-	sudo pacman -Syu --noconfirm
+	sudo pacman -Syu $@ --noconfirm
 done
