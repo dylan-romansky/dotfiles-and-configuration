@@ -1,1 +1,3 @@
 [ -f "$HOME/.bash_profile" ] && source "$HOME/.bash_profile"
+[ -f "$HOME/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc" ] && source "/hdd/$USER/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc"
+[ -f "$HOME/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc" ] && source "/hdd/dromansk/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc"
