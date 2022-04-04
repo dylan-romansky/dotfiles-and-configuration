@@ -16,6 +16,7 @@ export EDITOR="vim"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
+#TODO: discover why I need to manually pass the path to my xinitrc
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec startx $HOME/.xinitrc
 fi
