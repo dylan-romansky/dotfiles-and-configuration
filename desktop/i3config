@@ -56,7 +56,7 @@ exec --no-startup-id /usr/lib/notify-osd/notify-osd
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec --no-startup-id urxvt
 
 # change border mode
 new_window pixel 2
@@ -66,7 +66,7 @@ new_float pixel 2
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -217,8 +217,8 @@ mode "settings" {
 
 bindsym Shift+$mod+s mode "settings"
 
-bindsym --release $mod+shift+p exec $HOME/scripts/ScrotUM -s
-bindsym --release $mod+p exec $HOME/scripts/ScrotUM
+bindsym --release $mod+shift+p exec --no-startup-id $HOME/scripts/ScrotUM -s
+bindsym --release $mod+p exec --no-startup-id $HOME/scripts/ScrotUM
 bindsym Shift+$mod+w exec --no-startup-id wineserver -k
 bindsym --release XF86PowerOff exec shutdown now
 bindsym --release $mod+XF86PowerOff exec reboot
@@ -330,12 +330,6 @@ bar {
 
 bar {
 	output DP-4
-}
-
-bar 
-{
-  # Height in pixels
-	height 25
 }
 
 #exec --no-startup-id tint2
