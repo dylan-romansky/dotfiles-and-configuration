@@ -123,6 +123,7 @@ alias dicc='diff -C0'
 alias xclip='xclip -selection clip'
 alias newsh='newscript -sh'
 alias newpy='newscript -py3'
+alias amend='git commit -a --amend; git pull; git push'
 
 # renamed for easier memory
 
