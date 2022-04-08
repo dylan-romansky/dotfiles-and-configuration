@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# a bash script for downloading, building, and installing
+# the Glorious Eggroll fork of steam's proton compatibility
+# tool. TODO: figure out what a failed patch 
+cd $HOME/.steam/compat/
+if ! [ -d "proton-ge-custom" ]; then
+	git clone git clone --recurse-submodules http://github.com/gloriouseggroll/proton-ge-custom
+fi
+cd $HOME/.steam/compat/proton-ge-custom
+STATUS=$(git pull --recurse-submodules)
+echo "stat check"
+echo $STATUS
+if [[ "$STATUS" == *"Already up to date."* ]]; then
+	echo "Everything is up to date"
+	exit
+fi
+./patches/protonprep-valve-staging.sh &> patchlog.txt
+if [ -n "$(grep -i -w fail patchlog.txt)" ] || [ -n "$(grep -i -w error patchlog.txt)" ]; then
+	echo "Errors occured: see patchlog.txt"
+	echo "Note: it's extremely likely errors didn't occur and grep just has brain damage"
+else
+	echo "Patches applied successfully!"
+fi
+if [ -d "build" ]; then
+	rm -rf build
+fi
+mkdir build && cd build
+../configure.sh --enable-ccache --build-name=GE-Proton --container-engine=docker
+make redist &> log
+DEST="$HOME/.steam/root/compatibilitytools.d"
+if [ -d $DEST/GE-Proton ]
+	rm -rf
+fi
+cp -r GE-Proton $DEST/GE-Proton

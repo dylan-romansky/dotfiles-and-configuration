@@ -206,6 +206,8 @@ mode "settings" {
 		bindsym t exec --no-startup-id tint2conf
 		bindsym g exec --no-startup-id mate-terminal --hide-menubar -x vim ~/.config/picom/picom.conf
 		bindsym i exec --no-startup-id mate-terminal --hide-menubar -x vim ~/.config/i3/config
+		bindsym c exec --no-startup-id sudo cpu-x
+		bindsym f exec --no-startup-id mate-terminal --hide-menubar -e sys-info.sh
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
