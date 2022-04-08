@@ -52,6 +52,7 @@ function vbak () {
 }
 
 function aur-install () {
+cd $HOME/builds
 	if [ $# -ge 1 ]; then
 		for repo in "${@}"; do
 			git clone $repo
@@ -60,6 +61,12 @@ function aur-install () {
 			builtin cd ..
 		done
 	fi
+}
+
+function daily-chal () {
+mkdir $1
+cd $1
+vim challenge.txt
 }
 
 

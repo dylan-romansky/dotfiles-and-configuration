@@ -69,6 +69,12 @@ function aur-install () {
 	fi
 }
 
+function daily-chal () {
+mkdir $1
+cd $1
+vim challenge.txt
+}
+
 
 source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 
