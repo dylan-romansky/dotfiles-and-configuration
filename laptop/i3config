@@ -52,7 +52,7 @@ exec --no-startup-id nm-applet
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec mate-terminal
+bindsym $mod+Return exec mate-terminal --hide-menubar
 
 # change border mode
 new_window pixel 2
@@ -62,7 +62,7 @@ new_float pixel 2
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -204,13 +204,15 @@ bindsym Shift+$mod+a mode "launcher"
 mode "settings" {
 		bindsym p exec --no-startup-id paman
 		bindsym t exec --no-startup-id tint2conf
+		bindsym g exec --no-startup-id mate-terminal --hide-menubar -x vim ~/.config/picom/picom.conf
+		bindsym i exec --no-startup-id mate-terminal --hide-menubar -x vim ~/.config/i3/config
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
 		bindsym --release s mode "default"
 }
 
-bindsym Shift+$mod+n mode "wireless"
+bindsym Shift+$mod+s mode "settings"
 
 mode "wireless" {
 		bindsym s exec --no-startup-id wifi-manager start
@@ -222,10 +224,10 @@ mode "wireless" {
 		bindsym --release n mode "default"
 }
 
-bindsym Shift+$mod+s mode "settings"
+bindsym Shift+$mod+n mode "wireless"
 
-bindsym --release $mod+shift+p exec ScrotUM -s
-bindsym --release $mod+p exec ScrotUM
+bindsym --release $mod+shift+p --no-startup-id exec ScrotUM -s
+bindsym --release $mod+p exec --no-startup-id ScrotUM
 bindsym Shift+$mod+w exec --no-startup-id wineserver -k
 bindsym --release XF86PowerOff exec shutdown now
 bindsym --release $mod+XF86PowerOff exec reboot
@@ -251,6 +253,7 @@ for_window [title="gbmu"] floating enable
 for_window [title="VRAM"] floating enable
 for_window [title="Line Dump"] floating enable
 for_window [title="luakit"] floating enable
+for_window [title="Steam Guard - Computer Authorization Required"] floating_enable
 
 # window sizes and positions
 #
@@ -468,7 +471,7 @@ hide_edge_borders smart_no_gaps
 #}
 
 exec --no-startup-id tint2
-exec --no-startup-id compton
+exec --no-startup-id picom
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id /usr/lib/gsd-xsettings
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

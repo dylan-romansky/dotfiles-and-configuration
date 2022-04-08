@@ -70,6 +70,7 @@ source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 alias bconf='vim $HOME/.bashrc'
 alias binit='source $HOME/.bashrc'
 alias i3c='vim $HOME/.config/i3/config'
+alias piconf='vim $HOME/.config/picom/picom.conf'
 
 # always needs sudo
 
@@ -142,4 +143,4 @@ alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
 alias browse='(thunar $PWD &>/dev/null & disown)'
 
 HISTCONTROL=ignoreboth:erasedups
-HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c"
+HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c:piconf"
