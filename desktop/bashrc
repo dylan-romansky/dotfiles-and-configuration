@@ -59,6 +59,7 @@ function vbak () {
 }
 
 function aur-install () {
+cd $HOME/builds
 	if [ $# -ge 1 ]; then
 		for repo in "${@}"; do
 			git clone $repo

@@ -209,6 +209,9 @@ mode "settings" {
 		bindsym p exec --no-startup-id paman
 #		bindsym t exec --no-startup-id tint2conf
 		bindsym a exec --no-startup-id cadence
+		bindsym g exec --no-startup-id urxvt -e 'vim ~/.config/picom/picom.conf'
+		bindsym c exec --no-startup-id sudo cpu-x
+		bindsym f exec --no-startup-id urxvt -e 'sys-info.sh'
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
