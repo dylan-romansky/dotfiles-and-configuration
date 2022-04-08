@@ -115,6 +115,7 @@ alias cpp='clang++ -Wall -Werror -Wextra'
 alias dicc='diff -C0'
 alias newsh='newscript -sh'
 alias newpy='newscript -py3'
+alias amend='git commit -a --amend; git pull; git push'
 
 # renamed for easier memory
 
