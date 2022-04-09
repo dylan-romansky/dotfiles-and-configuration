@@ -35,7 +35,7 @@
 
 ! white
 *.color7: #bfbaac
-*.color15: #fdf6e
+*.color15: #fdf6e0
 
 URxvt.font: xft:hack:size=18
 URxvt.scrollBar: false
