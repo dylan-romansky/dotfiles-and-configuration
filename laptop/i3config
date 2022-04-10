@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $term mate-terminal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -52,7 +53,7 @@ exec --no-startup-id nm-applet
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec mate-terminal --hide-menubar
+bindsym $mod+Return exec $term --hide-menubar
 
 # change border mode
 new_window pixel 2
@@ -204,10 +205,10 @@ bindsym Shift+$mod+a mode "launcher"
 mode "settings" {
 		bindsym p exec --no-startup-id paman
 		bindsym t exec --no-startup-id tint2conf
-		bindsym g exec --no-startup-id mate-terminal --hide-menubar -x vim ~/.config/picom/picom.conf
-		bindsym i exec --no-startup-id mate-terminal --hide-menubar -x vim ~/.config/i3/config
+		bindsym g exec --no-startup-id $term --hide-menubar -x vim ~/.config/picom/picom.conf
+		bindsym i exec --no-startup-id $term --hide-menubar -x vim ~/.config/i3/config
 		bindsym c exec --no-startup-id sudo cpu-x
-		bindsym f exec --no-startup-id mate-terminal --hide-menubar -e sys-info.sh
+		bindsym f exec --no-startup-id $term --hide-menubar -e sys-info.sh
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
@@ -227,6 +228,8 @@ mode "wireless" {
 }
 
 bindsym Shift+$mod+n mode "wireless"
+
+# todo: bind bash script to change i3config
 
 bindsym --release $mod+shift+p --no-startup-id exec ScrotUM -s
 bindsym --release $mod+p exec --no-startup-id ScrotUM
