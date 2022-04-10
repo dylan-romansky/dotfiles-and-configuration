@@ -5,6 +5,11 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Setup environment variables I want to be able to change
+# during a user session
+
+export TERMINAL="mate-terminal"
+
 # Setup extract alias
 x () {
   if [ -f $1 ] ; then

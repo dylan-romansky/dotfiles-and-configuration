@@ -53,7 +53,7 @@ exec --no-startup-id nm-applet
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $term --hide-menubar
+bindsym $mod+Return exec $term
 
 # change border mode
 new_window pixel 2
@@ -205,10 +205,10 @@ bindsym Shift+$mod+a mode "launcher"
 mode "settings" {
 		bindsym p exec --no-startup-id paman
 		bindsym t exec --no-startup-id tint2conf
-		bindsym g exec --no-startup-id $term --hide-menubar -x vim ~/.config/picom/picom.conf
-		bindsym i exec --no-startup-id $term --hide-menubar -x vim ~/.config/i3/config
+		bindsym g exec --no-startup-id exec-helper $term vim ~/.config/picom/picom.conf
+		bindsym i exec --no-startup-id exec-helper $term vim ~/.config/i3/config
 		bindsym c exec --no-startup-id sudo cpu-x
-		bindsym f exec --no-startup-id $term --hide-menubar -e sys-info.sh
+		bindsym f exec --no-startup-id exec-helper $term sys-info.sh
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
@@ -216,6 +216,17 @@ mode "settings" {
 }
 
 bindsym Shift+$mod+s mode "settings"
+
+mode "terminals" {
+		#bindysm m //switch to mate
+		#bindsym u //switch to urxvt
+
+		bindsym Return mode "default"
+		bindsym Esc mode "default"
+		bindsym --release t mode "default"
+}
+
+bindsym shift+$mod+t mode "terminals"
 
 mode "wireless" {
 		bindsym s exec --no-startup-id wifi-manager start
