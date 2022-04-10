@@ -8,7 +8,7 @@
 # Setup environment variables I want to be able to change
 # during a user session
 
-export TERMINAL="urxvt"
+export TERMINAL="mate-terminal"
 
 # Setup extract alias
 x () {
