@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Sometimes I have a new terminal emulator I want to try out
+# so I wrote this script as a wrapper for any keybindings
+# that need to execute a command inside a terminal. That
+# way I can continue getting the expected behaviour despite
+# the differences in flag usage between different terminal
+# emulators.
+
+TERMINAL="$1"
+shift
+case $TERMINAL in 
+
+	mate-terminal)
+		mate-terminal -x "${@}"
+		;;
+
+	urxvt)
+		urxvt -e "${@}"
+		;;
+
+	cool-retro-term)
+		cool-retro-term -e "${@}"
+		;;
+
+	*)
+		killall notify-osd
+		notify-send "Error: missing terminal $TERMINAL"
+		;;
+
+esac
