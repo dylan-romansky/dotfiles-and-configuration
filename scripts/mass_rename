@@ -6,6 +6,8 @@
 #extensive list of files and want to do them all in one go.
 #I need to brush up on my regex to verify that everything
 #behaves properly
+#TODO: output method that doesn't involve ls. This script
+#	   is likely to break around spaces
 
 if [ ${#} -ne 2 ]; then
 	echo "Usage: mass_rename {target string} {replacement string}"
