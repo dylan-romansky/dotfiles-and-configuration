@@ -21,5 +21,6 @@ done
 ## check for extra settings and concatonate them onto our
 ## config if needed
 if [ -f "$HOME/.config/i3/.extraconf" ]; then
-	cat "$CONFIG" "$HOME/.config/i3/.extraconf" > "$CONFIG"
+	cat "$CONFIG" "$HOME/.config/i3/.extraconf" >> "/tmp/i3conf"
+	mv "/tmp/i3conf" "$CONFIG"
 fi
