@@ -1,0 +1,5 @@
+WALL="$HOME/Pictures/503160_hyrule-the-legend-of-zelda-hyrule-crest-wallpapers_1680x1050_h.jpg"
+if [ -n "$1" ]; then
+	WALL=$1;
+fi
+feh --no-fehbg --bg-scale "$WALL"

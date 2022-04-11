@@ -5,6 +5,10 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# below is a workaround till I figure out why dot space
+# dot in the bash_profile isn't working properly
+export i3LINES=(48 49 50 211 237 238 239 240 241 242 243 244 245 246 247)
+
 # Setup extract alias
 x () {
   if [ -f $1 ] ; then
