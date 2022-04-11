@@ -13,5 +13,5 @@ export QT_QPA_PLATFORMTHEME=gtk2
 export PYTHONPATH="$PYTHONPATH:$HOME/Documents/config/python_user_modules"
 export EDITOR="vim"
 
-[[ -f ~/.bashrc ]] && source ~/.bashrc
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 [[ -f ~/.bash_extras ]] && . ~/.bash_extras
