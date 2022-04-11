@@ -2,7 +2,6 @@
 # ~/.bash_extras
 #
 
-export i3LINES=(37 38 39 40 41 42 43 44 45 193 198 199 210 225 486 487)
 i3-setup.sh "urxvt" ${i3LINES[*]}
 
 #TODO: discover why I need to manually pass the path to my xinitrc
