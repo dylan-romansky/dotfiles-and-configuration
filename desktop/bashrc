@@ -4,7 +4,7 @@
 
 # These variables should be set regardless of whether the
 # shell is interactive or not
-export i3LINES=(37 38 39 40 41 42 43 44 45 193 198 199 210 225 486 487)
+export i3LINES=(37 38 39 40 41 42 43 44 45 193 198 199 210 226 487 488)
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

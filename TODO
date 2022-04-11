@@ -1,0 +1,27 @@
+write a script for editing the i3 config that proceeds to
+track what lines have changed based on the git diff
+
+example git diff output:
+
+diff --git a/i3config b/i3config
+index a4a4bac..794fa70 100644
+--- a/i3config
++++ b/i3config
+@@ -38,6 +38,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id volcont up
+ bindsym XF86AudioLowerVolume exec --no-startup-id volcont down
+ bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id volcont smup
+ bindsym Shift+XF86AudioLowerVolume exec --no-startup-id volcont smdown
++#test
+ bindsym Ctrl+XF86AudioRaiseVolume exec --no-startup-id volcont micup
+ bindsym Ctrl+XF86AudioLowerVolume exec --no-startup-id volcont micdown
+ bindsym Ctrl+Shift+XF86AudioRaiseVolume exec --no-startup-id volcont smicup
+@@ -220,6 +221,7 @@ mode "settings" {
+                bindsym --release s mode "default"
+ }
+ 
++#test
+ bindsym Shift+$mod+s mode "settings"
+ 
+ mode "terminals" {
+@@ -262,6 +264,7 @@ for_window [window_role="task_dialog"] floating enable
+

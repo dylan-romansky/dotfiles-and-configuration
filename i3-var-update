@@ -1,0 +1,26 @@
+#!/bin/bash
+
+source $HOME/.config/i3/.i3vars
+DIFFS="$(git diff i3config)"
+if [ -z "$DIFFS" ]; then
+	echo "no update necessary"
+	exit
+fi
+i=0
+
+RESARR=()
+while read LINE; do
+	echo "adding $LINE"
+	RESARR+=("$LINE")
+done <<< $(echo "$DIFFS")
+
+echo trimmed:
+RESARR=("${RESARR[@]:4}")
+# in the future this will process the differing lines
+for entry in "${RESARR[@]}"; do
+	echo $entry
+done
+# exiting for now until I have finished setting up the rest
+# of this script's functionality
+exit
+sed -i --follow-symlinks "s/export i3LINES=.*/export i3LINES=(${LINES[@]})/"

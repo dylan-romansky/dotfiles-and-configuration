@@ -2,6 +2,7 @@
 # ~/.bash_extras
 #
 
+source $HOME/.config/i3/.i3vars
 i3-setup.sh "urxvt" ${i3LINES[*]}
 
 #TODO: discover why I need to manually pass the path to my xinitrc

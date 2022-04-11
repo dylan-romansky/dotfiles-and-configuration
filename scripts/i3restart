@@ -1,5 +1,5 @@
-#!/bin/sh
-#i3-setup.sh "$TERMINAL" ${i3LINES[*]}
+#!/bin/bash
+source "$HOME/.config/i3/.i3vars"
 WS=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name')
 nempty
 i3-msg "restart"

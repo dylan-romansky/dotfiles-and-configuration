@@ -212,6 +212,7 @@ mode "settings" {
 		bindsym g exec --no-startup-id exec-helper $term vim ~/.config/picom/picom.conf
 		bindsym i exec --no-startup-id exec-helper $term vim ~/.config/i3/config
 		bindsym c exec --no-startup-id sudo cpu-x
+		bindsym h exec --no-startup-id htop
 		bindsym f exec --no-startup-id exec-helper $term sys-info.sh
 
 		bindsym Return mode "default"
