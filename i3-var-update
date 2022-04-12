@@ -1,26 +1,91 @@
 #!/bin/bash
 
-source $HOME/.config/i3/.i3vars
-DIFFS="$(git diff i3config)"
+# because I'm constructing the session's i3config from a
+# base config file, a stored variable informing us what
+# lines to comment out, and an extras file concatonated
+# onto the end of the base config, I need a way to save
+# any and all changes I make to the session's config so
+# they will remain persistent into the next session
+
+# make a backup of our current configuration so we have
+# something to diff against for changes
+builtin cd $HOME/.config/i3
+source ./.i3vars
+cp config newconf
+vim newconf
+
+# check if there are any differences and thus if we need
+# to update our variables
+DIFFS="$(sdiff -l config newconf | cat -n | grep -v -e '($')"
 if [ -z "$DIFFS" ]; then
 	echo "no update necessary"
 	exit
 fi
-i=0
 
-RESARR=()
+# get linecount of main config so it can be updated if needed
+MAINLC=$(wc -l .mainconf | awk '{ print $1 }')
+
+# create the list of new lines and whether they're being
+# added or commented out
+NEWLINES=()
 while read LINE; do
 	echo "adding $LINE"
-	RESARR+=("$LINE")
-done <<< $(echo "$DIFFS")
+	NEWLINES+=("$LINE")
+done <<< $(echo "$DIFFS" | awk '{ print $1 }')
 
-echo trimmed:
-RESARR=("${RESARR[@]:4}")
-# in the future this will process the differing lines
-for entry in "${RESARR[@]}"; do
-	echo $entry
+APPEND=()
+while read LINE; do
+	echo "adding $LINE"
+	APPEND+=("$LINE")
+done <<< $(echo "$DIFFS" | awk '{ print $2 }')
+
+# create a new array housing all the lines that get commented
+# out when concatonating the base config and extra config to
+# make the sessions' i3config
+# also add any new lines created during this session to the 
+# base and extra configs as needed
+
+#TODO sort out why the removal isn't working
+#TODO sort out why the commenting out isn't working
+i=0
+for LINENUM in ${i3LINES[@]}; do
+	echo loop
+	while [ -n "${NEWLINES[0]}" ] && [ $LINENUM -gt ${NEWLINES[0]} ]; do
+		case "${APPEND[0]}" in
+			'>') # append
+				echo "aend"
+				NEWCONF=$(sed -n "${NEWLINES[0]}{p;q}" newconf)
+				if [ $MAINLC -ge ${NEWLINES[0]} ]; then
+					sed -i --follow-symlinks "${NEWLINES[0]} i $NEWCONF" .mainconf
+				else
+					sed -i --follow-symlinks "${NEWLINES[0]} i $NEWCONF" .extraconf
+				fi
+				i=$(($i+1))
+				;;
+			'<') # remove
+				echo "reme"
+				if [ $MAINLC -ge ${NEWLINES[0]} ]; then
+					sed -i --follow-symlinks "${NEWLINES[0]}d" .mainconf
+				else
+					sed -i --follow-symlinks "$(($MAINLC-${NEWLINES[0]}))d" .extraconf
+				fi
+				i=$(($i-1))
+				;;
+			*)
+				echo default
+				CURRNUM=$(($i+${NEWLINES[0]}))
+				NEWARR+=("$CURRNUM")
+				;;
+		esac
+		NEWLINES=("${NEWLINES[@]:1}")
+		APPEND=("${APPEND[@]:1}")
+	done
+	CURRNUM=$(($i+$LINENUM))
+	NEWARR+=("$CURRNUM")
 done
-# exiting for now until I have finished setting up the rest
-# of this script's functionality
-exit
-sed -i --follow-symlinks "s/export i3LINES=.*/export i3LINES=(${LINES[@]})/"
+echo "NEWARR ${NEWARR[@]}"
+
+# finally output the list of modified lines and clean up
+sed -i --follow-symlinks 's/'"export i3LINES=.*"'/'"export\ i3LINES=(${NEWARR[*]})"'/' .i3vars
+rm newconf
+i3restart
