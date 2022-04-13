@@ -43,7 +43,7 @@ URxvt.shading:       20
 URxvt.depth: 32
 URxvt.background: rgba:0000/0000/0000/aaaa
 
-URxvt.perl-ext-common: default,matcher,tabbed,fullscreen,resize-font
+URxvt.perl-ext-common: default,matcher,tabbed,fullscreen,resize-font,vtwheel
 URxvt.url-launcher: /usr/bin/google-chrome-stable
 URxvt.matcher.button: 1
 URxvt.matcher.rend.0: Uline Bold fg5
@@ -56,6 +56,9 @@ URxvt.tabbed.tab-bg: 0
 URxvt.keysym.F11: perl:fullscreen:switch
 
 URxvt.scrollBar: false
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.keysym.C-Down:  resize-font:smaller

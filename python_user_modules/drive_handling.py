@@ -69,10 +69,16 @@ def drive_fill(DRIVE_DIR, DRIVE):
 	DEST = DRIVE.files().create(body=DEST_META, fields="id").execute()
 	ID = DEST.get('id')
 	for file in os.listdir():
-		print('upload: ' + file)
-		META = {"name": file, "parents": [ID]}
-		DATA = MediaFileUpload(file)
-		UPLOAD = DRIVE.files().create(body=META, media_body=DATA, fields='id').execute()
+		for attempt in range(1, 10):
+			try:
+				print('upload: ' + file)
+				META = {"name": file, "parents": [ID]}
+				DATA = MediaFileUpload(file)
+				UPLOAD = DRIVE.files().create(body=META, media_body=DATA, fields='id').execute()
+			except:
+				continue
+			else:
+				break
 
 def dl_items(drive, item):
 	query_string = "name = '" + item +"'"

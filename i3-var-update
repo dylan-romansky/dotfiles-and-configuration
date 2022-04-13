@@ -39,19 +39,17 @@ done <<< $(echo "$DIFFS")
 # also add any new lines created during this session to the 
 # base and extra configs as needed
 
-#TODO sort out why the removal isn't working
 #TODO sort out why the commenting out isn't working
+#     it has something to do with the way NEWARR gets constructed
 i=0
 for EACH in "${NEWLINES[@]}"; do
 	NEWLINE=$(echo "$EACH" | awk '{ print $1 }')
-	echo "$NEWLINE"
 	while [ -n "$i3LINES" ] && [ $(($i3LINES+$i)) -lt $NEWLINE ]; do
-		NEWARR+=$(($i3LINES+$i))
+        NEWARR+=($(($i3LINES+$i)))
 		i3LINES=("${i3LINES[@]:1}")
 	done
 	case "${NEWLINES[0]}" in
 		*'>'*) # append
-			echo "aend"
 			NEWCONF=$(sed -n "$NEWLINE{p;q}" newconf)
 			if [ $MAINLC -ge $NEWLINE ]; then
 				sed -i --follow-symlinks "$NEWLINE i $NEWCONF" .mainconf
@@ -61,27 +59,28 @@ for EACH in "${NEWLINES[@]}"; do
 			i=$(($i+1))
 			;;
 		*'<'*) # remove
-			echo "reme"
-			if [ $MAINLC -ge $NEWLINE ]; then
-				sed -i --follow-symlinks "$NEWLINE d" .mainconf
-			else
-				sed -i --follow-symlinks "$(($MAINLC-$NEWLINE))d" .extraconf
-			fi
 			i=$(($i-1))
+			if [ $MAINLC -ge $NEWLINE ]; then
+                sed -i --follow-symlinks "$((NEWLINE+$i)) d" .mainconf
+			else
+				sed -i --follow-symlinks "$(($MAINLC-$NEWLINE+$i))d" .extraconf
+			fi
 			;;
 		*'|'*)
 			# this is where this script breaks. I didn't
 			# consider that I need to tell the difference
 			# between commenting out and uncommenting
-			echo default
 			FIELD2=$(echo "${NEWLINES[0]}" | cut -d\| -f2 | awk '{$1=$1};1')
-			echo "$FIELD2"
 			if [ "${FIELD2::1}" == '#' ]; then
-				echo "ad"
 				CURRNUM=$(($i+$NEWLINE))
 				NEWARR+=("$CURRNUM")
-			else 
-				i3LINES=("${i3LINES[@]:1}")
+			else
+				for (( j=0; j<=${#i3LINES[@]}; j++ )); do
+                    if [ $NEWLINE -eq $((${i3LINES[$j]}+$i)) ]; then
+						unset 'i3LINES[j]'		
+						break
+					fi
+				done
 			fi
 			;;
 	esac
