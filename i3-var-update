@@ -45,7 +45,7 @@ i=0
 for EACH in "${NEWLINES[@]}"; do
 	NEWLINE=$(echo "$EACH" | awk '{ print $1 }')
 	echo "$NEWLINE"
-	while [ -n "$i3LINES" ] && [ $i3LINES -lt $NEWLINE ]; do
+	while [ -n "$i3LINES" ] && [ $(($i3LINES+$i)) -lt $NEWLINE ]; do
 		NEWARR+=$(($i3LINES+$i))
 		i3LINES=("${i3LINES[@]:1}")
 	done
@@ -74,8 +74,15 @@ for EACH in "${NEWLINES[@]}"; do
 			# consider that I need to tell the difference
 			# between commenting out and uncommenting
 			echo default
-			CURRNUM=$(($i+$NEWLINE))
-			NEWARR+=("$CURRNUM")
+			FIELD2=$(echo "${NEWLINES[0]}" | cut -d\| -f2 | awk '{$1=$1};1')
+			echo "$FIELD2"
+			if [ "${FIELD2::1}" == '#' ]; then
+				echo "ad"
+				CURRNUM=$(($i+$NEWLINE))
+				NEWARR+=("$CURRNUM")
+			else 
+				i3LINES=("${i3LINES[@]:1}")
+			fi
 			;;
 	esac
 	NEWLINES=("${NEWLINES[@]:1}")
