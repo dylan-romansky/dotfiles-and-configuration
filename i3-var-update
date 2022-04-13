@@ -19,6 +19,7 @@ vim newconf
 DIFFS="$(sdiff -l config newconf | cat -n | grep -v -e '($')"
 if [ -z "$DIFFS" ]; then
 	echo "no update necessary"
+	rm newconf
 	exit
 fi
 
@@ -29,15 +30,8 @@ MAINLC=$(wc -l .mainconf | awk '{ print $1 }')
 # added or commented out
 NEWLINES=()
 while read LINE; do
-	echo "adding $LINE"
 	NEWLINES+=("$LINE")
-done <<< $(echo "$DIFFS" | awk '{ print $1 }')
-
-APPEND=()
-while read LINE; do
-	echo "adding $LINE"
-	APPEND+=("$LINE")
-done <<< $(echo "$DIFFS" | awk '{ print $2 }')
+done <<< $(echo "$DIFFS")
 
 # create a new array housing all the lines that get commented
 # out when concatonating the base config and extra config to
@@ -48,40 +42,46 @@ done <<< $(echo "$DIFFS" | awk '{ print $2 }')
 #TODO sort out why the removal isn't working
 #TODO sort out why the commenting out isn't working
 i=0
-for LINENUM in ${i3LINES[@]}; do
-	echo loop
-	while [ -n "${NEWLINES[0]}" ] && [ $LINENUM -gt ${NEWLINES[0]} ]; do
-		case "${APPEND[0]}" in
-			'>') # append
-				echo "aend"
-				NEWCONF=$(sed -n "${NEWLINES[0]}{p;q}" newconf)
-				if [ $MAINLC -ge ${NEWLINES[0]} ]; then
-					sed -i --follow-symlinks "${NEWLINES[0]} i $NEWCONF" .mainconf
-				else
-					sed -i --follow-symlinks "${NEWLINES[0]} i $NEWCONF" .extraconf
-				fi
-				i=$(($i+1))
-				;;
-			'<') # remove
-				echo "reme"
-				if [ $MAINLC -ge ${NEWLINES[0]} ]; then
-					sed -i --follow-symlinks "${NEWLINES[0]}d" .mainconf
-				else
-					sed -i --follow-symlinks "$(($MAINLC-${NEWLINES[0]}))d" .extraconf
-				fi
-				i=$(($i-1))
-				;;
-			*)
-				echo default
-				CURRNUM=$(($i+${NEWLINES[0]}))
-				NEWARR+=("$CURRNUM")
-				;;
-		esac
-		NEWLINES=("${NEWLINES[@]:1}")
-		APPEND=("${APPEND[@]:1}")
+for EACH in "${NEWLINES[@]}"; do
+	NEWLINE=$(echo "$EACH" | awk '{ print $1 }')
+	echo "$NEWLINE"
+	while [ -n "$i3LINES" ] && [ $i3LINES -lt $NEWLINE ]; do
+		NEWARR+=$(($i3LINES+$i))
+		i3LINES=("${i3LINES[@]:1}")
 	done
-	CURRNUM=$(($i+$LINENUM))
-	NEWARR+=("$CURRNUM")
+	case "${NEWLINES[0]}" in
+		*'>'*) # append
+			echo "aend"
+			NEWCONF=$(sed -n "$NEWLINE{p;q}" newconf)
+			if [ $MAINLC -ge $NEWLINE ]; then
+				sed -i --follow-symlinks "$NEWLINE i $NEWCONF" .mainconf
+			else
+				sed -i --follow-symlinks "$NEWLINE i $NEWCONF" .extraconf
+			fi
+			i=$(($i+1))
+			;;
+		*'<'*) # remove
+			echo "reme"
+			if [ $MAINLC -ge $NEWLINE ]; then
+				sed -i --follow-symlinks "$NEWLINE d" .mainconf
+			else
+				sed -i --follow-symlinks "$(($MAINLC-$NEWLINE))d" .extraconf
+			fi
+			i=$(($i-1))
+			;;
+		*'|'*)
+			# this is where this script breaks. I didn't
+			# consider that I need to tell the difference
+			# between commenting out and uncommenting
+			echo default
+			CURRNUM=$(($i+$NEWLINE))
+			NEWARR+=("$CURRNUM")
+			;;
+	esac
+	NEWLINES=("${NEWLINES[@]:1}")
+done
+for LEFTOVER in "${i3LINES[@]}"; do
+	NEWARR+=($(($i+$LEFTOVER)))
 done
 echo "NEWARR ${NEWARR[@]}"
 
