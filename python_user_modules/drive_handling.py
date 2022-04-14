@@ -74,7 +74,7 @@ def drive_fill(DRIVE_DIR, DRIVE, FILESET=None):
 		for attempt in range(1, 10):
 			try:
 				print('upload: ' + file)
-				META = {"name": file, "parents": [ID]}
+				META = {"name": os.path.basename(file), "parents": [ID]}
 				DATA = MediaFileUpload(file)
 				UPLOAD = DRIVE.files().create(body=META, media_body=DATA, fields='id').execute()
 			except:
