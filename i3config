@@ -42,7 +42,7 @@ bindsym Ctrl+XF86AudioRaiseVolume exec --no-startup-id volcont micup
 bindsym Ctrl+XF86AudioLowerVolume exec --no-startup-id volcont micdown
 bindsym Ctrl+Shift+XF86AudioRaiseVolume exec --no-startup-id volcont smicup
 bindsym Ctrl+Shift+XF86AudioLowerVolume exec --no-startup-id volcont smicdown
-bindsym XF86AudioMute exec --no-startup-id volcont mute #pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMute exec --no-startup-id volcont mutt #pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume

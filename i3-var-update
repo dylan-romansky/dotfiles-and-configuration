@@ -11,15 +11,25 @@
 # something to diff against for changes
 builtin cd $HOME/.config/i3
 source ./.i3vars
-cp config newconf
-vim newconf
+cp config oldconf
+i3-setup.sh $TERMINAL "${i3LINES[@]}"
+# check if there's been an external update to the source
+# configuration files and if so, perform the rest of the
+# script before letting the user input further changes
+DIFFS="$(sdiff -l config oldconf | cat -n | grep -v -e '($')"
+if [ -z "$DIFFS" ]; then
+    vim oldconf
+else
+	echo "Unresolved changes detected. Resolving."
+	echo "If you still want to make changes, please run this script again after completion."
+fi
 
 # check if there are any differences and thus if we need
 # to update our variables
-DIFFS="$(sdiff -l config newconf | cat -n | grep -v -e '($')"
+DIFFS="$(sdiff -l config oldconf | cat -n | grep -v -e '($')"
 if [ -z "$DIFFS" ]; then
 	echo "no update necessary"
-	rm newconf
+	rm oldconf
 	exit
 fi
 
@@ -44,13 +54,15 @@ done <<< $(echo "$DIFFS")
 i=0
 for EACH in "${NEWLINES[@]}"; do
 	NEWLINE=$(echo "$EACH" | awk '{ print $1 }')
+    echo "Line $NEWLINE"
 	while [ -n "$i3LINES" ] && [ $(($i3LINES+$i)) -lt $NEWLINE ]; do
         NEWARR+=($(($i3LINES+$i)))
 		i3LINES=("${i3LINES[@]:1}")
 	done
 	case "${NEWLINES[0]}" in
 		*'>'*) # append
-			NEWCONF=$(sed -n "$NEWLINE{p;q}" newconf)
+            echo "Append"
+			NEWCONF=$(sed -n "$NEWLINE{p;q}" oldconf)
 			if [ $MAINLC -ge $NEWLINE ]; then
 				sed -i --follow-symlinks "$NEWLINE i $NEWCONF" .mainconf
 			else
@@ -59,28 +71,40 @@ for EACH in "${NEWLINES[@]}"; do
 			i=$(($i+1))
 			;;
 		*'<'*) # remove
+            echo "Remove"
 			i=$(($i-1))
 			if [ $MAINLC -ge $NEWLINE ]; then
-                sed -i --follow-symlinks "$((NEWLINE+$i)) d" .mainconf
+                sed -i --follow-symlinks "$((NEWLINE)) d" .mainconf
 			else
-				sed -i --follow-symlinks "$(($MAINLC-$NEWLINE+$i))d" .extraconf
+				sed -i --follow-symlinks "$(($MAINLC-$NEWLINE))d" .extraconf
 			fi
 			;;
 		*'|'*)
 			# this is where this script breaks. I didn't
 			# consider that I need to tell the difference
 			# between commenting out and uncommenting
-			FIELD2=$(echo "${NEWLINES[0]}" | cut -d\| -f2 | awk '{$1=$1};1')
-			if [ "${FIELD2::1}" == '#' ]; then
-				CURRNUM=$(($i+$NEWLINE))
+            echo "Default"
+			FIELD2=$(sed "$(($NEWLINE))q;d" oldconf)
+			echo "$FIELD2"
+			if [[ "$FIELD2" =~ ^[:space:]*# ]]; then
+                echo "remove commentation"
+				CURRNUM=$(($NEWLINE))
 				NEWARR+=("$CURRNUM")
+                FIELD2=$(echo $FIELD2 | sed 's/#//1')
 			else
+                echo "remove entry if needed"
 				for (( j=0; j<=${#i3LINES[@]}; j++ )); do
                     if [ $NEWLINE -eq $((${i3LINES[$j]}+$i)) ]; then
-						unset 'i3LINES[j]'		
+						unset 'i3LINES[j]'
 						break
 					fi
 				done
+			fi
+
+			if [ $MAINLC -ge $NEWLINE ]; then
+				sed -i --follow-symlinks ''"$(($NEWLINE))"'s/.*/'"$FIELD2"'/' .mainconf
+			else
+				sed -i --follow-symlinks ''"$(($MAINLC-$NEWLINE))"'s/.*/'"$FIELD2"'/' .extraconf
 			fi
 			;;
 	esac
@@ -93,5 +117,5 @@ echo "NEWARR ${NEWARR[@]}"
 
 # finally output the list of modified lines and clean up
 sed -i --follow-symlinks 's/'"export i3LINES=.*"'/'"export\ i3LINES=(${NEWARR[*]})"'/' .i3vars
-rm newconf
+rm oldconf
 i3restart
