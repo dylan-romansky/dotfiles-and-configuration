@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from datetime import date
+import sys
+import os
+import drive_handling
+
+SCOPE = [ 'https://www.googleapis.com/auth/drive' ]
+start_dir = os.path.expandvars('$HOME/')
+
+os.chdir(start_dir)
+if len(sys.argv) == 1:
+	print("Usage: uploader [drive folder] [files]")
+	exit
+if len(sys.argv) <= 2:
+	print("Error: no files given")
+	exit()
+drive = drive_handling.drive_setup(SCOPES=SCOPE, token_dir='/tmp/')
+for file in sys.argv[2:]:
+	if os.path.exists(file) == False:
+		print("Error: file '" + file + "' not found")
+		exit()
+drive_handling.drive_fill(drive.files().list(q='name = "' + sys.argv[1] + '"').execute(), drive, FILESET=sys.argv[2:])
