@@ -52,66 +52,70 @@ done <<< $(echo "$DIFFS")
 #TODO sort out why the commenting out isn't working
 #     it has something to do with the way NEWARR gets constructed
 i=0
+j=0
 for EACH in "${NEWLINES[@]}"; do
 	NEWLINE=$(echo "$EACH" | awk '{ print $1 }')
     echo "Line $NEWLINE"
-	while [ -n "$i3LINES" ] && [ $(($i3LINES+$i)) -lt $NEWLINE ]; do
-        NEWARR+=($(($i3LINES+$i)))
+    echo "i $i j $j"
+    while [ -n "$i3LINES" ] && [ $(($i3LINES+$i-$j)) -lt $(($NEWLINE-$j)) ]; do
+        NEWARR+=($(($i3LINES+$i-$j)))
 		i3LINES=("${i3LINES[@]:1}")
 	done
 	case "${NEWLINES[0]}" in
 		*'>'*) # append
             echo "Append"
 			NEWCONF=$(sed -n "$NEWLINE{p;q}" oldconf)
-			if [ $MAINLC -ge $NEWLINE ]; then
-				sed -i --follow-symlinks "$NEWLINE i $NEWCONF" .mainconf
+            if [ $MAINLC -ge $(($NEWLINE-$j)) ]; then
+                sed -i --follow-symlinks "$(($NEWLINE-$j)) i $NEWCONF" .mainconf
 			else
-				sed -i --follow-symlinks "$NEWLINE i $NEWCONF" .extraconf
+                sed -i --follow-symlinks "$(($NEWLINE-$j)) i $NEWCONF" .extraconf
 			fi
 			i=$(($i+1))
 			;;
 		*'<'*) # remove
             echo "Remove"
-			i=$(($i-1))
-			if [ $MAINLC -ge $NEWLINE ]; then
-                sed -i --follow-symlinks "$((NEWLINE)) d" .mainconf
+            if [ $MAINLC -ge $(($NEWLINE-$j)) ]; then
+                sed -i --follow-symlinks "$(($NEWLINE-$j)) d" .mainconf
 			else
-				sed -i --follow-symlinks "$(($MAINLC-$NEWLINE))d" .extraconf
+				sed -i --follow-symlinks "$(($MAINLC-$NEWLINE-$j))d" .extraconf
 			fi
+			j=$(($j+1))
 			;;
 		*'|'*)
 			# this is where this script breaks. I didn't
 			# consider that I need to tell the difference
 			# between commenting out and uncommenting
             echo "Default"
-			FIELD2=$(sed "$(($NEWLINE))q;d" oldconf)
+			FIELD2=$(sed "$(($NEWLINE-$j))q;d" oldconf)
 			echo "$FIELD2"
 			if [[ "$FIELD2" =~ ^[:space:]*# ]]; then
                 echo "remove commentation"
-				CURRNUM=$(($NEWLINE))
+				CURRNUM=$(($NEWLINE-$j))
 				NEWARR+=("$CURRNUM")
                 FIELD2=$(echo $FIELD2 | sed 's/#//1')
 			else
                 echo "remove entry if needed"
-				for (( j=0; j<=${#i3LINES[@]}; j++ )); do
-                    if [ $NEWLINE -eq $((${i3LINES[$j]}+$i)) ]; then
-						unset 'i3LINES[j]'
+				for (( k=0; k<=${#i3LINES[@]}; k++ )); do
+                    echo "$(($NEWLINE-$j)) == $((${i3LINES[$k]}))"
+                    if [ $(($NEWLINE-$j)) -eq $((${i3LINES[$k]}+$i)) ]; then
+                        echo "unset"
+						i3LINES=( "${i3LINES[@]:0:$k}" "${i3LINES[@]:$(($k+1))}" )
 						break
 					fi
 				done
 			fi
 
 			if [ $MAINLC -ge $NEWLINE ]; then
-				sed -i --follow-symlinks ''"$(($NEWLINE))"'s/.*/'"$FIELD2"'/' .mainconf
+				sed -i --follow-symlinks ''"$(($NEWLINE-$j))"'s/.*/'"$FIELD2"'/' .mainconf
 			else
-				sed -i --follow-symlinks ''"$(($MAINLC-$NEWLINE))"'s/.*/'"$FIELD2"'/' .extraconf
+				sed -i --follow-symlinks ''"$(($MAINLC-$NEWLINE-$j))"'s/.*/'"$FIELD2"'/' .extraconf
 			fi
 			;;
 	esac
 	NEWLINES=("${NEWLINES[@]:1}")
 done
 for LEFTOVER in "${i3LINES[@]}"; do
-	NEWARR+=($(($i+$LEFTOVER)))
+	NEWARR+=($(($i+$LEFTOVER-$j)))
 done
 echo "NEWARR ${NEWARR[@]}"
 
