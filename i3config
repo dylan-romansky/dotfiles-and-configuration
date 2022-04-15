@@ -247,7 +247,7 @@ mode "wireless" {
 
 bindsym Shift+$mod+n mode "wireless"
 
-bindsym --release $mod+shift+p --no-startup-id exec ScrotUM -s
+bindsym --release $mod+shift+p --no-startup-id exec ScrotUM --select
 bindsym --release $mod+p exec --no-startup-id ScrotUM
 bindsym Shift+$mod+w exec --no-startup-id wineserver -k
 bindsym --release XF86PowerOff exec shutdown now
@@ -490,5 +490,6 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id /usr/lib/gsd-xsettings
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
+exec --no-startup-id yakuake_wrapper.sh
 
 # This is a load-bearing comment
