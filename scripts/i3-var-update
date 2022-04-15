@@ -46,11 +46,9 @@ done <<< $(echo "$DIFFS")
 # create a new array housing all the lines that get commented
 # out when concatonating the base config and extra config to
 # make the sessions' i3config
-# also add any new lines created during this session to the 
-# base and extra configs as needed
+# also add/remove any new lines created/deleted during this
+# session to the base and extra configs as needed
 
-#TODO sort out why the commenting out isn't working
-#     it has something to do with the way NEWARR gets constructed
 i=0
 j=0
 for EACH in "${NEWLINES[@]}"; do
@@ -82,9 +80,6 @@ for EACH in "${NEWLINES[@]}"; do
 			j=$(($j+1))
 			;;
 		*'|'*)
-			# this is where this script breaks. I didn't
-			# consider that I need to tell the difference
-			# between commenting out and uncommenting
             echo "Default"
 			FIELD2=$(sed "$(($NEWLINE-$j))q;d" oldconf)
 			echo "$FIELD2"
