@@ -3,12 +3,17 @@
 #this script serves as the input gathering and sanitizing
 #for the dl_items function over in drive_handling.py
 
+#if the filename in google drive has a / in it, you need
+#to remove it. I will not handle that for you. It's too
+#complicated to solve that problem when you could just
+#rename that file and make both of our lives easier
+
 import os
 import sys
 import drive_handling
 
 SCOPE = ['https://www.googleapis.com/auth/drive']
-start_dir = os.path.expandvars('$HOME/Downloads')
+start_dir = os.path.expandvars('$HOME/Downloads/')
 os.chdir(start_dir)
 if os.path.exists('drive_dl') == False:
 	os.mkdir('drive_dl')
@@ -25,9 +30,10 @@ else:
 	dl_set = sys.argv[1:]
 drive = drive_handling.drive_setup(SCOPES=SCOPE, token_dir=start_dir)
 for item in dl_set:
+	fixed = item.replace('/', '-or-')
 	pwd = os.getcwd()
-	if os.path.exists(item) == False:
-		os.mkdir(item)
-	os.chdir(item)
+	if os.path.exists(fixed) == False:
+		os.mkdir(fixed)
+	os.chdir(fixed)
 	drive_handling.dl_items(drive, item)
 	os.chdir(pwd)

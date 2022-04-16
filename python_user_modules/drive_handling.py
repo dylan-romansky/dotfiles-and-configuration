@@ -42,6 +42,7 @@ import re
 creds_path = os.path.expandvars('$HOME/Documents/config/python_user_modules/')
 
 def drive_setup(SCOPES='https://www.googleapis.com/drive.metadata.readonly', token_dir=creds_path):
+	print(creds_path)
 	pwd = os.getcwd()
 	os.chdir(creds_path)
 	if not SCOPES:
