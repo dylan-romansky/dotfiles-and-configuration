@@ -3,11 +3,6 @@
 #this script serves as the input gathering and sanitizing
 #for the dl_items function over in drive_handling.py
 
-#if the filename in google drive has a / in it, you need
-#to remove it. I will not handle that for you. It's too
-#complicated to solve that problem when you could just
-#rename that file and make both of our lives easier
-
 import os
 import sys
 import drive_handling
