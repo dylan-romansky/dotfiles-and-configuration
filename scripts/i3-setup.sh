@@ -4,8 +4,10 @@
 ## .mainconf and .extraconf in your $HOME/.config/i3/ folder## pointed at the main i3config file and the i3extras file
 ## respectively
 
+## get the correct lines to disable for this machine
+source $HOME/.config/i3/.i3vars
+
 ## disable lines from the main i3config
-CMD_LINE=""
 CONFIG="$HOME/.config/i3/config"
 if [ -f "$CONFIG" ]; then
 	rm "$CONFIG"

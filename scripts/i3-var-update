@@ -66,16 +66,19 @@ for EACH in "${NEWLINES[@]}"; do
             if [ $MAINLC -ge $(($NEWLINE-$j)) ]; then
                 sed -i --follow-symlinks "$(($NEWLINE-$j)) i $NEWCONF" .mainconf
 			else
-                sed -i --follow-symlinks "$(($NEWLINE-$j)) i $NEWCONF" .extraconf
+                echo "$MAINLC $NEWLINE $j"
+                echo "$(($NEWLINE-$j))"
+                sed -i --follow-symlinks "$(($NEWLINE-$MAINLC-$j)) i $NEWCONF" .extraconf
 			fi
 			i=$(($i+1))
 			;;
 		*'<'*) # remove
-            echo "Remove"
             if [ $MAINLC -ge $(($NEWLINE-$j)) ]; then
+                echo "nope"
                 sed -i --follow-symlinks "$(($NEWLINE-$j)) d" .mainconf
 			else
-				sed -i --follow-symlinks "$(($MAINLC-$NEWLINE-$j))d" .extraconf
+                echo "yup"
+				sed -i --follow-symlinks "$(($NEWLINE-$MAINLC-$j))d" .extraconf
 			fi
 			j=$(($j+1))
 			;;

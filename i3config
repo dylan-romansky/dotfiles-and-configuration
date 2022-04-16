@@ -247,7 +247,7 @@ mode "wireless" {
 
 bindsym Shift+$mod+n mode "wireless"
 
-bindsym --release $mod+shift+p --no-startup-id exec ScrotUM --select
+bindsym --release $mod+shift+p exec --no-startup-id ScrotUM --select
 bindsym --release $mod+p exec --no-startup-id ScrotUM
 bindsym Shift+$mod+w exec --no-startup-id wineserver -k
 bindsym --release XF86PowerOff exec shutdown now

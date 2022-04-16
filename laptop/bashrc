@@ -5,10 +5,6 @@
 # These variables should be set whether the terminal is
 # interactive or not
 
-# below is a workaround till I figure out why
-# lightDM doesn't source my bash_extras properly
-export i3LINES=(48 49 50 211 238 239 240 241 242 243 244 245 246 247 248)
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -47,6 +43,15 @@ function cd () {
 	if [ $? -eq 0 ]; then
 		fu_ls -G
 	fi
+}
+
+function mkcd () {
+    DIR="$1"
+    DIR=${DIR:-"$HOME"}
+    if [ ! -d $DIR ]; then
+        mkdir -p $DIR
+    fi
+    cd $DIR exec
 }
 
 function vcp () {
