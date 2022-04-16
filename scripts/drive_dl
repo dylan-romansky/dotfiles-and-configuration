@@ -8,7 +8,7 @@ import sys
 import drive_handling
 
 SCOPE = ['https://www.googleapis.com/auth/drive']
-start_dir = os.path.expandvars('$HOME/Downloads')
+start_dir = os.path.expandvars('$HOME/Downloads/')
 os.chdir(start_dir)
 if os.path.exists('drive_dl') == False:
 	os.mkdir('drive_dl')
@@ -26,8 +26,8 @@ else:
 drive = drive_handling.drive_setup(SCOPES=SCOPE, token_dir=start_dir)
 for item in dl_set:
 	pwd = os.getcwd()
-	if os.path.exists(item) == False:
-		os.mkdir(item)
-	os.chdir(item)
+	if os.path.exists('"' + item + '"') == False:
+		os.makedirs('"' + item + '"')
+	os.chdir('"' + item + '"')
 	drive_handling.dl_items(drive, item)
 	os.chdir(pwd)

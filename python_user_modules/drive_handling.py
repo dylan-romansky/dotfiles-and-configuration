@@ -42,6 +42,8 @@ import re
 creds_path = os.path.expandvars('$HOME/Documents/config/python_user_modules/')
 
 def drive_setup(SCOPES='https://www.googleapis.com/drive.metadata.readonly', token_dir=creds_path):
+	print("setup time")
+	print(creds_path)
 	pwd = os.getcwd()
 	os.chdir(creds_path)
 	if not SCOPES:
@@ -50,6 +52,7 @@ def drive_setup(SCOPES='https://www.googleapis.com/drive.metadata.readonly', tok
 	if os.path.exists(token_dir + 'token.json'):
 		creds = Credentials.from_authorized_user_file(token_dir + 'token.json', SCOPES)
 	if not creds or not creds.valid:
+		print('make creds')
 		if creds and creds.expired and creds.refresh_token:
 			creds.refresh(Request())
 		else:
