@@ -168,5 +168,9 @@ alias disk='sudo du -hd1 /'
 alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
 alias browse='(thunar $PWD &>/dev/null & disown)'
 
+# complex tasks
+
+alias jorb='cd projects/Python/scraping; ./get_a_job.py; ./open_links.py output/linkedin/$(date -I)/*; cd -'
+
 HISTCONTROL=ignoreboth:erasedups
 HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c:xconf:xreload"
