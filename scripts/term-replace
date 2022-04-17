@@ -1,5 +1,5 @@
 #!/bin/bash
 
-sed -i --follow-symlinks "s/set \$term .*/set \$term $1/" "$HOME/.config/i3/config"
-sed -i --follow-symlinks "s/export TERMINAL=.*/export TERMINAL=\"$1\"/" "$HOME/.bashrc"
+sed -i --follow-symlinks "s/export TERMINAL=.*/export TERMINAL=\"$1\"/" "$HOME/.config/i3/.i3vars"
+sed -i --follow-symlinks "s/set \$term.*/set \$term $1/" "$HOME/.config/i3/config"
 i3restart

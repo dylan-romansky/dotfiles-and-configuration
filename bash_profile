@@ -12,14 +12,12 @@ export PROMPT_THEME=bigdigsquig
 export QT_QPA_PLATFORMTHEME=gtk2
 export PYTHONPATH="$PYTHONPATH:$HOME/Documents/config/python_user_modules"
 export EDITOR="vim"
-
 [[ -f ~/.bash_extras ]] && . ~/.bash_extras
-[[ -f ~/.config/i3/.i3vars ]] && . ~/.config/i3/.i3vars
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 
-i3-setup.sh "urxvt" ${i3LINES[*]}
+i3-setup.sh ${i3LINES[*]}
 
 if [ -z "$DISPLAY" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 	exec startx $HOME/.xinitrc
 fi
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc

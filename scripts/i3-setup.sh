@@ -13,9 +13,9 @@ if [ -f "$CONFIG" ]; then
 	rm "$CONFIG"
 fi
 cp "$HOME/.config/i3/.mainconf" "$CONFIG"
-sed -i --follow-symlinks "s/set \$term*/set \$term $1/" "$HOME/.config/i3/config"
+sed -i --follow-symlinks "s/set \$term*/set \$term $TERMINAL/" "$HOME/.config/i3/config"
 shift
-for line in "${@}"; do
+for line in "${i3LINES[@]}"; do
 	echo "doing line $line"
 	sed -i -e "$line s/./#&/" $CONFIG
 done
