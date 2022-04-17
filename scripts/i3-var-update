@@ -12,7 +12,7 @@
 builtin cd $HOME/.config/i3
 source ./.i3vars
 cp config oldconf
-i3-setup.sh $TERMINAL "${i3LINES[@]}"
+i3-setup.sh
 # check if there's been an external update to the source
 # configuration files and if so, perform the rest of the
 # script before letting the user input further changes

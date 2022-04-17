@@ -1,7 +1,5 @@
 #!/bin/bash
-source "$HOME/.config/i3/.i3vars"
-# discover why i3-setup doesn't run properly when invoked by i3
-i3-setup.sh $TERMINAL ${i3LINES[@]}
+i3-setup.sh
 WS=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name')
 nempty
 i3-msg "restart"

@@ -39,7 +39,7 @@ function cd () {
 	DIR="$1"
 	DIR=${DIR:-"$HOME"}
 	builtin cd "$DIR"
-    [[ $? -eq 0 ]] && ls --color
+    [[ $? -eq 0 ]] && ls --color=auto
 }
 
 function mkcd () {
@@ -115,7 +115,7 @@ alias iw='sudo iw'
 
 # modified functionality (flags, better names, or otherwise)
 
-alias ls='ls --color'
+alias ls='ls --color=auto'
 alias valor='valgrind --track-origins=yes'
 alias rm='mv -ft $HOME/Trash'
 alias cp='cp -iv'
