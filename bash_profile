@@ -14,10 +14,8 @@ export PYTHONPATH="$PYTHONPATH:$HOME/Documents/config/python_user_modules"
 export EDITOR="vim"
 [[ -f ~/.bash_extras ]] && . ~/.bash_extras
 [[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ -f ~/.dircolors ]] && eval "$(dircolors ~/.dircolors)"
 
-i3-setup.sh ${i3LINES[*]}
+i3-setup.sh
 
-if [ -z "$DISPLAY" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-	exec startx $HOME/.xinitrc
-fi
-
+[[ -z "$DISPLAY" ]] && [[ "${XDG_VTNR}" -eq 1 ]] && exec startx $HOME/.xinitrc

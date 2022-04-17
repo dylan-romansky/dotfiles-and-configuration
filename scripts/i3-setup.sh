@@ -4,7 +4,7 @@
 ## .mainconf and .extraconf in your $HOME/.config/i3/ folder## pointed at the main i3config file and the i3extras file
 ## respectively
 
-## get the correct lines to disable for this machine
+## get the variables for this machine's configuration
 source $HOME/.config/i3/.i3vars
 
 ## disable lines from the main i3config

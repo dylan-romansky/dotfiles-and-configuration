@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+[[ -f $HOME/.dircolors ]] && eval "$(dircolors $HOME/.dircolors)"
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
