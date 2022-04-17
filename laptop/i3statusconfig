@@ -24,6 +24,7 @@ order += "cpu_temperature 0"
 order += "memory"
 order += "volume master"
 order += "tztime local"
+order += "battery all"
 
 wireless _first_ {
         format_up = "%essid: %quality"
@@ -44,17 +45,17 @@ load {
 }
 
 cpu_usage {
-	format = "CPU USAGE: %usage" # CPU_0: %cpu0 CPU_1: %cpu1 CPU_2: %cpu2 CPU_3: %cpu3"
-	max_threshold = 75
-	format_above_threshold = "DANGER: %usage"
-	degraded_threshold = 50
-	format_above_degraded_threshold = "WARNING: %usage"
+		format = "CPU USAGE: %usage" # CPU_0: %cpu0 CPU_1: %cpu1 CPU_2: %cpu2 CPU_3: %cpu3"
+		max_threshold = 75
+		format_above_threshold = "DANGER: %usage"
+		degraded_threshold = 50
+		format_above_degraded_threshold = "WARNING: %usage"
 }
 
 cpu_temperature 0 {
-	format = "CPU TEMP: %degrees °C"
-	max_threshold = 80
-	format_above_threshold = "DANGER: %degrees °C"
+		format = "CPU TEMP: %degrees °C"
+		max_threshold = 80
+		format_above_threshold = "DANGER: %degrees °C"
 }
 
 memory {
@@ -64,12 +65,23 @@ memory {
 }
 
 volume master {
-	format = "V: %volume"
-	format_muted = "V: muted (%volume)"
-	device = "pulse:1"
-#	device = "pulse:alsa_output.pci-0000_00_14.2.analog-stereo"
+		format = "V: %volume"
+		format_muted = "V: muted (%volume)"
+		device = "pulse:1"
+#		device = "pulse:alsa_output.pci-0000_00_14.2.analog-stereo"
 }
 
 tztime local {
         format = "%Y-%m-%d %H:%M:%S"
+}
+
+battery all {
+		format = "%status %percentage %remaining %emptytime"
+		format_down = "No battery"
+		status_chr = "CHR"
+		status_bat = "BAT"
+		status_unk = "UNK"
+		status_full = "FUL"
+		path = "/sys/class/power_supply/BAT%d/uevent"
+		low_threshold = 10
 }
