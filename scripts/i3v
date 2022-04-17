@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#simple wrapper script that handles opening any of my
+#other i3 configuration files and restarting i3 when
+#it's done
+
+vim "$1"
+i3restart
