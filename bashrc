@@ -90,7 +90,7 @@ source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 
 alias bconf='vim $HOME/.bashrc'
 alias binit='source $HOME/.bashrc'
-alias i3c='vim $HOME/.config/i3/config'
+alias i3c='i3-var-update'
 alias xconf='vim $HOME/.Xresources'
 alias xreload='xrdb $HOME/.Xresources'
 alias piconf='vim $HOME/.config/picom/picom.conf'
@@ -125,6 +125,7 @@ alias mv='mv -iv'
 alias ln='ln -iv'
 alias ping='ping -c 4'
 alias shutdown='shutdown now'
+alias logout='i3-msg exit'
 alias calculator="gnome-calculator"
 alias clone='git clone'
 alias cpp='clang++ -Wall -Werror -Wextra'
