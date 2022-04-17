@@ -5,7 +5,7 @@ bar {
 	font pango:monospace 10
 	output LVDS-1
 	colors {
-		background #000000
+		background #350084
 		statusline #00ff00
 		separator #666666
 

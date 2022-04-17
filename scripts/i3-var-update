@@ -90,7 +90,7 @@ for EACH in "${NEWLINES[@]}"; do
                 echo "remove commentation"
 				CURRNUM=$(($NEWLINE-$j))
 				NEWARR+=("$CURRNUM")
-                FIELD2=$(echo $FIELD2 | sed 's/#//1')
+                FIELD2=$(echo $FIELD2 | sed 's|#||1')
 			else
                 echo "remove entry if needed"
 				for (( k=0; k<=${#i3LINES[@]}; k++ )); do
@@ -102,11 +102,11 @@ for EACH in "${NEWLINES[@]}"; do
 					fi
 				done
 			fi
-
+            echo "$MAINLC $j $NEWLINE"
 			if [ $MAINLC -ge $NEWLINE ]; then
-				sed -i --follow-symlinks ''"$(($NEWLINE-$j))"'s/.*/'"$FIELD2"'/' .mainconf
+				sed -i --follow-symlinks ''"$(($NEWLINE-$j))"'s|.*|'"$FIELD2"'|' .mainconf
 			else
-				sed -i --follow-symlinks ''"$(($MAINLC-$NEWLINE-$j))"'s/.*/'"$FIELD2"'/' .extraconf
+				sed -i --follow-symlinks ''"$(($NEWLINE-$MAINLC-$j))"'s|.*|'"$FIELD2"'|' .extraconf
 			fi
 			;;
 	esac
@@ -118,6 +118,6 @@ done
 echo "NEWARR ${NEWARR[@]}"
 
 # finally output the list of modified lines and clean up
-sed -i --follow-symlinks 's/'"export i3LINES=.*"'/'"export\ i3LINES=(${NEWARR[*]})"'/' .i3vars
+sed -i --follow-symlinks 's|'"export i3LINES=.*"'|'"export\ i3LINES=(${NEWARR[*]})"'|' .i3vars
 rm oldconf
 i3restart

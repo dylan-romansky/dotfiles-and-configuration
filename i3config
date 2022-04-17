@@ -210,7 +210,9 @@ mode "settings" {
 		bindsym t exec --no-startup-id tint2conf
 		bindsym a exec --no-startup-id cadence
 		bindsym g exec --no-startup-id exec-helper $term vim ~/.config/picom/picom.conf
-		bindsym i exec --no-startup-id exec-helper $term vim ~/.config/i3/config
+		bindsym i exec --no-startup-id exec-helper $term i3-var-update
+		bindsym b exec --no-startup-id exec-helper $term i3v ~/.config/i3blocks/config
+		bindsym e exec --no-startup-id exec-helper $term i3v ~/.config/i3status/config
 		bindsym c exec --no-startup-id sudo cpu-x
 		bindsym h exec --no-startup-id htop
 		bindsym f exec --no-startup-id exec-helper $term sys-info.sh
