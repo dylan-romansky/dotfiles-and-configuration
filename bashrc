@@ -2,8 +2,6 @@
 # ~/.bashrc
 #
 
-source $HOME/.config/i3/.i3vars
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -41,9 +39,14 @@ function cd () {
 	DIR="$1"
 	DIR=${DIR:-"$HOME"}
 	builtin cd "$DIR"
-	if [ $? -eq 0 ]; then
-		ls --color
-	fi
+    [[ $? -eq 0 ]] && ls --color
+}
+
+function mkcd () {
+    DIR="$1"
+    DIR=${DIR:-"$HOME"}
+    [[ -d "$DIR" ]] && mkdir $DIR
+    cd $DIR
 }
 
 function vcp () {
@@ -88,6 +91,7 @@ alias binit='source $HOME/.bashrc'
 alias i3c='vim $HOME/.config/i3/config'
 alias xconf='vim $HOME/.Xresources'
 alias xreload='xrdb $HOME/.Xresources'
+alias piconf='vim $HOME/.config/picom/picom.conf'
 
 # always needs sudo
 
@@ -107,6 +111,7 @@ alias du='sudo du'
 alias netctl='sudo netctl'
 alias ip='sudo ip'
 alias lldb='sudo lldb'
+alias iw='sudo iw'
 
 # modified functionality (flags, better names, or otherwise)
 
@@ -132,7 +137,7 @@ alias amend='git commit -a --amend; git pull; git push'
 alias schootar='tar -zxvf'
 alias xwinfo='xprop'
 alias nut='python $HOME/Downloads/nut-2.6/nut.py'
-alias mirrors='sudo reflector --latest 20 --sort rate --save /etc/pacman.d/mirrorlist --protocol http,http--latest 20 --sort rate --save /etc/pacman.d/mirrorlist --protocol http,https'
+alias mirrors='sudo reflector --sort age --country US --fastest 20 --protocol https --save /etc/pacman.d/mirrorlist'
 
 # fun
 
@@ -155,7 +160,7 @@ alias phone='ssh -i ~/.ssh/id_phone -p 8022'
 
 # system related
 
-alias sys-update='sudo reflector --sort age --country US --fastest 20 --protocol https --save /etc/pacman.d/mirrorlist; pacman -Syu $@ --noconfirm; aur-update'
+alias sys-update='mirrors; repac; aur-update; pip-update'
 alias disk='sudo du -hd1 /'
 alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
 alias browse='(thunar $PWD &>/dev/null & disown)'

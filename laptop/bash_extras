@@ -2,11 +2,5 @@
 # ~/.bash_extras
 #
 
-[ -f "/hdd/$USER/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc" ] && source "/hdd/$USER/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc"
-[ -f "/hdd/dromansk/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc" ] && source "/hdd/dromansk/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc"
-. $HOME/.config/i3/.i3vars
-i3-setup.sh "urxvt" ${i3LINES[*]}
-
-if [ -z "$DISPLAY" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-	exec startx $HOME/.xinitrc
-fi
+[ -f "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc" ] && source "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc"
+[ -f "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc" ] && source "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc"
