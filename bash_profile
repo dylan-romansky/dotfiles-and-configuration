@@ -12,10 +12,12 @@ export PROMPT_THEME=bigdigsquig
 export QT_QPA_PLATFORMTHEME=gtk2
 export PYTHONPATH="$PYTHONPATH:$HOME/Documents/config/python_user_modules"
 export EDITOR="vim"
-[[ -f ~/.bash_extras ]] && . ~/.bash_extras
-[[ -f ~/.bashrc ]] && . ~/.bashrc
-[[ -f ~/.dircolors ]] && eval "$(dircolors ~/.dircolors)"
+[ -f ~/.bash_extras ] && . ~/.bash_extras
+[ -f ~/.bashrc ] && . ~/.bashrc
+[ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
+[ -f "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc" ] && source "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc"
+[ -f "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc" ] && source "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc"
 
 i3-setup.sh
 
-[[ -z "$DISPLAY" ]] && [[ "${XDG_VTNR}" -eq 1 ]] && exec startx $HOME/.xinitrc
+[ -z "$DISPLAY" ] && [ "${XDG_VTNR}" -eq 1 ] && exec startx $HOME/.xinitrc
