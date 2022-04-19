@@ -12,3 +12,9 @@ https://wiki.archlinux.org/title/Improving_performance
 https://wiki.archlinux.org/title/Solid_state_drive
 
 https://wiki.archlinux.org/title/Color_output_in_console
+
+
+find the keypress for Fn+left/right so I can control my backlight directly
+--/sys/class/backlight/intel_backlight/brightness
+--max brightness: 976
+--XF86MonBrightnessUp XF86MonBrightnessDown
