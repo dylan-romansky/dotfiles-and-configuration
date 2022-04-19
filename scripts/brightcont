@@ -1,0 +1,30 @@
+#!/bin/bash
+
+FILE="/sys/class/backlight/intel_backlight/brightness"
+BRIGHT=$(cat $FILE)
+MAX=976
+
+case $1 in
+
+	up)
+		BRIGHT=$(($BRIGHT+120))
+		;;
+
+	down)
+		BRIGHT=$(($BRIGHT-120))
+		;;
+
+	smup)
+		BRIGHT=$(($BRIGHT+60))
+		;;
+
+	smdown)
+		BRIGHT=$(($BRIGHT-60))
+		;;
+
+esac
+
+[ $BRIGHT -gt $MAX ] && BRIGHT=$MAX
+[ $BRIGHT -lt 0 ] && BRIGHT=0
+
+sudo echo $BRIGHT > $FILE

@@ -18,3 +18,8 @@ bar {
 	}
 	status_command i3status
 }
+
+bindsym XF86MonBrightnessUp exec sudo brightcont up
+bindsym XF86MonBrightnessDown exec sudo brightcont down
+bindsym shift+XF86BrightnessUp exec sudo brightcont smup
+bindsym shift+XF86BrightnessDown exec sudo brightcont smdown
