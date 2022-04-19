@@ -177,4 +177,4 @@ alias browse='(thunar $PWD &>/dev/null & disown)'
 alias jorb='cd projects/Python/scraping; ./get_a_job.py; ./open_links.py output/linkedin/$(date -I)/*; cd -'
 
 HISTCONTROL=ignoreboth:erasedups
-HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c:xconf:xreload"
+HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c:xconf:xreload:please"
