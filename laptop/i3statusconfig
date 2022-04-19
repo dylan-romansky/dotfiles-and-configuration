@@ -23,8 +23,8 @@ order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "memory"
 order += "volume master"
-order += "tztime local"
 order += "battery all"
+order += "tztime local"
 
 wireless _first_ {
         format_up = "%essid: %quality"
@@ -67,8 +67,8 @@ memory {
 volume master {
 		format = "V: %volume"
 		format_muted = "V: muted (%volume)"
-		device = "pulse:1"
-#		device = "pulse:alsa_output.pci-0000_00_14.2.analog-stereo"
+#		device = "pulse:1"
+		device = "pulse:alsa_output.pci-0000_00_14.2.analog-stereo"
 }
 
 tztime local {

@@ -5,10 +5,10 @@
 # tool. TODO: figure out what a failed patch 
 cd $HOME/.steam/compat/
 if ! [ -d "proton-ge-custom" ]; then
-	git clone git clone --recurse-submodules http://github.com/gloriouseggroll/proton-ge-custom
-fi
+	git clone --recurse-submodules http://github.com/gloriouseggroll/proton-ge-custom
+	STATUS="DO"
 cd $HOME/.steam/compat/proton-ge-custom
-STATUS=$(git pull --recurse-submodules)
+STATUS=${STATUS:-"$(git pull --recurse-submodules)"}
 echo "stat check"
 echo $STATUS
 if [[ "$STATUS" == *"Already up to date."* ]]; then
