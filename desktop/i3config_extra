@@ -1,3 +1,17 @@
+set $monitor_top DP-4
+set $monitor_bottom HDMI-0
+
+workspace $ws1 output $monitor_bottom
+workspace $ws2 output $monitor_top
+workspace $ws3 output $monitor_bottom
+workspace $ws4 output $monitor_top
+workspace $ws5 output $monitor_bottom
+workspace $ws6 output $monitor_top
+workspace $ws7 output $monitor_bottom
+workspace $ws8 output $monitor_top
+workspace $ws9 output $monitor_bottom
+workspace $ws10 output $monitor_top
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -13,11 +27,8 @@ bar {
 		urgent_workspace   #2f343a #900000 #ffffff
 		binding_mode       #2f343a #900000 #ffffff
 	}
+	tray_output HDMI-0
 	status_command i3status
-}
-
-bar {
-	output DVI-D-0
 }
 
 bar {
