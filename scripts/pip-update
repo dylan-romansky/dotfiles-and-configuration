@@ -1,3 +1,5 @@
 #!/bin/bash
 
+#next time pip has an error, check to see if it left an exit code.
+#if it did, have this use python -m ensurepip --upgrade
 pip install -U $(pip freeze | awk '{split($0, a, "=="); print a[1]}')

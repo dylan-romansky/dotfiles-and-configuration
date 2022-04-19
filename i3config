@@ -190,13 +190,13 @@ mode "launcher" {
 		bindsym g exec --no-startup-id google-chrome-stable
 		bindsym d exec --no-startup-id discord
 		bindsym t exec --no-startup-id deluge
-		bindsym m exec --no-startup-id wine ~/Desktop/mtgo.exe
+ bindsym m exec --no-startup-id wine ~/Desktop/mtgo.exe
 		bindsym f exec --no-startup-id thunar
 		bindsym c exec --no-startup-id gnome-calculator
 		bindsym s exec --no-startup-id steam-native
 		bindsym p exec --no-startup-id sudo gparted
-		bindsym n exec --no-startup-id python ~/Downloads/nut-2.6/nut.py
-		bindsym l exec --no-startup-id sol
+ bindsym n exec --no-startup-id python ~/Downloads/nut-2.6/nut.py
+ bindsym l exec --no-startup-id sol
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
@@ -484,7 +484,7 @@ hide_edge_borders smart_no_gaps
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
-#        status_command i3status
+# status_command i3status
 #}
 
 exec --no-startup-id tint2
@@ -494,6 +494,5 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 exec --no-startup-id yakuake_wrapper.sh
-exec --no-startup-id cbatticon
 
 # This is a load-bearing comment

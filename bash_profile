@@ -12,6 +12,8 @@ export PROMPT_THEME=bigdigsquig
 export QT_QPA_PLATFORMTHEME=gtk2
 export PYTHONPATH="$PYTHONPATH:$HOME/Documents/config/python_user_modules"
 export EDITOR="vim"
+export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
+export LESS='-R '
 [ -f ~/.bash_extras ] && . ~/.bash_extras
 [ -f ~/.bashrc ] && . ~/.bashrc
 [ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
