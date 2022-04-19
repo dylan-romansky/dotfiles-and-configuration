@@ -118,6 +118,9 @@ alias iw='sudo iw'
 # modified functionality (flags, better names, or otherwise)
 
 alias ls='ls --color=auto'
+alias diff='diff --color=auto'
+alias grep='grep --color=auto'
+alias ip='ip -color=auto'
 alias valor='valgrind --track-origins=yes'
 alias rm='mv -ft $HOME/Trash'
 alias cp='cp -iv'

@@ -205,15 +205,16 @@ mode "launcher" {
 
 bindsym Shift+$mod+a mode "launcher"
 
-mode "settings" {
+mode "system" {
 		bindsym p exec --no-startup-id paman
-		bindsym t exec --no-startup-id tint2conf
+ bindsym t exec --no-startup-id tint2conf
 		bindsym a exec --no-startup-id cadence
 		bindsym g exec --no-startup-id exec-helper $term vim ~/.config/picom/picom.conf
 		bindsym i exec --no-startup-id exec-helper $term i3-var-update
 		bindsym b exec --no-startup-id exec-helper $term i3v ~/.config/i3blocks/config
 		bindsym e exec --no-startup-id exec-helper $term i3v ~/.config/i3status/config
 		bindsym c exec --no-startup-id sudo cpu-x
+bindsym d exec --no-startup-id conky
 		bindsym h exec --no-startup-id htop
 		bindsym f exec --no-startup-id exec-helper $term sys-info.sh
 
@@ -222,7 +223,7 @@ mode "settings" {
 		bindsym --release s mode "default"
 }
 
-bindsym Shift+$mod+s mode "settings"
+bindsym Shift+$mod+s mode "system"
 
 mode "terminals" {
 		bindsym m exec --no-startup-id term-replace mate-terminal
@@ -493,5 +494,6 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 exec --no-startup-id yakuake_wrapper.sh
+exec --no-startup-id cbatticon
 
 # This is a load-bearing comment
