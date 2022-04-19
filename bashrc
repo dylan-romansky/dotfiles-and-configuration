@@ -114,6 +114,7 @@ alias netctl='sudo netctl'
 alias ip='sudo ip'
 alias lldb='sudo lldb'
 alias iw='sudo iw'
+alias powertop='sudo powertop'
 
 # modified functionality (flags, better names, or otherwise)
 
