@@ -64,17 +64,17 @@ for EACH in "${NEWLINES[@]}"; do
 		*'>'*) # append
             echo "Append"
 			NEWCONF=$(sed -n "$NEWLINE{p;q}" oldconf)
-			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC-1)) && DESTFILE=".extraconf"
+			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC)) && DESTFILE=".extraconf"
 			if [ -n "$NEWCONF" ]; then
                	sed -i --follow-symlinks "$NEWLINE i $NEWCONF" $DESTFILE
 			else
-				sed -i --follow-symlinks "$NEWLINE G" $DESTFILE
+				sed -i --follow-symlinks "$((NEWLINE-1)) G" $DESTFILE
 			fi
 			echo "$NEWLINE $DESTFILE"
 			i=$(($i+1))
 			;;
 		*'<'*) # remove
-			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC-1)) && DESTFILE=".extraconf"
+			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC)) && DESTFILE=".extraconf"
 			sed -i --follow-symlinks "$NEWLINE d" $DESTFILE
 			j=$(($j+1))
 			;;
@@ -97,7 +97,7 @@ for EACH in "${NEWLINES[@]}"; do
 					fi
 				done
 			fi
-			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC-1)) && DESTFILE=".extraconf"
+			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC)) && DESTFILE=".extraconf"
 			sed -i --follow-symlinks ''"$NEWLINE"'s|.*|'"$FIELD2"'|' $DESTFILE
 			;;
 	esac
