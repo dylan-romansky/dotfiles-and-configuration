@@ -1,4 +1,6 @@
 #!/bin/bash
+
+## Rebuild our configuration for this session and restart i3wm
 i3-setup.sh
 WS=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name')
 nempty
