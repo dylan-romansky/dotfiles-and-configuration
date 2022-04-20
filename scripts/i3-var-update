@@ -52,10 +52,11 @@ done <<< $(echo "$DIFFS")
 i=0
 j=0
 for EACH in "${NEWLINES[@]}"; do
-	NEWLINE=$(echo "$EACH" | awk '{ print $1 }')
+	NEWLINE=$(($(echo "$EACH" | awk '{ print $1 }')-$j))
+	DESTFILE=".mainconf"
     echo "Line $NEWLINE"
     echo "i $i j $j"
-    while [ -n "$i3LINES" ] && [ $(($i3LINES+$i-$j)) -lt $(($NEWLINE-$j)) ]; do
+    while [ -n "$i3LINES" ] && [ $(($i3LINES+$i-$j)) -lt $NEWLINE ]; do
         NEWARR+=($(($i3LINES+$i-$j)))
 		i3LINES=("${i3LINES[@]:1}")
 	done
@@ -63,51 +64,41 @@ for EACH in "${NEWLINES[@]}"; do
 		*'>'*) # append
             echo "Append"
 			NEWCONF=$(sed -n "$NEWLINE{p;q}" oldconf)
-            if [ $MAINLC -ge $(($NEWLINE-$j)) ]; then
-                sed -i --follow-symlinks "$(($NEWLINE-$j)) i $NEWCONF" .mainconf
+			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC-1)) && DESTFILE=".extraconf"
+			if [ -n "$NEWCONF" ]; then
+               	sed -i --follow-symlinks "$NEWLINE i $NEWCONF" $DESTFILE
 			else
-                echo "$MAINLC $NEWLINE $j"
-                echo "$(($NEWLINE-$j))"
-                sed -i --follow-symlinks "$(($NEWLINE-$MAINLC-$j)) i $NEWCONF" .extraconf
+				sed -i --follow-symlinks "$NEWLINE G" $DESTFILE
 			fi
+			echo "$NEWLINE $DESTFILE"
 			i=$(($i+1))
 			;;
 		*'<'*) # remove
-            if [ $MAINLC -ge $(($NEWLINE-$j)) ]; then
-                echo "nope"
-                sed -i --follow-symlinks "$(($NEWLINE-$j)) d" .mainconf
-			else
-                echo "yup"
-				sed -i --follow-symlinks "$(($NEWLINE-$MAINLC-$j))d" .extraconf
-			fi
+			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC-1)) && DESTFILE=".extraconf"
+			sed -i --follow-symlinks "$NEWLINE d" $DESTFILE
 			j=$(($j+1))
 			;;
 		*'|'*)
             echo "Default"
-			FIELD2=$(sed "$(($NEWLINE-$j))q;d" oldconf)
+			FIELD2=$(sed "$NEWLINE q;d" oldconf)
 			echo "$FIELD2"
 			if [[ "$FIELD2" =~ ^[:space:]*# ]]; then
                 echo "remove commentation"
-				CURRNUM=$(($NEWLINE-$j))
-				NEWARR+=("$CURRNUM")
-                FIELD2=$(echo $FIELD2 | sed 's|#||1')
+				NEWARR+=("$NEWLINE")
+                FIELD2=$(echo "$FIELD2" | sed 's|#||1')
 			else
                 echo "remove entry if needed"
 				for (( k=0; k<=${#i3LINES[@]}; k++ )); do
-                    echo "$(($NEWLINE-$j)) == $((${i3LINES[$k]}))"
-                    if [ $(($NEWLINE-$j)) -eq $((${i3LINES[$k]}+$i)) ]; then
+                    echo "$NEWLINE == $((${i3LINES[$k]}))"
+                    if [ $NEWLINE -eq $((${i3LINES[$k]}+$i)) ]; then
                         echo "unset"
 						i3LINES=( "${i3LINES[@]:0:$k}" "${i3LINES[@]:$(($k+1))}" )
 						break
 					fi
 				done
 			fi
-            echo "$MAINLC $j $NEWLINE"
-			if [ $MAINLC -ge $NEWLINE ]; then
-				sed -i --follow-symlinks ''"$(($NEWLINE-$j))"'s|.*|'"$FIELD2"'|' .mainconf
-			else
-				sed -i --follow-symlinks ''"$(($NEWLINE-$MAINLC-$j))"'s|.*|'"$FIELD2"'|' .extraconf
-			fi
+			[ $MAINLC -lt $NEWLINE ] && NEWLINE=$(($NEWLINE-$MAINLC-1)) && DESTFILE=".extraconf"
+			sed -i --follow-symlinks ''"$NEWLINE"'s|.*|'"$FIELD2"'|' $DESTFILE
 			;;
 	esac
 	NEWLINES=("${NEWLINES[@]:1}")
