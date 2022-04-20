@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Self explanatory, I keep two variables that state what terminal
+# emulator I'm currently using. This script automates the process
+# of modifying those variables.
+
 sed -i --follow-symlinks "s/export TERMINAL=.*/export TERMINAL=\"$1\"/" "$HOME/.config/i3/.i3vars"
 sed -i --follow-symlinks "s/set \$term.*/set \$term $1/" "$HOME/.config/i3/config"
 i3restart

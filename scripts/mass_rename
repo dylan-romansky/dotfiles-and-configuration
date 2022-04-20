@@ -6,15 +6,16 @@
 #extensive list of files and want to do them all in one go.
 #I need to brush up on my regex to verify that everything
 #behaves properly
-#TODO: output method that doesn't involve ls. This script
-#	   is likely to break around spaces
 
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
 if [ ${#} -ne 2 ]; then
 	echo "Usage: mass_rename {target string} {replacement string}"
 	exit
 fi
 
-for MATCH in $(ls -1 | grep $1); do
+for MATCH in $(dir -Q1 | grep $1); do
 	NEWNAME=$(echo $MATCH | sed s/$1/$2/)
 	mv $MATCH $NEWNAME
 done
+IFS=$SAVEIFS

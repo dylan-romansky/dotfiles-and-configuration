@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# This script checks to see if I've updated my resume or my
+# cover letter. If it detects changes, it uploads the changed
+# file to my google drive
+
 SUM=$(md5sum "$HOME/resume draft.docx")
 OSUM=$(cat "$HOME/resume draft.md5")
 echo "$SUM" "|" "$OSUM"

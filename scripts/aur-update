@@ -1,6 +1,13 @@
 #!/bin/bash
+
+## This script is very self explanatory. It goes into my builds
+## directory (which is where I keep my AUR installs) and uses
+## the output of 'dir' to go into each install and update it
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
 cd $HOME/builds
-for REPO in $(ls); do
+for REPO in $(dir -Q1); do
 	cd $REPO
 	echo $REPO
 	git reset --hard
@@ -13,3 +20,4 @@ for REPO in $(ls); do
 	fi
 	cd ..
 done
+IFS=$SAVEIFS

@@ -2,11 +2,17 @@
 
 # a bash script for downloading, building, and installing
 # the Glorious Eggroll fork of steam's proton compatibility
-# tool. TODO: figure out what a failed patch 
+# tool.
+#TODO: figure out what a failed patch outputs as an error 
+
+# If GE isn't even cloned, clone it
 cd $HOME/.steam/compat/
 if ! [ -d "proton-ge-custom" ]; then
 	git clone --recurse-submodules http://github.com/gloriouseggroll/proton-ge-custom
 	STATUS="DO"
+fi
+
+# Check if we need to run an update
 cd $HOME/.steam/compat/proton-ge-custom
 STATUS=${STATUS:-"$(git pull --recurse-submodules)"}
 echo "stat check"
@@ -15,6 +21,8 @@ if [[ "$STATUS" == *"Already up to date."* ]]; then
 	echo "Everything is up to date"
 	exit
 fi
+
+# Apply any patches and log the results for error checks
 ./patches/protonprep-valve-staging.sh &> patchlog.txt
 if [ -n "$(grep -i -w fail patchlog.txt)" ] || [ -n "$(grep -i -w error patchlog.txt)" ]; then
 	echo "Errors occured: see patchlog.txt"
@@ -22,12 +30,19 @@ if [ -n "$(grep -i -w fail patchlog.txt)" ] || [ -n "$(grep -i -w error patchlog
 else
 	echo "Patches applied successfully!"
 fi
+
+# Remove any old build files
 if [ -d "build" ]; then
 	rm -rf build
 fi
+
+# Create and move to our build directory, then build
 mkdir build && cd build
 ../configure.sh --enable-ccache --build-name=GE-Proton --container-engine=docker
 make redist &> log
+
+# Copy the completed build to the proper location,
+# removing the old build if it exists
 DEST="$HOME/.steam/root/compatibilitytools.d"
 if [ -d $DEST/GE-Proton ]
 	rm -rf

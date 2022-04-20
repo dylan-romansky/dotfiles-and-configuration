@@ -22,6 +22,7 @@ if [ -z "$DIFFS" ]; then
 else
 	echo "Unresolved changes detected. Resolving."
 	echo "If you still want to make changes, please run this script again after completion."
+	exit
 fi
 
 # check if there are any differences and thus if we need
@@ -33,11 +34,12 @@ if [ -z "$DIFFS" ]; then
 	exit
 fi
 
-# get linecount of main config so it can be updated if needed
+# get linecount of main config so we can later determine
+# which file a change was implemented in
 MAINLC=$(wc -l .mainconf | awk '{ print $1 }')
 
 # create the list of new lines and whether they're being
-# added or commented out
+# added, removed, or commented out
 NEWLINES=()
 while read LINE; do
 	NEWLINES+=("$LINE")
@@ -47,7 +49,7 @@ done <<< $(echo "$DIFFS")
 # out when concatonating the base config and extra config to
 # make the sessions' i3config
 # also add/remove any new lines created/deleted during this
-# session to the base and extra configs as needed
+# session to/from the base and extra configs as needed
 
 i=0
 j=0

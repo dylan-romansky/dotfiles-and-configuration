@@ -1,6 +1,10 @@
 #!/bin/sh
 # Scrot Utility Manager
 
+# This simple wrapper script keeps all my screenshots in a
+# convenient location and simplifies the process of creating
+# i3 keybindings for different scrot functionality
+
 cd $HOME/Pictures/scrot
 scrot $@
 killall notify-osd
