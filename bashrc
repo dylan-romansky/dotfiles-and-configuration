@@ -2,10 +2,17 @@
 # ~/.bashrc
 #
 
-[[ -f $HOME/.dircolors ]] && eval "$(dircolors $HOME/.dircolors)"
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+# Set up the colors for `ls` to use
+[[ -f $HOME/.dircolors ]] && eval "$(dircolors $HOME/.dircolors)"
+
+# make tab cycle through commands after listing
+bind '"\t":menu-complete'
+bind "set show-all-if-ambiguous on"
+bind "set completion-ignore-case on"
+bind "set menu-complete-display-prefix on"
 
 # Setup extract alias
 x () {
@@ -171,6 +178,7 @@ alias sys-update='mirrors; repac; aur-update; pip-update'
 alias disk='sudo du -hd1 /'
 alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
 alias browse='(thunar $PWD &>/dev/null & disown)'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # complex tasks
 

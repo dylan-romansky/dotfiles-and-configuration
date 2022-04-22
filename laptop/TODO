@@ -9,3 +9,11 @@ learn and configure:
 -smartmontools https://wiki.archlinux.org/title/S.M.A.R.T.
 
 https://wiki.archlinux.org/title/Improving_performance
+
+look into putting together a grub splashscreen
+https://askubuntu.com/questions/716957/what-do-the-nomodeset-quiet-and-splash-kernel-parameters-mean#:~:text=The%20splash%20(which%20eventually%20ends,would%20disrupt%20that%20splash%20screen.
+
+maybe even design my own grub theme
+
+https://wiki.archlinux.org/title/GRUB/Tips_and_tricks
+http://wiki.rosalab.ru/en/index.php/Grub2_theme_tutorial
