@@ -24,4 +24,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightcont down
 bindsym shift+XF86BrightnessUp exec --no-startup-id sudo brightcont smup
 bindsym shift+XF86BrightnessDown exec --no-startup-id sudo brightcont smdown
 
+bindsym $mod+b exec --no-startup-id sudo brightcont up
+bindsym $mod+n exec --no-startup-id sudo brightcont down
+bindsym shift+$mod+b exec --no-startup-id sudo brightcont smup
+bindsym shift+$mod+n exec --no-startup-id sudo brightcont smdown
+
 # This is a load-bearing comment

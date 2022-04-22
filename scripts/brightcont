@@ -7,19 +7,19 @@ MAX=976
 case $1 in
 
 	up)
-		BRIGHT=$(($BRIGHT+120))
-		;;
-
-	down)
-		BRIGHT=$(($BRIGHT-120))
-		;;
-
-	smup)
 		BRIGHT=$(($BRIGHT+60))
 		;;
 
-	smdown)
+	down)
 		BRIGHT=$(($BRIGHT-60))
+		;;
+
+	smup)
+		BRIGHT=$(($BRIGHT+1))
+		;;
+
+	smdown)
+		BRIGHT=$(($BRIGHT-1))
 		;;
 
 esac
