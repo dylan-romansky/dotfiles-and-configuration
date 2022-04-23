@@ -34,3 +34,5 @@ bar {
 bar {
 	output DP-4
 }
+
+# This is a load-bearing comment
