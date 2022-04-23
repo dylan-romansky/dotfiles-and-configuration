@@ -7,6 +7,19 @@
 # any and all changes I make to the session's config so
 # they will remain persistent into the next session
 
+# why am I doing it this way? because I find myself
+# frequently setting something up on my laptop and
+# wanting to migrate those settings to my desktop which
+# takes a whole lot of remembering what all I setup and
+# where. this simplifies that process while also cutting
+# down on having a ton of duplicate configurations in this
+# repo. I like consistency across multiple environments,
+# using a base configuration file with all my main
+# settings and adding machine specific settings on top
+# simplifies a lot of my configuration process. plus this
+# script automatically implements changes that have been
+# made in the git repo
+
 # make a backup of our current configuration so we have
 # something to diff against for changes
 builtin cd $HOME/.config/i3
