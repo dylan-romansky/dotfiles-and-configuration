@@ -7,7 +7,7 @@
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 cd $HOME/builds
-for REPO in $(dir -Q1); do
+for REPO in $(dir -1); do
 	cd $REPO
 	echo $REPO
 	git reset --hard
