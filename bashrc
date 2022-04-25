@@ -182,7 +182,7 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # complex tasks
 
-alias jorb='cd projects/Python/scraping; ./get_a_job.py; ./open_links.py output/linkedin/$(date -I)/*; cd -'
+alias jorb='cd $HOME/projects/Python/scraping; ./get_a_job.py; ./open_links.py output/linkedin/$(date -I)/*; cd -'
 
 HISTCONTROL=ignoreboth:erasedups
 HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c:xconf:xreload:please"

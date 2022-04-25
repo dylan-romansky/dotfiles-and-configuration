@@ -4,16 +4,19 @@
 ## directory (which is where I keep my AUR installs) and uses
 ## the output of 'dir' to go into each install and update it
 
+builtin cd $HOME/builds
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
-cd $HOME/builds
+builtin cd $HOME/builds
 for REPO in $(dir -1); do
-	cd $REPO
+	builtin cd $REPO
 	echo $REPO
 	git reset --hard
 	STATUS=$(git pull)
 	if [[ $STATUS != *"Already up to date."* ]]; then
 		echo "Updating..."
+		git fetch origin
+		git reset --hard origin/master
 		makepkg -si --noconfirm
 	else
 		echo "Already up to date."

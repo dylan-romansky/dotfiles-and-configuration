@@ -17,3 +17,19 @@ maybe even design my own grub theme
 
 https://wiki.archlinux.org/title/GRUB/Tips_and_tricks
 http://wiki.rosalab.ru/en/index.php/Grub2_theme_tutorial
+
+
+If I ever find myself needing to change what my keyboard does
+https://wiki.gentoo.org/wiki/Keyboard_layout_switching
+
+
+look at the automation packages for Xorg
+https://wiki.archlinux.org/title/Xorg#Tips_and_tricks
+
+
+lspci | grep VGA
+
+[    0.197146] pci 0000:00:02.0: vgaarb: setting as boot VGA device
+[    0.197146] pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    0.378671] fb0: VESA VGA frame buffer device
+[    3.352768] fb0: switching to i915 from VESA VGA
