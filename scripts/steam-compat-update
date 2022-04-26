@@ -5,8 +5,15 @@
 # tool.
 #TODO: figure out what a failed patch outputs as an error 
 
-# If GE isn't even cloned, clone it
+# If we don't even have a compat folder we're gonna have
+# to make it. And the follow if statement will take care
+# of cloning for us
+if ! [ -d $HOME/.steam/compat ]; then
+	mkdir $HOME/.steam/compat
+fi
 cd $HOME/.steam/compat/
+
+# If GE isn't even cloned, clone it
 if ! [ -d "proton-ge-custom" ]; then
 	git clone --recurse-submodules http://github.com/gloriouseggroll/proton-ge-custom
 	STATUS="DO"

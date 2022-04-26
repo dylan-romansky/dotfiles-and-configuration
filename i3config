@@ -218,6 +218,7 @@ mode "system" {
 		bindsym h exec --no-startup-id htop
 		bindsym f exec --no-startup-id exec-helper $term sys-info.sh
 		bindsym n exec --no-startup-id sudo nvidia-settings
+		bindsym q exec --no-startup-id sudo qpwgraph
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
