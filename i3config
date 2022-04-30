@@ -214,9 +214,11 @@ mode "system" {
 		bindsym b exec --no-startup-id exec-helper $term i3v ~/.config/i3blocks/config
 		bindsym e exec --no-startup-id exec-helper $term i3v ~/.config/i3status/config
 		bindsym c exec --no-startup-id sudo cpu-x
-bindsym d exec --no-startup-id conky
+		bindsym d exec --no-startup-id conky
 		bindsym h exec --no-startup-id htop
 		bindsym f exec --no-startup-id exec-helper $term sys-info.sh
+		bindsym n exec --no-startup-id sudo nvidia-settings
+		bindsym q exec --no-startup-id sudo qpwgraph
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
