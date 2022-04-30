@@ -190,13 +190,14 @@ mode "launcher" {
 		bindsym g exec --no-startup-id google-chrome-stable
 		bindsym d exec --no-startup-id discord
 		bindsym t exec --no-startup-id deluge
- bindsym m exec --no-startup-id wine ~/Desktop/mtgo.exe
+		bindsym m exec --no-startup-id wine ~/Desktop/mtgo.exe
 		bindsym f exec --no-startup-id thunar
-		bindsym c exec --no-startup-id gnome-calculator
+		bindsym c exec --no-startup-id xcalc
 		bindsym s exec --no-startup-id steam-native
 		bindsym p exec --no-startup-id sudo gparted
- bindsym n exec --no-startup-id python ~/Downloads/nut-2.6/nut.py
- bindsym l exec --no-startup-id sol
+		bindsym n exec --no-startup-id python ~/Downloads/nut-2.6/nut.py
+		bindsym l exec --no-startup-id sol
+bindsym e exec --no-startup-id spotify
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
@@ -214,9 +215,11 @@ mode "system" {
 		bindsym b exec --no-startup-id exec-helper $term i3v ~/.config/i3blocks/config
 		bindsym e exec --no-startup-id exec-helper $term i3v ~/.config/i3status/config
 		bindsym c exec --no-startup-id sudo cpu-x
-bindsym d exec --no-startup-id conky
+		bindsym d exec --no-startup-id conky
 		bindsym h exec --no-startup-id htop
 		bindsym f exec --no-startup-id exec-helper $term sys-info.sh
+		bindsym n exec --no-startup-id sudo nvidia-settings
+		bindsym q exec --no-startup-id sudo qpwgraph
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"

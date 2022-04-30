@@ -90,6 +90,13 @@ cd $1
 vim challenge.txt
 }
 
+function getpid () {
+	if [ -z $1 ]; then
+		echo "usage: getpid [term]"
+		return
+	fi
+	ps ax | grep "$@"
+}
 
 source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 
@@ -131,13 +138,14 @@ alias grep='grep --color=auto'
 alias ip='ip -color=auto'
 alias valor='valgrind --track-origins=yes'
 alias rm='mv -ft $HOME/Trash'
+alias del='sudo rm -rf'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias ln='ln -iv'
 alias ping='ping -c 4'
 alias shutdown='shutdown now'
 alias logout='i3-msg exit'
-alias calculator="gnome-calculator"
+alias calculator="xcalc"
 alias clone='git clone'
 alias cpp='clang++ -Wall -Werror -Wextra'
 alias dicc='diff -C0'
@@ -152,6 +160,7 @@ alias schootar='tar -zxvf'
 alias xwinfo='xprop'
 alias nut='python $HOME/Downloads/nut-2.6/nut.py'
 alias mirrors='sudo reflector --sort age --country US --fastest 20 --protocol https --save /etc/pacman.d/mirrorlist'
+alias headphones='bluetoothctl power on; bluetoothctl connect 70:88:6B:90:BF:A6'
 
 # fun
 

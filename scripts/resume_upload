@@ -8,17 +8,19 @@ SUM=$(md5sum "$HOME/resume draft.docx")
 OSUM=$(cat "$HOME/resume draft.md5")
 echo "$SUM" "|" "$OSUM"
 if [[ $SUM != "$OSUM" ]]; then
-	FILES+=("$HOME/resume draft.docx")
+	UL=true
 	echo "$SUM" > "$HOME/resume draft.md5"
 fi
 SUM=$(md5sum "$HOME/cover_letter.docx")
 OSUM=$(cat "$HOME/cover_letter.md5")
 echo "$SUM" "|" "$OSUM"
 if [[ $SUM != "$OSUM" ]]; then
-	FILES+=("$HOME/cover_letter.docx")
+	UL=true
 	echo "$SUM" > "$HOME/cover_letter.md5"
 fi
-if [ -n "$FILES" ]; then
-    echo "uploading ${FILES[*]}"
-	uploader "resume and cover letters" "${FILES[@]}"
+if [ "$UL" = true ]; then
+    echo "uploading"
+	uploader "resume and cover letters" "resume draft.docx" "cover_letter.docx"
+else
+	echo "files are up to date
 fi
