@@ -33,3 +33,17 @@ lspci | grep VGA
 [    0.197146] pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
 [    0.378671] fb0: VESA VGA frame buffer device
 [    3.352768] fb0: switching to i915 from VESA VGA
+
+lspic -k
+
+00:02.0 VGA compatible controller: Intel Corporation 2nd Generation Core Processor Family Integrated Graphics Controller (rev 09)
+	Subsystem: Acer Incorporated [ALI] Device 0623
+	Kernel driver in use: i915
+	Kernel modules: i915
+
+
+modinfo i915 | grep ^parm
+parm:           enable_dpcd_backlight:Enable support for DPCD backlight control(-1=use per-VBT LFP backlight type setting [default], 0=disabled, 1=enable, 2=force VESA interface, 3=force Intel interface) (int)
+
+
+udevadm monitor --property shows no kernel or udev entries pertaining to the backlight
