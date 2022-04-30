@@ -122,6 +122,8 @@ alias ip='sudo ip'
 alias lldb='sudo lldb'
 alias iw='sudo iw'
 alias powertop='sudo powertop'
+alias mount='sudo mount'
+alias umount='sudo umount'
 
 # modified functionality (flags, better names, or otherwise)
 
