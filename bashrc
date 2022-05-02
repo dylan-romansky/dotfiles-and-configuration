@@ -129,6 +129,8 @@ alias ip='sudo ip'
 alias lldb='sudo lldb'
 alias iw='sudo iw'
 alias powertop='sudo powertop'
+alias mount='sudo mount'
+alias umount='sudo umount'
 
 # modified functionality (flags, better names, or otherwise)
 
@@ -136,6 +138,7 @@ alias ls='ls --color=auto'
 alias diff='diff --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip -color=auto'
+alias fdisk='fdisk -L'
 alias valor='valgrind --track-origins=yes'
 alias rm='mv -ft $HOME/Trash'
 alias del='sudo rm -rf'
