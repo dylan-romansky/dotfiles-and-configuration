@@ -5,20 +5,23 @@
 #issues because I'm still learning how sound routing works in
 #a "build it yourself" environment
 
+#convert this to use font-awesome volume icons
 function noty {
 	killall notify-osd
 	case $1 in
 
 		Volume)
-			sendstr="$1: $(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
-		if [[ "$(pactl list sinks | grep Mute)" == *"yes"* ]]; then
-			sendstr+=" (Mute)"
-		fi
-		notify-send "$sendstr"
+			sendstr="$1: $(pactl get-sink-volume @DEFAULT_SINK@ | awk 'FNR==1{ print $5 }')"
+			if [[ "$(pactl list sinks | grep Mute)" == *"yes"* ]]; then
+				sendstr+=" (Mute)"
+			fi
+			notify-send "$sendstr"
+			pkill -SIGRTMIN+1 i3blocks #so that i3blocks knows to update its volume block
 			;;
 
 		Mic)
-			notify-send "$1: $(pactl list sources | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 2 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+			notify-send "$1: $(pactl get-source-volume @DEFAULT_SOURCE@ | awk 'FNR==1{ print $5 }')"
+			pkill -SIGRTMIN+2 i3blocks #so that i3blocks knows to update its mic level block
 			;;
 	esac
 }	
@@ -46,22 +49,22 @@ case $1 in
 		;;
 	
 	micup)
-		pactl set-source-volume 1 +10%
+		pactl set-source-volume @DEFAULT_SOURCE@ +10%
 		noty Mic
 		;;
 
 	micdown)
-		pactl set-source-volume 1 -10%
+		pactl set-source-volume @DEFAULT_SOURCE@ -10%
 		noty Mic
 		;;
 
 	smicup)
-		pactl set-source-volume 1 +5%
+		pactl set-source-volume @DEFAULT_SOURCE@ +5%
 		noty Mic
 		;;
 
 	smicdown)
-		pactl set-source-volume 1 -5%
+		pactl set-source-volume @DEFAULT_SOURCE@ -5%
 		noty Mic
 		;;
 
@@ -73,5 +76,6 @@ case $1 in
 		else
 			notify-send "Volume: Unmute"
 		fi
+		pkill -SIGRTMIN+1 i3blocks #so i3blocks knows to update its volume block
 		;;
 esac

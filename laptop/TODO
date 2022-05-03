@@ -5,6 +5,7 @@ write a quick script to remove all instances of "expandtab" in vim plugins
 turn 'sys-update' into an actual script, have it create an error log
 
 learn and configure:
+-rofi
 -i3blocks
 -conky
 -batsignal (manpage)

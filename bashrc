@@ -73,7 +73,13 @@ function vbak () {
 }
 
 function aur-install () {
-cd $HOME/builds
+	if [ -z $1 ]; then
+		echo "Usage: aur-install [repo(s)]"
+		return
+	fi
+	THISPWD="$PWD"
+	THISPREV="$OLDPWD"
+	cd $HOME/builds
 	if [ $# -ge 1 ]; then
 		for repo in "${@}"; do
 			git clone $repo
@@ -82,6 +88,8 @@ cd $HOME/builds
 			builtin cd ..
 		done
 	fi
+	cd "$THISPWD"
+	OLDPWD="$THISPREV"
 }
 
 function daily-chal () {

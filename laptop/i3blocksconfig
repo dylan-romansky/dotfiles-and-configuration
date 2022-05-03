@@ -5,22 +5,60 @@
 #
 #     https://vivien.github.io/i3blocks
 
+# TODO:
+#	Verify the current blocks function as expected
+#	Decide if some of these need separate actions for when they're clicked on
+#	Figure out if it's possible to have a regular command and a click command in the same block
+#	Integrate font-awesome icons
 
 # Global properties
 separator=true
 separator_block_width=15
-
-[documentation]
-full_text=Documentation
-website=https://vivien.github.io/i3blocks
-command=xdg-open "$website"
-color=#f12711
 
 [greetings]
 color=#f5af19
 command=echo "Hello, $USER!"
 interval=once
 
+[network]
+command=echo "$(iwgetid -r): $(awk 'NR==3 {print $3 "00 %"}''' /proc/net/wireless)"
+interval=5
+color=#91E78B
+
+[cpu]
+color=#91E78B
+command=cpu_use.py
+interval=1
+
+[cpu-temp]
+command=echo "$(cpu_temp_colour.sh)$(acpi -t | awk '{ printf $4 }')C"
+interval=1
+
+[ram]
+command=echo $(ram_usage_colour.sh)$(free -h | awk 'FNR==2 { print $3 "/" $2 }')
+interval=1
+
+#this was a test to see if I could figure out how to mix a set line of text with a command output and have them be different colours. Until I actually use this idea somewhere else, I'm going to leave this here
+#[test]
+#txt=<span color="#189529">haha</span>
+#command=echo "${txt} butt"
+#markup=pango
+#interval=once
+
+#there has to be a way to simplify this and make it print better without putting it in a separate script
+[volume]
+color=#91E78B
+command=echo -n $(if [[ "$(pactl get-sink-mute @DEFAULT_SINK@)" == *"yes"* ]]; then echo -n "M:"; else echo "V:"; fi); echo $(pactl get-sink-volume @DEFAULT_SINK@ | awk 'FNR==1{ print " " $5 }')
+interval=once
+signal=1
+
+[mic]
+color=#91E78B
+command=echo "Mic: $(pactl get-source-volume @DEFAULT_SOURCE@ | awk 'FNR==1{ print $5 }')"
+interval=once
+signal=2
+
 [time]
+color=#91E78B
 command=date '+%Y-%m-%d %H:%M:%S'
 interval=1
