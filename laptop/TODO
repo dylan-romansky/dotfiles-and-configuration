@@ -1,10 +1,11 @@
 rename tabs in terminal with the name of the last run cmd
 
-configure i3blocks to extend i3status further
-
 write a quick script to remove all instances of "expandtab" in vim plugins
 
+turn 'sys-update' into an actual script, have it create an error log
+
 learn and configure:
+-i3blocks
 -conky
 -batsignal (manpage)
 -laptop-mode-tools https://wiki.archlinux.org/title/Laptop_Mode_Tools
