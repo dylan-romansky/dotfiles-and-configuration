@@ -64,9 +64,16 @@ def drive_setup(SCOPES='https://www.googleapis.com/drive.metadata.readonly', tok
 #generalize this function by giving it the ability to tell
 #the difference between folders and files, creating
 #subdirectories in the drive upload location accordingly
-def drive_fill(DRIVE_DIR, DRIVE, FILESET=None):
+def drive_fill(DRIVE_DIR, DRIVE, FILESET=None, SUBDIR=None):
 	print('from: ' + str(date.today()))
-	DEST_META = {'name': str(date.today()), 'mimeType': "application/vnd.google-apps.folder", 'parents': [DRIVE_DIR['files'][0]['id']]}
+	if SUBDIR:
+		DEST_META = {'name': SUBDIR, 'mimeType': "application/vnd.google-apps.folder", 'parents': [DRIVE_DIR['files'][0]['id']]}
+		DEST = DRIVE.files().create(body=DEST_META, fields="id").execute()
+		ID = DEST.get('id')
+		DEST_META['name'] = str(date.today())
+		DEST_META['parents'] = [ID]
+	else:
+		DEST_META = {'name': str(date.today()), 'mimeType': "application/vnd.google-apps.folder", 'parents': [DRIVE_DIR['files'][0]['id']]}
 	DEST = DRIVE.files().create(body=DEST_META, fields="id").execute()
 	ID = DEST.get('id')
 	if FILESET == None:
