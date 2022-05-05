@@ -7,7 +7,7 @@
 #TODO: create a gradient
 
 TEMP=$(acpi -t | awk '{ printf $4 }')
-echo "${TEMP}C"
+echo -e "\xEF\x81\xAD: ${TEMP}C"
 echo "${TEMP}C"
 TEMP=$(printf "%.0f\n" $TEMP)
 if [ $TEMP -ge 50 ]; then

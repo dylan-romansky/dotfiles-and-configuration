@@ -5,8 +5,8 @@
 #TODO: create a gradient
 
 import psutil
-PER=psutil.cpu_percent(interval=1)
-OUT="CPU: " + str(PER) + "%"
+PER=psutil.cpu_percent(interval=2)
+OUT="CPU:" + str(str(PER) + "%").center(7)
 print(OUT)
 print(OUT)
 if PER >= 50:

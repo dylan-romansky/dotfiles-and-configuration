@@ -15,10 +15,15 @@
 separator=true
 separator_block_width=15
 
-[greetings]
-color=#f5af19
-command=echo "Hello, $USER!"
-interval=once
+[active]
+command=echo "$(xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5) WM_NAME | cut -d '"' -f 2)"
+color=#91e78B
+interval=1
+
+#[greetings]
+#color=#f5af19
+#command=echo "Hello, $USER!"
+#interval=once
 
 [network]
 command=i3b_net.sh
@@ -28,7 +33,7 @@ markup=pango
 [cpu]
 color=#91E78B
 command=i3b_cpu_use.py
-interval=4
+interval=1
 
 [cpu-temp]
 command=i3b_cpu_temp.sh
@@ -60,5 +65,5 @@ signal=2
 
 [time]
 color=#91E78B
-command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%c'
 interval=1

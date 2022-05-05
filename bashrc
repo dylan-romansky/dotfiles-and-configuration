@@ -202,7 +202,28 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # complex tasks
 
-alias jorb='cd $HOME/projects/Python/scraping; ./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -s sre; ./open_links.py output/linkedin/$(date -I)/*; cd -'
+function jorb () {
+	cd $HOME/projects/Python/scraping
+	case $1 in
+
+		CO)
+			STATE="Colorado, United States"
+			;;
+		AB)
+			STATE="Alberta, Canada"
+			;;
+		*)
+			STATE="California, United States"
+			;;
+	esac
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" sre
+	./open_links.py output/linkedin/$(echo "$STATE" | cut -d, -f1)/$(date -I)/*
+	cd -
+}
+
+function gethex () {
+	echo -n "${@}" | hexdump -C
+}
 
 HISTCONTROL=ignoreboth:erasedups
 HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c:xconf:xreload:please"
