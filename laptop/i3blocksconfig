@@ -21,9 +21,13 @@ command=echo "Hello, $USER!"
 interval=once
 
 [network]
-command=echo "$(iwgetid -r): $(awk 'NR==3 {print $3 "00 %"}''' /proc/net/wireless)"
+command=i3b_ssid.sh
 interval=5
 color=#91E78B
+
+[net_str]
+command=i3b_net_str.sh 2>/dev/null
+interval=5
 
 [cpu]
 color=#91E78B
@@ -48,13 +52,13 @@ interval=5
 #there has to be a way to simplify this and make it print better without putting it in a separate script
 [volume]
 color=#91E78B
-command=echo -n $(if [[ "$(pactl get-sink-mute @DEFAULT_SINK@)" == *"yes"* ]]; then echo -n "M:"; else echo "V:"; fi); echo $(pactl get-sink-volume @DEFAULT_SINK@ | awk 'FNR==1{ print " " $5 }')
+command=i3b_vol_mic.sh
 interval=once
 signal=1
 
 [mic]
 color=#91E78B
-command=echo "Mic: $(pactl get-source-volume @DEFAULT_SOURCE@ | awk 'FNR==1{ print $5 }')"
+command=i3b_vol_mic.sh f
 interval=once
 signal=2
 
