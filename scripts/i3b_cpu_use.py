@@ -6,8 +6,9 @@
 
 import psutil
 PER=psutil.cpu_percent(interval=1)
-print("CPU: " + str(PER) + "%")
-print()
+OUT="CPU: " + str(PER) + "%"
+print(OUT)
+print(OUT)
 if PER >= 50:
     print("#FFFF00")
 elif PER >= 80:
