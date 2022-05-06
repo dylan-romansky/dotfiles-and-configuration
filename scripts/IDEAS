@@ -11,3 +11,40 @@ Use find to perform an action on every file that matches some criteria (this wou
 Use lsof to find all connections to a certain port open longer than 24 hours and kill them.
 https://wiki.archlinux.org/title/vim#Configuration
 https://www.nomachine.com/
+
+add click behaviour to some blocks
+
+https://fontawesome.com/v5/cheatsheet
+
+ef 89 81 for batt 3/4
+ef 89 83  for batt 1/4
+ef 89 82  for batt 1/2
+ef 89 80 for batt 4/4
+ef 89 84 for batt 0/4
+
+ef 97 9f car batt
+ef 97 a7 charge station
+
+ef 80 93 cog
+ef 82 85 cogs
+
+ef 94 a0 crow
+ef 9e 94 dumpster fire
+ef 9e 93 dumpster
+ef 9d ab temp low
+ef 9d a9 temp high
+
+ef 84 b0 mic
+ef 84 b1 mic slash
+
+ef 80 a8 vol up
+ef 80 a7 vol down
+ef 80 a6 vol off
+ef 9a a9 vol mute
+
+ef 8b 9b microchip
+ef 87 ab wifi
+
+ef 86 b0 paw
+
+ef 83 a8 kinda like usb

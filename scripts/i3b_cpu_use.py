@@ -6,7 +6,7 @@
 
 import psutil
 PER=psutil.cpu_percent(interval=2)
-OUT="CPU:" + str(str(PER) + "%").center(7)
+OUT='<span color="#f5af19" font="Font Awesome 6 Free">\uf2db</span>:' + str(str(PER) + "%").center(6)
 print(OUT)
 print(OUT)
 if PER >= 50:

@@ -6,14 +6,20 @@
 
 #TODO: create a gradient
 
+#ef 9f a5 for bacon instead of fire
+
 TEMP=$(acpi -t | awk '{ printf $4 }')
-echo -e "\xEF\x81\xAD: ${TEMP}C"
-echo "${TEMP}C"
-TEMP=$(printf "%.0f\n" $TEMP)
-if [ $TEMP -ge 50 ]; then
-	echo "#FFFF00"
-elif [ $TEMP -ge 80 ]; then
-	echo "#FF0000"
+DEC=$(printf "%.0f\n" $TEMP)
+if [ $DEC -ge 50 ]; then
+	ICO="\xef\x9d\xa9"
+	COL="#FFFF00"
+elif [ $DEC -ge 80 ]; then
+	ICO="\xef\x81\xad"
+	COL="#FF0000"
 else
-	echo "#00FF00"
+	ICO="\xef\x9d\xab"
+	COL="#00FF00"
 fi
+echo -e "<span font=\"Font Awesome 6 Free\">$ICO</span>: ${TEMP}C"
+echo "${TEMP}C"
+echo "$COL"

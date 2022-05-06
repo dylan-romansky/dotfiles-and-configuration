@@ -19,9 +19,9 @@ function STR () {
 function SSID () {
 	SSID=$(iwgetid -r)
 	if [ -z "$SSID" ]; then
-		echo -n "<span color=\"#FF0000\">Disconnected</span>"
+		echo -n -e "<span color=\"#FF0000\" font=\"Font Awesome 6 Free\">\xef\x9e\x94</span>"
 	else
-		echo -n "<span color=\"#91E78B\">$SSID:</span>"
+		echo -n -e "<span color=\"#91E78B\"><span font=\"Font Awesome 6 Free\">\xef\x87\xab</span> $SSID:</span>"
 	fi
 }
 

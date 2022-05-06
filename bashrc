@@ -222,7 +222,7 @@ function jorb () {
 }
 
 function gethex () {
-	echo -n "${@}" | hexdump -C
+	echo -n "${@}" | hexdump -C | awk 'FNR==1 {for (i=2; i<NF; i++) printf $i " "}'; echo
 }
 
 HISTCONTROL=ignoreboth:erasedups

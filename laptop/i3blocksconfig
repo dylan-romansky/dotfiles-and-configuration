@@ -14,6 +14,7 @@
 # Global properties
 separator=true
 separator_block_width=15
+markup=pango
 
 [active]
 command=echo "$(xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5) WM_NAME | cut -d '"' -f 2)"
@@ -25,10 +26,14 @@ interval=1
 #command=echo "Hello, $USER!"
 #interval=once
 
+#for testing to make sure a script is doing what it's supposed to before adding it to i3blocks proper
+[test]
+command=test.py
+interval=1
+
 [network]
 command=i3b_net.sh
 interval=5
-markup=pango
 
 [cpu]
 color=#91E78B
@@ -43,27 +48,20 @@ interval=5
 command=i3b_ram_use.sh
 interval=5
 
-#this was a test to see if I could figure out how to mix a set line of text with a command output and have them be different colours. Until I actually use this idea somewhere else, I'm going to leave this here
-#[test]
-#txt=<span color="#189529">haha</span>
-#command=echo "${txt} butt"
-#markup=pango
-#interval=once
-
 #there has to be a way to simplify this and make it print better without putting it in a separate script
 [volume]
 color=#91E78B
-command=i3b_vol_mic.sh
+command=i3b_vol_mic.sh 2>/dev/null
 interval=once
 signal=1
 
 [mic]
 color=#91E78B
-command=i3b_vol_mic.sh f
+command=i3b_vol_mic.sh f 2>/dev/null
 interval=once
 signal=2
 
 [time]
 color=#91E78B
-command=date '+%c'
+command=echo -e "<span font=\"Font Awesome 6 Free\">\xef\x80\x97</span> $(date '+%c')"
 interval=1
