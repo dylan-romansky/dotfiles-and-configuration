@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#This script gets information about the amount of ram
+#currently in use and prints with a friendly icon as
+#well as a set of colours corresponding to how much
+#ram is currently in use
+
 #TODO: create gradient
 
 TOTAL=0

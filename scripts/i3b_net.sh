@@ -6,7 +6,9 @@
 
 function STR () {
 	STR=$(awk 'NR==3 {print $3 }' /proc/net/wireless)
-	if [ $STR -le 25 ]; then
+	if [ -z "$STR" ]; then
+		return
+	elif [ $STR -le 25 ]; then
 		COL="#FF0000"
 	elif [ $STR -le 50 ]; then
 		COL="#FFFF00"
@@ -25,4 +27,9 @@ function SSID () {
 	fi
 }
 
-echo "$(SSID) $(STR 2>/dev/null)"
+STRI=$(SSID)
+STR2=$(STR 2>/dev/null)
+if [ -n "$STR2" ]; then
+	STRI="$STRI $STR2"
+fi
+echo "$STRI"

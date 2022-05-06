@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#when I was flashing magisk bootloaders onto my phone,
+#I wrote this tto simplify the flashing process
 #adb pull /sdcard/Download/magisk_patched.img
 
 DIR="$HOME/Documents/android/"

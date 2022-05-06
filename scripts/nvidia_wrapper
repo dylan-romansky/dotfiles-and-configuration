@@ -1,3 +1,9 @@
 #!/bin/bash
 
+#this is probably the most overkill wrapper script in
+#this entire repo. it was the simplest way to make i3
+#open the nvidia settings panel from a keybinding so
+#I don't have to open it from dmenu or from inside an
+#actual terminal
+
 sudo nvidia-settings

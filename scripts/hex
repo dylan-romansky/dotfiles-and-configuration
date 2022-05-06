@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+#pretty much exists as an easy way for me to
+#convert decimal numbers to hex
+#TODO: create a way to convert from hex to dec
 import sys
     
 numset = sys.argv[1:]

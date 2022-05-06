@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#I wrote this because I wanted to have more fine
+#control over the exact brightnes of my laptop
+#screen, as the default brightness adjustment
+#didn't offer small enough brightness intervals
+#and doesn't go below a fairly high threshold
+
 FILE="/sys/class/backlight/intel_backlight/brightness"
 BRIGHT=$(cat $FILE)
 MAX=976
