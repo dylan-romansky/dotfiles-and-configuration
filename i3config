@@ -67,6 +67,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -240,6 +241,17 @@ mode "terminals" {
 }
 
 bindsym shift+$mod+t mode "terminals"
+
+mode "rofi" {
+bindsym r exec --no-startup-id rofi -show run
+bindsym w exec --no-startup-id rofi -show window
+
+bindsym Return mode "default"
+bindsym Esc mode "default"
+bindsym --release d mode "default"
+}
+
+bindsym Shift+$mod+d mode "rofi"
 
 mode "wireless" {
 		bindsym s exec --no-startup-id wifi-manager start
