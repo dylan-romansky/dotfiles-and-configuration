@@ -110,7 +110,7 @@ function maim () {
 	if [ -n "$1" ]; then
 		for PARAM in "${@}"; do
 			for PID in $(getpid $PARAM | awk '{ print $2 }'); do
-				kill -9 $PID
+				sudo kill -9 $PID
 			done
 		done
 	fi

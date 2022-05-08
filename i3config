@@ -293,7 +293,7 @@ for_window [title="VRAM"] floating enable
 for_window [title="Line Dump"] floating enable
 for_window [title="luakit"] floating enable
 for_window [title="Steam Guard - Computer Authorization Required"] floating enable
-for_window [title="^conky.*"] floating enable
+for_window [class="Conky" instance="Conky"] floating enable
 
 # window sizes and positions
 #
@@ -310,10 +310,10 @@ for_window [title="jctl"] resize set 680 400
 for_window [title="jctl"] move position center
 for_window [title="NUT USB / Web Server v2.6"] resize set 780 400
 for_window [title="NUT USB / Web Server v2.6"] move position center
-for_window [title="^conky.*"] move position center
-for_window [title="^conky.*"] resize set 401 390
-for_window [title="Steam Guard - Computer Authorization Required"] move position center
+for_window [class="Conky" instance="Conky"] resize set 401 390
+for_window [class="Conky" instance="Conky"] move position center
 for_window [title="Steam Guard - Computer Authorization Required"] resize set 780 400
+for_window [title="Steam Guard - Computer Authorization Required"] move position center
 
 # Anything that gets its own designated workspace
 #
