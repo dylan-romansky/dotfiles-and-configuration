@@ -103,7 +103,17 @@ function getpid () {
 		echo "usage: getpid [term]"
 		return
 	fi
-	ps ax | grep "$@" | head -n -1
+	ps aux | grep "$@" | head -n -1
+}
+
+function maim () {
+	if [ -n "$1" ]; then
+		for PARAM in "${@}"; do
+			for PID in $(getpid $PARAM | awk '{ print $2 }'); do
+				kill -9 $PID
+			done
+		done
+	fi
 }
 
 source $HOME/bin/ptheme/prompt_bigdigsquig.sh

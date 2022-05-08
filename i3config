@@ -292,7 +292,8 @@ for_window [title="gbmu"] floating enable
 for_window [title="VRAM"] floating enable
 for_window [title="Line Dump"] floating enable
 for_window [title="luakit"] floating enable
-for_window [title="Steam Guard - Computer Authorization Required"] floating_enable
+for_window [title="Steam Guard - Computer Authorization Required"] floating enable
+for_window [title="^conky.*"] floating enable
 
 # window sizes and positions
 #
@@ -309,6 +310,15 @@ for_window [title="jctl"] resize set 680 400
 for_window [title="jctl"] move position center
 for_window [title="NUT USB / Web Server v2.6"] resize set 780 400
 for_window [title="NUT USB / Web Server v2.6"] move position center
+for_window [title="^conky.*"] move position center
+for_window [title="^conky.*"] resize set 401 390
+for_window [title="Steam Guard - Computer Authorization Required"] move position center
+for_window [title="Steam Guard - Computer Authorization Required"] resize set 780 400
+
+# Anything that gets its own designated workspace
+#
+for_window [instance="discord" window_role="browser-window"] move scratchpad #make this not put popups from discord in here
+assign [instance="google-chrome"] 1
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -503,6 +513,7 @@ hide_edge_borders smart_no_gaps
 # status_command i3status
 #}
 
+# Programs and scripts that should be run on startup
 exec --no-startup-id tint2
 exec --no-startup-id picom
 exec --no-startup-id ~/.fehbg
@@ -510,5 +521,6 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 exec --no-startup-id yakuake_wrapper.sh
+exec --no-startup-id discord
 
 # This is a load-bearing comment

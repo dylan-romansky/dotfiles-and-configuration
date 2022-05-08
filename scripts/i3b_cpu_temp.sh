@@ -21,3 +21,5 @@ else
 	COL="#00FF00"
 fi
 echo -n -e "<span color=\"$COL\"><span font=\"Font Awesome 6 Free\">$ICO</span>: ${TEMP}C</span>"
+
+[ -z "${BLOCK_BUTTON}" ] || conky & disown
