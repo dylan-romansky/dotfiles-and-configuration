@@ -8,7 +8,7 @@ while [ -z $SLEV ] && [ -z $MLEV ]; do
 	MLEV=$(pactl get-source-volume @DEFAULT_SOURCE@ | awk 'FNR==1{ print " " $5 }')
 done
 if [[ "$(pactl get-sink-mute @DEFAULT_SINK@)" == *"yes"* ]]; then
-	SSTAT="\xef\x9a\xa9:"
+	SSTAT="\xef\x9a\xa9"
 else
 	DEC=$(echo $SLEV | cut -d% -f1)
 	if [ $DEC -le 20 ]; then
