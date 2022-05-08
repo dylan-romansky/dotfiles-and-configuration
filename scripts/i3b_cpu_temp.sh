@@ -20,6 +20,4 @@ else
 	ICO="\xef\x9d\xab"
 	COL="#00FF00"
 fi
-echo -e "<span font=\"Font Awesome 6 Free\">$ICO</span>: ${TEMP}C"
-echo "${TEMP}C"
-echo "$COL"
+echo -n -e "<span color=\"$COL\"><span font=\"Font Awesome 6 Free\">$ICO</span>: ${TEMP}C</span>"

@@ -11,8 +11,8 @@ TOTAL=0
 USED=1
 RAM=($(free | awk 'FNR==2 { print $2 " " $3 " " $4 }'))
 OUT="$(bc <<< "${RAM[$USED]} / 1048576")GB/$(bc <<< "${RAM[$TOTAL]} / 1048576")GB"
-echo -e "<span font=\"Font Awesome 6 Free\">\xef\x83\xa8</span>: $OUT"
-echo -e "$OUT"
+echo -e "<span font=\"Font Awesome 6 Free\">\xef\x94\xb8</span>: $OUT"
+echo -e "<span font=\"Font Awesome 6 Free\">\xef\x94\xb8</span>: $OUT"
 FREE=$(bc <<< "(${RAM[$TOTAL]} - ${RAM[$USED]}) / 1048576")
 if [ $FREE -le 2 ]; then
 	echo "#FF0000"

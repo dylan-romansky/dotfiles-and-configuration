@@ -103,7 +103,7 @@ function getpid () {
 		echo "usage: getpid [term]"
 		return
 	fi
-	ps ax | grep "$@"
+	ps ax | grep "$@" | head -n -1
 }
 
 source $HOME/bin/ptheme/prompt_bigdigsquig.sh

@@ -37,12 +37,8 @@ interval=5
 
 [cpu]
 color=#91E78B
-command=i3b_cpu_use.py
+command=echo -e "$(i3b_cpu_use.py) $(i3b_cpu_temp.sh)"
 interval=1
-
-[cpu-temp]
-command=i3b_cpu_temp.sh
-interval=5
 
 [ram]
 command=i3b_ram_use.sh
