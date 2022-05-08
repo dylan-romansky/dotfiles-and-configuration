@@ -20,10 +20,10 @@ function STR () {
 
 function SSID () {
 	if [ "${BLOCK_BUTTON}" == 1 ]; then 
-		SSID=$(nmcli -p device show | grep IP4.ADDRESS | awk 'FNR==1 { print $2 }')
-	else
-		SSID=$(iwgetid -r)
+		killall notify-osd
+		notify-send $(nmcli -p device show | grep IP4.ADDRESS | awk 'FNR==1 { print $2 }')
 	fi
+	SSID=$(iwgetid -r)
 	if [ -z "$SSID" ]; then
 		echo -n -e "<span color=\"#FF0000\" font=\"Font Awesome 6 Free\">\xef\x9e\x94</span>"
 	else
