@@ -44,18 +44,11 @@ interval=1
 command=i3b_ram_use.sh
 interval=5
 
-#there has to be a way to simplify this and make it print better without putting it in a separate script
-[volume]
+[audio]
 color=#91E78B
-command=i3b_vol_mic.sh 2>/dev/null
+command=i3b_vol_mic.sh
 interval=once
 signal=1
-
-[mic]
-color=#91E78B
-command=i3b_vol_mic.sh f 2>/dev/null
-interval=once
-signal=2
 
 [time]
 color=#91E78B
