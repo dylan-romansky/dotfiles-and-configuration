@@ -3,8 +3,10 @@
 #simple script for i3blocks that gets the volume or mic
 #levels and prints them with a unicode icon
 
-while [ -z $SLEV ] && [ -z $MLEV ]; do
+while [ -z $SLEV ]; do
 	SLEV=$(pactl get-sink-volume @DEFAULT_SINK@ | awk 'FNR==1{ print " " $5 }')
+done
+while [ -z $MLEV ]; do
 	MLEV=$(pactl get-source-volume @DEFAULT_SOURCE@ | awk 'FNR==1{ print " " $5 }')
 done
 if [[ "$(pactl get-sink-mute @DEFAULT_SINK@)" == *"yes"* ]]; then
