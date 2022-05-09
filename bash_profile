@@ -15,6 +15,7 @@ export PYTHONPATH="$PYTHONPATH:$HOME/Documents/config/python_user_modules"
 export EDITOR="vim"
 export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
 export LESS='-R '
+export STEAM_RUNTIME=1
 
 # Source any of these files if they exist
 [ -f ~/.bash_extras ] && . ~/.bash_extras
