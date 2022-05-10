@@ -39,8 +39,8 @@
 
 URxvt.font: xft:hack:size=18
 URxvt.scrollBar: false
-URxvt.transparent:   true
-URxvt.shading:       20
+URxvt*depth: 32
+URxvt*background: rgba:0000/0000/0200/bbbb
 
 URxvt.perl-ext-common: default,matcher,tabbed,fullscreen,resize-font
 URxvt.url-launcher: /usr/bin/google-chrome-stable

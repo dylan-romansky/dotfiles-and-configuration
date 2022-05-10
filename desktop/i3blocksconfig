@@ -9,18 +9,41 @@
 # Global properties
 separator=true
 separator_block_width=15
+markup=pango
+color=#91E78B
 
-[documentation]
-full_text=Documentation
-website=https://vivien.github.io/i3blocks
-command=xdg-open "$website"
-color=#f12711
+#[documentation]
+#full_text=Documentation
+#website=https://vivien.github.io/i3blocks
+#command=xdg-open "$website"
+#color=#f12711
 
-[greetings]
-color=#f5af19
-command=echo "Hello, $USER!"
+#[greetings]
+#color=#f5af19
+#command=echo "Hello, $USER!"
+#interval=once
+
+[active]
+command=echo "$(xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5) WM_NAME | cut -d '"' -f 2)"
+interval=1
+
+[network]
+command=i3b_net.sh
+interval=5
+
+[cpu]
+command=echo -e "$(i3b_cpu_use.py) $(i3b_cpu_temp.sh)"
+interval=1
+
+[ram]
+command=i3b_ram_use.sh
+interval=5
+
+[audio]
+command=i3b_vol_mic.sh
 interval=once
+signal=1
 
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+command=echo -e "<span font=\"Font Awesome 6 Free\">\xef\x80\x97</span> $(date '+%c')"
 interval=1

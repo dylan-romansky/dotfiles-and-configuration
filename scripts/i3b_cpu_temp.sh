@@ -8,7 +8,7 @@
 
 #ef 9f a5 for bacon instead of fire
 
-TEMP=$(acpi -t | awk '{ printf $4 }')
+TEMP=$(($(</sys/class/thermal/thermal_zone0/temp)/1000)) #acpi -t | awk '{ printf $4 }')
 DEC=$(printf "%.0f\n" $TEMP)
 if [ $DEC -ge 50 ]; then
 	ICO="\xef\x9d\xa9"
