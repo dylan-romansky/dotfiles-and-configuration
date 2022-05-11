@@ -22,5 +22,5 @@ if [ "$UL" = true ]; then
     echo "uploading"
 	uploader "resume and cover letters" "resume draft.docx" "cover_letter.docx"
 else
-	echo "files are up to date
+	echo "files are up to date"
 fi
