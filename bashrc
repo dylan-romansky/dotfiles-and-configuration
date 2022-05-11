@@ -5,9 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Set up the colors for `ls` to use
-[[ -f $HOME/.dircolors ]] && eval "$(dircolors $HOME/.dircolors)"
-
 # make tab cycle through commands after listing
 bind '"\t":menu-complete'
 bind "set show-all-if-ambiguous on"
@@ -54,7 +51,7 @@ function cd () {
 function mkcd () {
     DIR="$1"
     DIR=${DIR:-"$HOME"}
-    [[ -d "$DIR" ]] && mkdir $DIR
+    [[ -d "$DIR" ]] || mkdir $DIR
     cd $DIR
 }
 
@@ -125,6 +122,7 @@ alias binit='source $HOME/.bashrc'
 alias i3c='i3-var-update'
 alias xconf='vim $HOME/.Xresources'
 alias xreload='xrdb $HOME/.Xresources'
+alias xmerge='xrdb merge $HOME/.Xresources'
 alias piconf='vim $HOME/.config/picom/picom.conf'
 
 # always needs sudo
@@ -185,15 +183,12 @@ alias headphones='bluetoothctl power on; bluetoothctl connect 70:88:6B:90:BF:A6'
 
 # fun
 
-alias clap='$HOME/Documents/scripts/clap.sh'
-alias spongebob='$HOME/Documents/scripts/spongebob.sh'
 alias haha="printf '\e[0;31;46mB00B135\e[0m\n'"
 
 # games
 
 alias mtgo='wine $HOME/Desktop/mtgo.exe'
 alias minecraft='minecraft-launcher'
-alias clean='make clean'
 alias doom='chocolate-doom -iwad ~/Documents/dos/Doom/DOOM.WAD -window'
 alias blipblop='cd $HOME/Documents/games/blip-blop/vc-projects/Blip_n_Blop_3/; ./blipblop; cd -'
 

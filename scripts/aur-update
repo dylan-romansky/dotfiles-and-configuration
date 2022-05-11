@@ -1,14 +1,14 @@
 #!/bin/bash
 
 ## This script is very self explanatory. It goes into my builds
-## directory (which is where I keep my AUR installs) and uses
-## the output of 'dir' to go into each install and update it
+## directory (which is where I keep my AUR installs) and goes
+## into each directory to update it
 
 builtin cd $HOME/builds
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 builtin cd $HOME/builds
-for REPO in $(dir -1); do
+for REPO in *; do
 	builtin cd $REPO
 	echo $REPO
 	git reset --hard
