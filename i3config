@@ -201,7 +201,7 @@ mode "launcher" {
 		bindsym p exec --no-startup-id sudo gparted
 		bindsym n exec --no-startup-id python ~/Downloads/nut-2.6/nut.py
 		bindsym l exec --no-startup-id sol
-bindsym e exec --no-startup-id spotify
+		bindsym e exec --no-startup-id spotify
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
@@ -212,7 +212,7 @@ bindsym Shift+$mod+a mode "launcher"
 
 mode "system" {
 		bindsym p exec --no-startup-id paman
- bindsym t exec --no-startup-id tint2conf
+		bindsym t exec --no-startup-id tint2conf
 		bindsym a exec --no-startup-id cadence
 		bindsym g exec --no-startup-id exec-helper $term vim ~/.config/picom/picom.conf
 		bindsym i exec --no-startup-id exec-helper $term i3-var-update
