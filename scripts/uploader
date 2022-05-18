@@ -5,6 +5,12 @@
 ## simple. Just pass in the target directory in your drive
 ## first, then the list of files you want uploaded to there
 
+## TODO:    implement flag parsing so it's possible to upload
+##          to either root or a given directory.
+##          create the given directory if it doesn't already
+##          exist.
+##          learn how to parse the directory tree in the api
+
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -16,9 +22,7 @@ import os
 import drive_handling
 
 SCOPE = [ 'https://www.googleapis.com/auth/drive' ]
-start_dir = os.path.expandvars('$HOME/')
 
-os.chdir(start_dir)
 if len(sys.argv) == 1:
 	print("Usage: uploader [drive folder] [files]")
 	exit

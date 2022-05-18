@@ -13,20 +13,20 @@ bind "set menu-complete-display-prefix on"
 
 # Setup extract alias
 x () {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1 ;;
-      *.tar.gz)    tar xzf $1 ;;
-      *.bz2)       bunzip2 $1 ;;
-      *.rar)       rar x $1 ;;
-      *.gz)        gunzip $1 ;;
-      *.tar)       tar xvf $1 ;;
-      *.tbz2)      tar xjf $1 ;;
-      *.tgz)       tar xzf $1 ;;
-      *.zip)       unzip $1 ;;
-      *.Z)         uncompress $1 ;;
-      *.7z)        7za x $1 ;;
-      *.xz)        xz -d $1 ;;
+  if [ -f "$1" ] ; then
+    case "$1" in
+      *.tar.bz2)   tar xjf "$1" ;;
+      *.tar.gz)    tar xzf "$1" ;;
+      *.bz2)       bunzip2 "$1" ;;
+      *.rar)       rar x "$1" ;;
+      *.gz)        gunzip "$1" ;;
+      *.tar)       tar xvf "$1" ;;
+      *.tbz2)      tar xjf "$1" ;;
+      *.tgz)       tar xzf "$1" ;;
+      *.zip)       unzip "$1" ;;
+      *.Z)         uncompress "$1" ;;
+      *.7z)        7za x "$1" ;;
+      *.xz)        xz -d "$1" ;;
       *)           echo "'$1' cannot be extracted via extract()" ;;
     esac
   else
@@ -113,6 +113,17 @@ function maim () {
 	fi
 }
 
+# copying things in urxvt doesn't put them
+# in your normal clipboard so this lets
+# me copy small lines of text
+
+function cb () {
+	if [ -n "$1" ]; then
+		echo -n "$*" > /tmp/txt
+		clip /tmp/txt
+	fi
+}
+
 source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 
 # config
@@ -147,6 +158,7 @@ alias iw='sudo iw'
 alias powertop='sudo powertop'
 alias mount='sudo mount'
 alias umount='sudo umount'
+alias fdisk='sudo fdisk'
 
 # modified functionality (flags, better names, or otherwise)
 
