@@ -7,6 +7,7 @@
 
 # make tab cycle through commands after listing
 bind '"\t":menu-complete'
+bind '"\e[Z": menu-complete-backward'
 bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
@@ -164,7 +165,7 @@ alias fdisk='sudo fdisk'
 
 alias ls='ls --color=auto'
 alias diff='diff --color=auto'
-alias grep='grep --color=auto'
+alias grep='grep -n --color=auto'
 alias ip='ip -color=auto'
 alias fdisk='fdisk -L'
 alias valor='valgrind --track-origins=yes'
@@ -233,8 +234,10 @@ function jorb () {
 			STATE="California, United States"
 			;;
 	esac
-	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" sre
-	./open_links.py output/linkedin/$(echo "$STATE" | cut -d, -f1)/$(date -I)/*
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u sre
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u it
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u software engineer
+	./open_links.py output/linkedin/$(echo "$STATE" | cut -d, -f1)/sre/$(date -I)/* output/linkedin/$(echo "$STATE" | cut -d, -f1)/"software\ engineer"/$(date -I)/* output/linkedin/$(echo "$STATE" | cut -d, -f1)/it/$(date -I)/*
 	cd -
 }
 

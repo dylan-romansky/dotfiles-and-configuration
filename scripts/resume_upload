@@ -10,6 +10,7 @@ echo "$SUM" "|" "$OSUM"
 if [[ $SUM != "$OSUM" ]]; then
 	UL=true
 	echo "$SUM" > "$HOME/resume draft.md5"
+	unoconv -o "$HOME/resume - Romansky, Dylan.pdf" "$HOME/resume draft.docx"
 fi
 SUM=$(md5sum "$HOME/cover_letter.docx")
 OSUM=$(cat "$HOME/cover_letter.md5")
@@ -20,7 +21,7 @@ if [[ $SUM != "$OSUM" ]]; then
 fi
 if [ "$UL" = true ]; then
     echo "uploading"
-	uploader "resume and cover letters" "resume draft.docx" "cover_letter.docx"
+	uploader "resume and cover letters" "resume draft.docx" "cover_letter.docx" "resume - Romansky, Dylan.pdf"
 else
 	echo "files are up to date"
 fi
