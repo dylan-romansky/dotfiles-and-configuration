@@ -218,6 +218,19 @@ alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
 alias browse='(thunar "$PWD" &>/dev/null & disown)'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
+# kubernetes related
+
+alias dockube='eval $(minikube -p minikube docker-env)'
+
+function redeploy () {
+	if [ -z "$1" ]; then
+		echo "Usage: redeploy <filename>"
+		exit
+	fi
+	kubectl delete -f "$1"
+	kubectl apply -f "$1"
+}
+
 # complex tasks
 
 function jorb () {
