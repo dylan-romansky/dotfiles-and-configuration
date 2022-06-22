@@ -4,6 +4,8 @@
 ## directory (which is where I keep my AUR installs) and goes
 ## into each directory to update it
 
+## $? is 0 on successful install
+
 builtin cd $HOME/builds
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
@@ -11,13 +13,20 @@ builtin cd $HOME/builds
 for REPO in *; do
 	builtin cd $REPO
 	echo $REPO
-	git reset --hard
 	STATUS=$(git pull)
 	if [[ $STATUS != *"Already up to date."* ]]; then
 		echo "Updating..."
 		git fetch origin
 		git reset --hard origin/master
 		makepkg -si --noconfirm
+		if [[ $? -gt 0 ]]; then
+			echo "Error, bad build $REPO"
+			echo "Error, bad build $REPO" >> $HOME/aurror.txt
+			echo "Retrying..."
+			sudo rm -rf *
+			git reset --hard
+			makepkg -si --noconfirm
+		fi
 	else
 		echo "Already up to date."
 	fi

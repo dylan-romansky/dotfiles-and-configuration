@@ -222,6 +222,13 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 alias dockube='eval $(minikube -p minikube docker-env)'
 
+function undockube () {
+	export DOCKER_TLS_VERIFY=""
+	export DOCKER_HOST=""
+	export DOCKER_CERT_PATH=""
+	export MINIKUBE_ACTIVE_DOCKERD=""
+}
+
 function redeploy () {
 	if [ -z "$1" ]; then
 		echo "Usage: redeploy <filename>"
