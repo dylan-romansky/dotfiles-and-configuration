@@ -19,7 +19,7 @@ for REPO in *; do
 		git fetch origin
 		git reset --hard origin/master
 		makepkg -si --noconfirm
-		if [[ $? -gt 0 ]]; then
+		if !  [ $? -eq 0 ]; then
 			echo "Error, bad build $REPO"
 			echo "Error, bad build $REPO" >> $HOME/aurror.txt
 			echo "Retrying..."
