@@ -1,1 +1,9 @@
-https://stackoverflow.com/questions/7179642/how-can-i-make-bash-tab-completion-behave-like-vim-tab-completion-and-cycle-thro
+vim-terraform
+vim-javascript-git
+vim-svelte-git
+nerdtree
+airline
+airline-themes
+fzf
+gitgutter
+fugitive
