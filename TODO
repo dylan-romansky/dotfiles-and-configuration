@@ -7,3 +7,5 @@ airline-themes
 fzf
 gitgutter
 fugitive
+
+script/program to take a number and print it in binary, hex, or dec
