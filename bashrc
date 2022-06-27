@@ -52,8 +52,8 @@ function cd () {
 function mkcd () {
     DIR="$1"
     DIR=${DIR:-"$HOME"}
-    [[ -d "$DIR" ]] || mkdir $DIR
-    cd $DIR
+    [[ -d "$DIR" ]] || mkdir "$DIR"
+    cd "$DIR"
 }
 
 function vcp () {

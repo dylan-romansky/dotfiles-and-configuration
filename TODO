@@ -1,1 +1,11 @@
-Make a list of vim plugins I use on my laptop, install on desktop
+vim-terraform
+vim-javascript-git
+vim-svelte-git
+nerdtree
+airline
+airline-themes
+fzf
+gitgutter
+fugitive
+
+script/program to take a number and print it in binary, hex, or dec
