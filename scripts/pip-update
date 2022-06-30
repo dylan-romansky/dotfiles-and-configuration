@@ -2,4 +2,10 @@
 
 #next time pip has an error, check to see if it left an exit code.
 #if it did, have this use python -m ensurepip --upgrade
-pip install -U $(pip freeze | awk '{split($0, a, "=="); print a[1]}')
+#pip install -U $(pip freeze | awk '{split($0, a, "=="); print a[1]}')
+pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+if [ $? -ne 0 ]; then
+	python -m ensurepip --upgrade
+fi
+pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+#pip install -U $(pip freeze | awk '{split($0, a, "=="); print a[1]}')
