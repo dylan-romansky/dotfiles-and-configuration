@@ -13,8 +13,8 @@ STATUS=$(git status -sb 2> /dev/null)
 
 if [ -n "$STATUS" ]; then
 	NUM_STATUS=$(printf "$STATUS\n" | wc -l)
-	BRANCH=$(echo "$STATUS" | sed "s/\.\.\./\n/" | sed -n "s/^## \(.*\)$/\1/p")
-	UNTRACKED=$(echo "$STATUS" | grep "^?? ")
+	BRANCH=$(sed "s/\.\.\./\n/" <<< "$STATUS" | sed -n "s/^## \(.*\)$/\1/p")
+	UNTRACKED=$(grep "^?? " <<< "$STATUS")
 
 	if [ -n "$UNTRACKED" ]; then
 		NUM_UNTRACKED=$(printf "$UNTRACKED\n" | wc -l)

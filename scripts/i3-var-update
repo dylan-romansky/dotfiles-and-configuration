@@ -100,7 +100,7 @@ for EACH in "${NEWLINES[@]}"; do
 			if [[ "$FIELD2" =~ ^[:space:]*# ]]; then
                 echo "remove commentation"
 				NEWARR+=("$NEWLINE")
-                FIELD2=$(echo "$FIELD2" | sed 's|#||1')
+                FIELD2=$(sed 's|#||1' <<< "$FIELD2")
 			else
                 echo "remove entry if needed"
 				for (( k=0; k<=${#i3LINES[@]}; k++ )); do

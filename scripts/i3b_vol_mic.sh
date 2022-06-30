@@ -12,7 +12,7 @@ done
 if [[ "$(pactl get-sink-mute @DEFAULT_SINK@)" == *"yes"* ]]; then
 	SSTAT="\xef\x9a\xa9"
 else
-	DEC=$(echo $SLEV | cut -d% -f1)
+	DEC=$(cut -d% -f1 <<< "$SLEV")
 	if [ $DEC -le 20 ]; then
 		SSTAT="\xef\x80\xa6"
 	elif [ $DEC -le 60 ]; then
