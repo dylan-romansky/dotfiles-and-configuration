@@ -247,22 +247,22 @@ mode "terminals" {
 bindsym shift+$mod+t mode "terminals"
 
 mode "rofi" {
-bindsym r exec --no-startup-id rofi -show run
-bindsym w exec --no-startup-id rofi -show window
+		bindsym r exec --no-startup-id rofi -show run
+		bindsym w exec --no-startup-id rofi -show window
 
-bindsym Return mode "default"
-bindsym Esc mode "default"
-bindsym --release d mode "default"
+		bindsym Return mode "default"
+		bindsym Esc mode "default"
+		bindsym --release d mode "default"
 }
 
 bindsym Shift+$mod+d mode "rofi"
 
 mode "ide" {
-bindsym j exec --no-startup-id idea
+		bindsym j exec --no-startup-id idea
 
-bindsym Return mode "default"
-bindsym Esc mode "default"
-bindsym --release i mode "default"
+		bindsym Return mode "default"
+		bindsym Esc mode "default"
+		bindsym --release i mode "default"
 }
 
 bindsym Shift+$mod+i mode "ide"
