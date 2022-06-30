@@ -257,6 +257,16 @@ bindsym --release d mode "default"
 
 bindsym Shift+$mod+d mode "rofi"
 
+mode "ide" {
+bindsym j exec --no-startup-id idea
+
+bindsym Return mode "default"
+bindsym Esc mode "default"
+bindsym --release i mode "default"
+}
+
+bindsym Shift+$mod+i mode "ide"
+
 mode "wireless" {
 		bindsym s exec --no-startup-id wifi-manager start
 		bindsym r exec --no-startup-id wifi-manager restart
