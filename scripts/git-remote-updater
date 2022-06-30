@@ -3,5 +3,5 @@
 # This is a temporary script while I convert all my local repos over to the new
 # username and associated remote url
 
-NEW="$(git remote get-url | sed 's/bigdiggysquiggle/dylan-romansky/')"
-git remote set-url "$NEW"
+NEW="$(git remote get-url origin | sed 's/bigdiggysquiggle/dylan-romansky/')"
+git remote set-url origin "$NEW"
