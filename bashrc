@@ -2,6 +2,9 @@
 # ~/.bashrc
 #
 
+[ -f ~/Documents/soft/google-cloud-sdk/path.bash.inc ] && . ~/squirrels/Documents/soft/google-cloud-sdk/path.bash.inc
+[ -f ~/Documents/soft/google-cloud-sdk/completion.bash.inc ] && . /home/squirrels/Documents/soft/google-cloud-sdk/completion.bash.inc
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
