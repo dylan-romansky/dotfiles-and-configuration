@@ -16,13 +16,12 @@ export EDITOR="vim"
 export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
 export LESS='-R '
 export STEAM_RUNTIME=1
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # Source any of these files if they exist
 [ -f ~/.bash_extras ] && . ~/.bash_extras
 [ -f ~/.bashrc ] && . ~/.bashrc
 [ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
-[ -f "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc" ] && source "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.bash.inc"
-[ -f "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc" ] && source "~/Documents/builds/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.bash.inc"
 
 # Build this session's i3config
 i3-setup.sh
