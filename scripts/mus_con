@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# in the future, expand this to convert to multiple
+# possile file types
+
+case $1 in
+	
+	mp3)
+		BITRATE="320k"
+		EXT="mp3"
+		shift
+		;;
+
+	*)
+		echo "Usage: mus_con [mp3] fileslist..."
+		exit
+		;;
+esac
+
+for FILE in "${@}"; do
+	ffmpeg -i "$FILE" -vn -ar 44100 -ac 2 -b:a "$BITRATE" $(cut -d'.' -f1 <<< "$FILE")."$EXT";
+done
