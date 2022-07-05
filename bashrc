@@ -117,6 +117,14 @@ function maim () {
 	fi
 }
 
+vman() {
+  vim -c "SuperMan $*"
+
+  if [ "$?" != "0" ]; then
+    echo "No manual entry for $*"
+  fi
+}
+
 # copying things in urxvt doesn't put them
 # in your normal clipboard so this lets
 # me copy small lines of text
