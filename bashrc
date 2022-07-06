@@ -107,15 +107,18 @@ function getpid () {
 	ps aux | grep "$@" | head -n -1
 }
 
-function maim () {
-	if [ -n "$1" ]; then
-		for PARAM in "${@}"; do
-			for PID in $(getpid $PARAM | awk '{ print $2 }'); do
-				sudo kill -9 $PID
-			done
-		done
-	fi
-}
+# I forgot killall exists when I wrote this.
+# it has since been replaced with an alias
+
+#function maim () {
+#	if [ -n "$1" ]; then
+#		for PARAM in "${@}"; do
+#			for PID in $(getpid $PARAM | awk '{ print $2 }'); do
+#				sudo kill -9 $PID
+#			done
+#		done
+#	fi
+#}
 
 vman() {
   vim -c "SuperMan $*"
@@ -196,6 +199,7 @@ alias xclip='xclip -selection clip'
 alias newsh='newscript -sh'
 alias newpy='newscript -py3'
 alias amend='git commit -a --amend; git pull; git push'
+alias maim='killall -9'
 
 # renamed for easier memory
 
