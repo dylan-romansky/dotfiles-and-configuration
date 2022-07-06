@@ -14,6 +14,19 @@ map <F5> :NERDTreeToggle<CR>
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
 
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+hi clear SpellBad
+hi SpellBad term=reverse ctermbg=darkgreen
+
 command W w !sudo tee % >/dev/null
 set noexpandtab
 
@@ -38,5 +51,7 @@ Plug 'jez/vim-superman'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'tpope/vim-surround'
+Plug 'cdelledonne/vim-cmake'
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
