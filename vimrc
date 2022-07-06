@@ -16,3 +16,19 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
 
 command W w !sudo tee % >/dev/null
 set noexpandtab
+
+callplug
+Plug '~/.vim/pack/vendor/start/vim-easytags/plugin/easytags.vim'
+callplug
+
+callplug
+Plug '~/.vim/pack/vendor/start/vim-misc/plugin/xolox/misc.vim'
+callplug
+
+callplug
+Plug '~/.vim/pack/vendor/start/vim-nerdtree/nerdtree_plugin/vim-nerdtree-tabs.vim'
+callplug
+
+callplug
+Plug '~/.vim/pack/vendor/start/vim-symlink/plugin/symlink.vim'
+callplug
