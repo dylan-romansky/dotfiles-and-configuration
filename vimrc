@@ -51,5 +51,6 @@ Plug 'dense-analysis/ale'
 Plug 'frazrepo/vim-rainbow'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-commentary'
+Plug 'puremourning/vimspector'
 
 call plug#end()
