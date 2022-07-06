@@ -19,7 +19,7 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
 "set statusline+=%*
 
 hi clear SpellBad
-hi SpellBad term=reverse ctermbg=darkgreen
+hi SpellBad term=reverse ctermbg=darkred
 
 command W w !sudo tee % >/dev/null
 set noexpandtab
