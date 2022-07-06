@@ -1,11 +1,1 @@
-vim-terraform
-vim-javascript-git
-vim-svelte-git
-nerdtree
-airline
-airline-themes
-fzf
-gitgutter
-fugitive
-
-script/program to take a number and print it in binary, hex, or dec
+vim-plug installed in /usr/share/vim/vimfiles/autoload

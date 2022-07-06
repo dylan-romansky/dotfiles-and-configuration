@@ -238,6 +238,7 @@ mode "terminals" {
 		bindsym u exec --no-startup-id term-replace urxvt
 		bindsym c exec --no-startup-id term-replace cool-retro-term
 		bindsym y exec --no-startup-id yakuake_wrapper.sh
+bindsym a exec --no-startup-id term-replace alacritty
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"

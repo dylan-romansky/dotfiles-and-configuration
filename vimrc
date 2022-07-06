@@ -14,21 +14,44 @@ map <F5> :NERDTreeToggle<CR>
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
 
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+hi clear SpellBad
+hi SpellBad term=reverse ctermbg=darkgreen
+
 command W w !sudo tee % >/dev/null
 set noexpandtab
 
-callplug
-Plug '~/.vim/pack/vendor/start/vim-easytags/plugin/easytags.vim'
-callplug
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
-callplug
-Plug '~/.vim/pack/vendor/start/vim-misc/plugin/xolox/misc.vim'
-callplug
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
 
-callplug
-Plug '~/.vim/pack/vendor/start/vim-nerdtree/nerdtree_plugin/vim-nerdtree-tabs.vim'
-callplug
+call plug#begin('~/.vim/autoload/plug.vim')
 
-callplug
-Plug '~/.vim/pack/vendor/start/vim-symlink/plugin/symlink.vim'
-callplug
+Plug 'hashivim/vim-terraform'
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'vim-scripts/a.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'jez/vim-superman'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'vim-scripts/HTML-AutoCloseTag'
+Plug 'tpope/vim-surround'
+Plug 'cdelledonne/vim-cmake'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'dense-analysis/ale'
+Plug 'frazrepo/vim-rainbow'
+Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
+Plug 'puremourning/vimspector'
+
+call plug#end()
+>>>>>>> 3ecfa6395852e01fe1b7e6fc81f72da45286ae7e
