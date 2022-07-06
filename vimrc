@@ -35,6 +35,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
+"call plug#begin('~/.vim/autoload/plug.vim')
 call plug#begin('~/.vim/autoload/plug.vim')
 
 Plug 'hashivim/vim-terraform'
@@ -54,4 +55,3 @@ Plug 'tpope/vim-commentary'
 Plug 'puremourning/vimspector'
 
 call plug#end()
->>>>>>> 3ecfa6395852e01fe1b7e6fc81f72da45286ae7e
