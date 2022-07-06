@@ -1,11 +1,1 @@
-script/program to take a number and print it in binary, hex, or dec
-a.vim
-coc.nvim
-delimitMate
-HTML-AutoCloseTag
-vim-better-whitespace
-vim-cmake
-vim-gutentags
-vim-superman
-vim-surround
-vim-terraform
+vim-plug installed in /usr/share/vim/vimfiles/autoload

@@ -18,12 +18,6 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
 hi clear SpellBad
 hi SpellBad term=reverse ctermbg=darkgreen
 
@@ -53,5 +47,9 @@ Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'tpope/vim-surround'
 Plug 'cdelledonne/vim-cmake'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'dense-analysis/ale'
+Plug 'frazrepo/vim-rainbow'
+Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
