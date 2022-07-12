@@ -8,11 +8,21 @@ set showmatch
 set hlsearch
 set incsearch
 set laststatus=2
+set splitbelow
+set splitright
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 map <F5> :NERDTreeToggle<CR>
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
+
+" vim-powered terminal in split window
+ map <Leader>t :term ++close<cr>
+ tmap <Leader>t <c-w>:term ++close<cr>
+
+" " vim-powered terminal in new tab
+ map <Leader>T :tab term ++close<cr>
+ tmap <Leader>T <c-w>:tab term ++close<cr>
 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
