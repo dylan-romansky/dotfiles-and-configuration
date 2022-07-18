@@ -39,3 +39,7 @@ if [ -n "$ITEMS" ]; then
 	git commit
 	git push --set-upstream origin main
 fi
+cat << EOF > .gitignore
+.gitignore
+tags
+EOF
