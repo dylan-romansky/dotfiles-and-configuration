@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# similar to git-maker, this script expects to
+# read your username from ~/.config/git/token
+
+CONFIG=~/.config/git/token
+USERNAME=$(grep username $CONFIG | cut -d= -f2)
+echo $USERNAME
+git clone git@gihub.com:"$USERNAME"/"$1".git
+if [ -nz $? ]; then
+	cd "$1"
+	echo << EOF > .gitignore
+.gitignore
+tags
+EOF
+fi
