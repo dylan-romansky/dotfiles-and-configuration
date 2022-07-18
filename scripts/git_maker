@@ -30,3 +30,12 @@ git init
 git remote add origin git@github.com:$USERNAME/$REPO.git
 
 curl -u $USERNAME:$PASSWORD https://api.github.com/user/repos -d "{\"name\":\"$REPO\", \"private\":\"$PRIV\"}"
+
+for FILE in *; do
+	ITEMS+=("$FILE")
+done
+if [ -n "$ITEMS" ]; then
+	git add "${ITEMS[@]}"
+	git commit
+	git push --set-upstream origin main
+fi
