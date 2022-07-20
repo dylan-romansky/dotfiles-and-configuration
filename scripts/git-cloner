@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# so I don't need to go grab the link from my github
+# if I already know the name of my repo
+
+# uses the same config file as git_maker
+
+CONFIG=~/.config/git/token
+USERNAME=$(grep username $CONFIG | cut -d= -f2)
+git clone git@github.com:$USERNAME/$1.git $2
+cd $2
+cat << EOF >> .gitignore
+.gitignore
+tags
+EOF
