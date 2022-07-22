@@ -202,7 +202,7 @@ mode "launcher" {
 		bindsym n exec --no-startup-id python ~/Downloads/nut-2.6/nut.py
 		bindsym l exec --no-startup-id sol
 		bindsym e exec --no-startup-id spotify
-bindsym o exec --no-startup-id obs
+		bindsym o exec --no-startup-id obs
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
@@ -532,7 +532,6 @@ bar {
 exec --no-startup-id tint2
 exec --no-startup-id picom
 exec --no-startup-id ~/.fehbg
-exec --no-startup-id gnome-flashback
 exec --no-startup-id yakuake_wrapper.sh
 exec --no-startup-id discord
 
