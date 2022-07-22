@@ -6,7 +6,7 @@
 ## respectively
 
 ## get the variables for this machine's configuration
-source $HOME/.config/i3/.i3vars
+source "$HOME/.config/i3/.i3vars"
 
 ## remove the old config file and copy over the main config
 CONFIG="$HOME/.config/i3/config"
@@ -29,5 +29,5 @@ shift
 ## disable lines according to our variable for this machine
 for line in "${i3LINES[@]}"; do
 	echo "doing line $line"
-	sed -i -e "$line s/./#&/" $CONFIG
+	sed -i -e "$line s/./#&/" "$CONFIG"
 done
