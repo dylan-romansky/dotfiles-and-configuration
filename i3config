@@ -202,7 +202,7 @@ mode "launcher" {
 		bindsym n exec --no-startup-id python ~/Downloads/nut-2.6/nut.py
 		bindsym l exec --no-startup-id sol
 		bindsym e exec --no-startup-id spotify
-bindsym o exec --no-startup-id obs
+		bindsym o exec --no-startup-id obs
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
