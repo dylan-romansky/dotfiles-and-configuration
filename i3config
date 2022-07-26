@@ -532,7 +532,6 @@ bar {
 exec --no-startup-id tint2
 exec --no-startup-id picom
 exec --no-startup-id ~/.fehbg
-exec --no-startup-id gnome-flashback
 exec --no-startup-id yakuake_wrapper.sh
 exec --no-startup-id discord
 
