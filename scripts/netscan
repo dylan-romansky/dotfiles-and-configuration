@@ -6,5 +6,4 @@
 # one I want to SSH to
 
 HOMENET="$(ip addr | grep 192.168 | awk '{ print $2 } ' | sed "s|[0-9]*/|0/|")"
-echo $HOMENET
 sudo nmap -sn "$HOMENET"
