@@ -6,8 +6,8 @@
 CONFIG=~/.config/git/token
 USERNAME=$(grep username $CONFIG | cut -d= -f2)
 echo $USERNAME
-git clone git@gihub.com:"$USERNAME"/"$1".git
-if [ -nz $? ]; then
+git clone git@github.com:"$USERNAME"/"$1".git
+if [ $? == 0 ]; then
 	cd "$1"
 	echo << EOF > .gitignore
 .gitignore
