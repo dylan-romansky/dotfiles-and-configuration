@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# sometimes I forget to look at the ip address of one of my machines before
+# attempting to SSH to it from another one of my machines. This lets me scan
+# the local network and attempt to determine which connected device is the
+# one I want to SSH to
+
+HOMENET="$(ip addr | grep 192.168 | awk '{ print $2 } ' | sed "s|[0-9]*/|0/|")"
+sudo nmap -sn "$HOMENET"
