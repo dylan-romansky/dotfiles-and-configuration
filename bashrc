@@ -233,6 +233,7 @@ alias disk='sudo du -hd1 /'
 alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
 alias browse='(thunar "$PWD" &>/dev/null & disown)'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias update-clock='timedatectl set-ntp true'
 
 # kubernetes related
 
