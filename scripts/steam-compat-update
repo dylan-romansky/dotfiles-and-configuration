@@ -51,7 +51,7 @@ make redist &> log
 # Copy the completed build to the proper location,
 # removing the old build if it exists
 DEST="$HOME/.steam/root/compatibilitytools.d"
-if [ -d $DEST/GE-Proton ]
+if [ -d $DEST/GE-Proton ]; then
 	rm -rf
 fi
 cp -r GE-Proton $DEST/GE-Proton
