@@ -334,6 +334,7 @@ for_window [title="Steam Guard - Computer Authorization Required"] move position
 #
 for_window [instance="discord" window_role="browser-window"] move scratchpad
 assign [instance="google-chrome"] 1
+assign [class="microsoft teams - preview"] move 7
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
