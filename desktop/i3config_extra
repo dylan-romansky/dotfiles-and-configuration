@@ -34,7 +34,7 @@ bar {
 }
 
 bar {
-	output DP-0
+	output DP-4
 	colors {
 		background #350084
 
