@@ -101,9 +101,9 @@ function aur-install () {
 }
 
 function daily-chal () {
-mkdir $1
-cd $1
-vim challenge.txt
+	mkdir $1
+	cd $1
+	vim challenge.txt
 }
 
 function getpid () {
@@ -208,6 +208,7 @@ alias newsh='newscript -sh'
 alias newpy='newscript -py3'
 alias amend='git commit -a --amend; git pull; git push'
 alias maim='killall -9'
+alias mkdir='mkdir -p'
 
 # renamed for easier memory
 
@@ -216,6 +217,7 @@ alias xwinfo='xprop'
 alias nut='python $HOME/Downloads/nut-2.6/nut.py'
 alias mirrors='sudo reflector --sort age --country US --fastest 20 --protocol https --save /etc/pacman.d/mirrorlist'
 alias headphones='bluetoothctl power on; bluetoothctl connect 70:88:6B:90:BF:A6'
+alias dbclear='sudo rm /var/lib/pacman/db.lck'
 
 # fun
 
