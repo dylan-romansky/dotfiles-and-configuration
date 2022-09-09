@@ -261,6 +261,7 @@ bindsym Shift+$mod+d mode "rofi"
 
 mode "ide" {
 		bindsym j exec --no-startup-id idea
+bindsym p exec --no-startup-id postman
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
