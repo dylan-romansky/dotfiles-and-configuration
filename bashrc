@@ -46,17 +46,24 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
 fi
 
 function cd () {
-	DIR="$1"
-	DIR=${DIR:-"$HOME"}
-	builtin cd "$DIR"
-    [[ $? -eq 0 ]] && ls --color=auto
+	case $# in
+		2)
+			builtin cd "${PWD/$1/$2}"
+			;;
+		*)
+			DIR="$1"
+			DIR=${DIR:-"$HOME"}
+			builtin cd "$DIR"
+			;;
+	esac
+	[[ $? -eq 0 ]] && ls --color=auto
 }
 
 function mkcd () {
-    DIR="$1"
-    DIR=${DIR:-"$HOME"}
-    [[ -d "$DIR" ]] || mkdir "$DIR"
-    cd "$DIR"
+	DIR="$1"
+	DIR=${DIR:-"$HOME"}
+	[[ -d "$DIR" ]] || mkdir "$DIR"
+	cd "$DIR"
 }
 
 function vcp () {

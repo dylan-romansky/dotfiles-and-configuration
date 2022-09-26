@@ -259,15 +259,17 @@ mode "rofi" {
 
 bindsym Shift+$mod+d mode "rofi"
 
-mode "ide" {
+mode "dev-tools" {
 		bindsym j exec --no-startup-id idea
+		bindsym p exec --no-startup-id postman
+		bindsym m exec --no-startup-id dbeaver
 
 		bindsym Return mode "default"
 		bindsym Esc mode "default"
 		bindsym --release i mode "default"
 }
 
-bindsym Shift+$mod+i mode "ide"
+bindsym Shift+$mod+i mode "dev-tools"
 
 mode "wireless" {
 		bindsym s exec --no-startup-id wifi-manager start
