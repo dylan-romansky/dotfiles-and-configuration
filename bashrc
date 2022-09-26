@@ -107,6 +107,10 @@ function getpid () {
 	ps aux | grep "$@" | head -n -1
 }
 
+function jcurl () {
+	curl "$@" | json_pp | pygmentize -l json
+}
+
 # I forgot killall exists when I wrote this.
 # it has since been replaced with an alias
 
