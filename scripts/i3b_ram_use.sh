@@ -10,7 +10,8 @@
 TOTAL=0
 USED=1
 RAM=($(free | awk 'FNR==2 { print $2 " " $3 " " $4 }'))
-OUT="$(bc <<< "${RAM[$USED]} / 1048576")GB/$(bc <<< "${RAM[$TOTAL]} / 1048576")GB"
+#we're adding 1 to the total amount of ram as a hacky fix for the rounding problem"
+OUT="$(bc <<< "${RAM[$USED]} / 1048576")GB/$(bc <<< "${RAM[$TOTAL]} / 1048576 + 1")GB"
 echo -e "<span font=\"Font Awesome 6 Free\">\xef\x94\xb8</span>: $OUT"
 echo -e "<span font=\"Font Awesome 6 Free\">\xef\x94\xb8</span>: $OUT"
 FREE=$(bc <<< "(${RAM[$TOTAL]} - ${RAM[$USED]}) / 1048576")
