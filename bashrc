@@ -241,7 +241,7 @@ alias phone='ssh -i ~/.ssh/id_phone -p 8022'
 
 # system related
 
-alias sys-update='mirrors; repac; aur-update; pip-update; sudo mkinitcpio -P'
+alias sys-update='repac; aur-update; pip-update; sudo mkinitcpio -P'
 alias disk='sudo du -hd1 /'
 alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
 alias browse='(thunar "$PWD" &>/dev/null & disown)'
