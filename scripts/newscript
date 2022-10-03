@@ -51,9 +51,9 @@ function typecheck () {
 			read -r -d '' SCRTYPE << EOF
 import React from 'react';
 
-function ${0}() {
+function $(cut -d. -f1 <<< "$2")() {
 	return (
-		<div>${0}</div>
+		<div>$(cut -d. -f1 <<< "$2")</div>
 	);
 }
 EOF
