@@ -20,7 +20,7 @@ $SCRNAME
 
 function typeinput () {
 	echo "Type of script:"
-	echo "1) Bash 2) Python3"
+	echo "1) Bash 2) Python3 3) React Component"
 	read INPUT
 	case $INPUT in
 		1)
@@ -28,6 +28,9 @@ function typeinput () {
 			;;
 		2)
 			SCRTYPE="-py3"
+			;;
+		3)
+			SCRTYPE="-rfce"
 			;;
 		*)
 			echo "Error: bad type. Aborting"
@@ -44,6 +47,17 @@ function typecheck () {
 		-py3)
 			SCRTYPE="#!/usr/bin/env python3"
 			;;
+		-rfce)
+			read -r -d '' SCRTYPE << EOF
+import React from 'react';
+
+function ${0}() {
+	return (
+		<div>${0}</div>
+	);
+}
+EOF
+		;;
 		*)
 			if [ -z "$SCRNAME" ]; then
 				SCRNAME=$1
