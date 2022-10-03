@@ -48,6 +48,7 @@ function typecheck () {
 			SCRTYPE="#!/usr/bin/env python3"
 			;;
 		-rfce)
+			#temporarily using the absolute arguments to get the name for the function
 			read -r -d '' SCRTYPE << EOF
 import React from 'react';
 
