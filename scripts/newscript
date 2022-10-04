@@ -49,14 +49,17 @@ function typecheck () {
 			;;
 		-rfce)
 			#temporarily using the absolute arguments to get the name for the function
+			OUTNAME=$(cut -d. -f1 <<< "$2")
 			read -r -d '' SCRTYPE << EOF
 import React from 'react';
 
-function $(cut -d. -f1 <<< "$2")() {
+function ${OUTNAME}() {
 	return (
-		<div>$(cut -d. -f1 <<< "$2")</div>
+		<div>${OUTNAME}</div>
 	);
 }
+
+export default $OUTNAME
 EOF
 		;;
 		*)
