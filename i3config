@@ -273,15 +273,15 @@ mode "dev-tools" {
 bindsym Shift+$mod+i mode "dev-tools"
 
 mode "paint tools" {
-bindsym g exec --no-startup-id gimp
-bindsym i exec --no-startup-id inkscape
+		bindsym p exec --no-startup-id gimp
+		bindsym i exec --no-startup-id inkscape
 
-bindsym Return mode "default"
-bindsym Esc mode "default"
-bindsym --release p mode "default"
+		bindsym Return mode "default"
+		bindsym Esc mode "default"
+		bindsym --release z mode "default"
 }
 
-bindsym Shift+$mod+p mode "paint tools"
+bindsym Shift+$mod+z mode "paint tools"
 
 mode "wireless" {
 		bindsym s exec --no-startup-id wifi-manager start

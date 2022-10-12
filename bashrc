@@ -150,6 +150,11 @@ function cb () {
 	fi
 }
 
+function git-upload () {
+	git commit -a -m "${*}"
+	git push
+}
+
 source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 
 # config
