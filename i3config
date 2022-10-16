@@ -287,11 +287,11 @@ mode "wireless" {
 		bindsym s exec --no-startup-id wifi-manager start
 		bindsym r exec --no-startup-id wifi-manager restart
 		bindsym q exec --no-startup-id wifi-manager stop
-
-		bindsym Return mode "default"
-		bindsym Esc mode "default"
-		bindsym --release n mode "default"
-}
+#
+#		bindsym Return mode "default"
+#		bindsym Esc mode "default"
+#		bindsym --release n mode "default"
+#}
 
 bindsym Shift+$mod+n mode "wireless"
 
@@ -525,13 +525,13 @@ gaps outer 5
 # Only enable gaps on a workspace when there is at least one container
 smart_gaps on
 
-# Only enable outer gaps when there is exactly one container
-#smart_gaps inverse_outer
+ Only enable outer gaps when there is exactly one container
+smart_gaps inverse_outer
 
-# Activate smart borders (always)
+ Activate smart borders (always)
 smart_borders on
 
-# Activate smart borders (only when there are effectively no gaps)
+ Activate smart borders (only when there are effectively no gaps)
 smart_borders no_gaps
 
 # Hide edge borders only if there is one window with no gaps
