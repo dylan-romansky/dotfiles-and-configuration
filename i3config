@@ -283,10 +283,10 @@ mode "paint tools" {
 
 bindsym Shift+$mod+z mode "paint tools"
 
-mode "wireless" {
-		bindsym s exec --no-startup-id wifi-manager start
-		bindsym r exec --no-startup-id wifi-manager restart
-		bindsym q exec --no-startup-id wifi-manager stop
+#mode "wireless" {
+#		bindsym s exec --no-startup-id wifi-manager start
+#		bindsym r exec --no-startup-id wifi-manager restart
+#		bindsym q exec --no-startup-id wifi-manager stop
 #
 #		bindsym Return mode "default"
 #		bindsym Esc mode "default"
@@ -525,25 +525,25 @@ gaps outer 5
 # Only enable gaps on a workspace when there is at least one container
 smart_gaps on
 
- Only enable outer gaps when there is exactly one container
+# Only enable outer gaps when there is exactly one container
 smart_gaps inverse_outer
 
- Activate smart borders (always)
+# Activate smart borders (always)
 smart_borders on
 
- Activate smart borders (only when there are effectively no gaps)
+# Activate smart borders (only when there are effectively no gaps)
 smart_borders no_gaps
 
 # Hide edge borders only if there is one window with no gaps
 hide_edge_borders smart_no_gaps
 
- Start i3bar to display a workspace bar (plus the system information i3status
- finds out, if available)
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
 bar {
  status_command i3status
 }
 
- Programs and scripts that should be run on startup
+# Programs and scripts that should be run on startup
 exec --no-startup-id picom
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id yakuake_wrapper.sh
