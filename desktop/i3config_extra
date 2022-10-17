@@ -1,5 +1,5 @@
 set $monitor_top HDMI-0
-set $monitor_bottom DP-0
+set $monitor_bottom DP-4
 
 # Set all the even workspaces to one monitor and all odd workspaces
 # to the other monitor

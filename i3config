@@ -293,7 +293,7 @@ bindsym Shift+$mod+z mode "paint tools"
 #		bindsym --release n mode "default"
 #}
 
-bindsym Shift+$mod+n mode "wireless"
+#bindsym Shift+$mod+n mode "wireless"
 
 bindsym --release $mod+shift+p exec --no-startup-id ScrotUM --select
 bindsym --release $mod+p exec --no-startup-id ScrotUM
