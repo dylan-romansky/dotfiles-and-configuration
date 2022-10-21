@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#set the DISPLAY variable so xrandr can work when this is launched by a cron job
+export DISPLAY=:0
 MONITORS="$(xrandr | grep -w "connected" | cut -d ' ' -f 1)"
 SETTING=""
 
