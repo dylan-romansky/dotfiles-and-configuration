@@ -18,7 +18,6 @@ function toggle()	{
 
 function setup()	{
 	TIME=$(date +%k%M)
-	echo $TIME
 	if [ $TIME -gt 1830 -o $TIME -lt 400 ]; then
 		on
 	else
