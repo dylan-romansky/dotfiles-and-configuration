@@ -6,10 +6,7 @@
 #     https://vivien.github.io/i3blocks
 
 # TODO:
-#	Verify the current blocks function as expected
 #	Decide if some of these need separate actions for when they're clicked on
-#	Figure out if it's possible to have a regular command and a click command in the same block
-#	Integrate font-awesome icons
 
 # Global properties
 separator=true
