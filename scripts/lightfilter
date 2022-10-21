@@ -1,0 +1,40 @@
+#!/bin/bash
+
+MONITORS="$(xrandr | grep -w "connected" | cut -d ' ' -f 1)"
+SETTING=""
+
+function on()	{
+	SETTING="0.9:0.7:0.5"
+}
+
+function off()	{
+	SETTING="1"
+}
+
+function toggle()	{
+	CURR="$(xrandr --verbose | grep -i "gamma" | tr -s ' ' '	' | cut -d '	' -f 3 | head -n 1)"
+	[ "$CURR" = "1.0:1.0:1.0" ] && on || off
+}
+
+function setup()	{
+	TIME=$(date +%k%M)
+	echo $TIME
+	if [ $TIME -gt 1830 -o $TIME -lt 400 ]; then
+		on
+	else
+		off
+	fi
+}
+
+case "$1" in
+	on|off|toggle)
+		$1
+		;;
+	*)
+		setup
+		;;
+esac
+
+for MONITOR in $MONITORS; do
+	xrandr --output "$MONITOR" --gamma "$SETTING"
+done

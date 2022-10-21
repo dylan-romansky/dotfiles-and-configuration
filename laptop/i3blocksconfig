@@ -15,10 +15,10 @@
 separator=true
 separator_block_width=15
 markup=pango
+color=#91e78B
 
 [active]
 command=echo "$(xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5) WM_NAME | cut -d '"' -f 2)"
-color=#91e78B
 interval=1
 
 #[greetings]
@@ -26,17 +26,11 @@ interval=1
 #command=echo "Hello, $USER!"
 #interval=once
 
-#for testing to make sure a script is doing what it's supposed to before adding it to i3blocks proper
-[test]
-command=test.py
-interval=1
-
 [network]
 command=i3b_net.sh
 interval=5
 
 [cpu]
-color=#91E78B
 command=echo -e "$(i3b_cpu_use.py) $(i3b_cpu_temp.sh)"
 interval=1
 
@@ -45,12 +39,14 @@ command=i3b_ram_use.sh
 interval=5
 
 [audio]
-color=#91E78B
 command=i3b_vol_mic.sh
 interval=once
 signal=1
 
+[light]
+full_text=
+command=[ -z $button ] && lightfilter || lightfilter toggle
+
 [time]
-color=#91E78B
 command=echo -e "<span font=\"Font Awesome 6 Free\">\xef\x80\x97</span> $(date '+%c')"
 interval=1
