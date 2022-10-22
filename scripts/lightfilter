@@ -6,7 +6,7 @@ MONITORS="$(xrandr | grep -w "connected" | cut -d ' ' -f 1)"
 SETTING=""
 
 function on()	{
-	SETTING="0.9:0.7:0.5"
+	SETTING="0.9:0.7:0.3"
 }
 
 function off()	{
