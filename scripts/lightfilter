@@ -4,13 +4,34 @@
 export DISPLAY=:0
 MONITORS="$(xrandr | grep -w "connected" | cut -d ' ' -f 1)"
 SETTING=""
+R=0.9
+G=0.7
+B=0.3
 
 function on()	{
 	SETTING="0.9:0.7:0.3"
+	START_R=1
+	START_G=1
+	START_B=1
+
+	RED=$R
+	GREEN=$G
+	BLUE=$B
+
+	OP=-
 }
 
 function off()	{
 	SETTING="1"
+	START_R=$R
+	START_G=$G
+	START_B=$B
+
+	RED=1
+	GREEN=1
+	BLUE=1
+
+	OP=+
 }
 
 function toggle()	{
@@ -36,6 +57,31 @@ case "$1" in
 		;;
 esac
 
+PRECISION=6
+STEPS_PER_SEC=30
+SLEEPTIME="$(dc -e "$PRECISION k 1 $STEPS_PER_SEC /p")"
+DURATION=1
+STEPS="$(dc -e "$DURATION $STEPS_PER_SEC *p")"
+R=$START_R
+G=$START_G
+B=$START_B
+DELTA_R=$(dc -e "$PRECISION k $R $RED - $STEPS /p")
+DELTA_G=$(dc -e "$PRECISION k $G $GREEN - $STEPS /p")
+DELTA_B=$(dc -e "$PRECISION k $B $BLUE - $STEPS /p")
+
+echo $SLEEPTIME $STEPS $R $G $B $DELTA_R $DELTA_G $DELTA_B
+i=0
+while [ $i -le $STEPS ]; do
+	echo $R $G $B
+	R=$(dc -e "$PRECISION k $R $DELTA_R ${OP}p" 2>/dev/null)
+	G=$(dc -e "$PRECISION k $G $DELTA_G ${OP}p" 2>/dev/null)
+	B=$(dc -e "$PRECISION k $B $DELTA_B ${OP}p" 2>/dev/null)
+	STEP="$R:$G:$B"
+	for MONITOR in $MONITORS; do
+		xrandr --output "$MONITOR" --gamma "$STEP"
+	done
+	i=$(($i+1))
+done
 for MONITOR in $MONITORS; do
 	xrandr --output "$MONITOR" --gamma "$SETTING"
 done
