@@ -9,6 +9,7 @@ G=0.7
 B=0.3
 
 function on()	{
+	#set our start and end points for our stepwise hue shifting later as well as the kind of math to perform
 	SETTING="0.9:0.7:0.3"
 	START_R=1
 	START_G=1
@@ -22,6 +23,7 @@ function on()	{
 }
 
 function off()	{
+	#set our start and end points for our stepwise hue shifting later as well as the kind of math to perform
 	SETTING="1"
 	START_R=$R
 	START_G=$G
@@ -57,6 +59,8 @@ case "$1" in
 		;;
 esac
 
+#set variables that will be reused in the stepwise hue shift
+#separated into a block of variables so they can be treated as settings
 PRECISION=6
 STEPS_PER_SEC=30
 SLEEPTIME="$(dc -e "$PRECISION k 1 $STEPS_PER_SEC /p")"
@@ -69,7 +73,6 @@ DELTA_R=$(dc -e "$PRECISION k $R $RED - $STEPS /p")
 DELTA_G=$(dc -e "$PRECISION k $G $GREEN - $STEPS /p")
 DELTA_B=$(dc -e "$PRECISION k $B $BLUE - $STEPS /p")
 
-echo $SLEEPTIME $STEPS $R $G $B $DELTA_R $DELTA_G $DELTA_B
 i=0
 while [ $i -le $STEPS ]; do
 	echo $R $G $B
@@ -82,6 +85,8 @@ while [ $i -le $STEPS ]; do
 	done
 	i=$(($i+1))
 done
+#apply our final desired setting to account for precision differences
+#and to allow the toggle function to correctly detect which state it's in
 for MONITOR in $MONITORS; do
 	xrandr --output "$MONITOR" --gamma "$SETTING"
 done
