@@ -75,7 +75,6 @@ DELTA_B=$(dc -e "$PRECISION k $B $BLUE - $STEPS /p")
 
 i=0
 while [ $i -le $STEPS ]; do
-	echo $R $G $B
 	R=$(dc -e "$PRECISION k $R $DELTA_R ${OP}p" 2>/dev/null)
 	G=$(dc -e "$PRECISION k $G $DELTA_G ${OP}p" 2>/dev/null)
 	B=$(dc -e "$PRECISION k $B $DELTA_B ${OP}p" 2>/dev/null)
