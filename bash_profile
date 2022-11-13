@@ -23,9 +23,6 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 [ -f ~/.bashrc ] && . ~/.bashrc
 [ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
 
-# Update the lightfilter cronjobs
-lightfilter setup
-
 # Build this session's i3config
 i3-setup.sh
 
