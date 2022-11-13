@@ -42,7 +42,7 @@ signal=1
 
 [light]
 full_text=
-command=[ -z $button ] && lightfilter || lightfilter toggle
+command=[ -n $button ] && lightfilter toggle
 interval=once
 
 [time]
