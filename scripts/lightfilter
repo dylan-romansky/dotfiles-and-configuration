@@ -8,6 +8,7 @@ R=0.9
 G=0.7
 B=0.3
 
+
 function on()	{
 	#set our start and end points for our stepwise hue shifting later as well as the kind of math to perform
 	SETTING="0.9:0.7:0.3"
@@ -42,8 +43,24 @@ function toggle()	{
 }
 
 function setup()	{
+	RESPONSE="$(curl https://api.sunrise-sunset.org/json |
+		sed -e 's/[{}]/''/g' |
+		awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
+	OFFH="$(grep "sunrise" <<< "$RESPONSE" | cut -d: -f3)"
+	OFFH="${OFFH:1}"
+	OFFM="$(grep "sunrise" <<< "$RESPONSE" | cut -d: -f4)"
+	ONH="$(grep "sunset" <<< "$RESPONSE" | cut -d: -f2)"
+	ONH=${ONH:1}
+	ONH=$((ONH + 12))
+	ONM="$(grep "sunset" <<< "$RESPONSE" | cut -d: -f3)"
+
+	echo "$ONM $ONH * * * /home/squirrels/scripts/lightfilter off" > /tmp/crontmp
+	echo "$OFFM $OFFH * * * /home/squirrels/scripts/lightfilter on" >> /tmp/crontmp
+	crontab -l | tail -n +3 >> /tmp/crontmp
+	cat /tmp/crontmp | crontab
+	rm /tmp/crontmp
 	TIME=$(date +%k%M)
-	if [ $TIME -gt 1830 -o $TIME -lt 400 ]; then
+	if [ $TIME -gt ${ONH}${ONM} -o $TIME -lt ${OFFH}${OFFM} ]; then
 		on
 	else
 		off
