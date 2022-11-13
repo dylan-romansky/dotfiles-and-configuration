@@ -155,6 +155,14 @@ function git-upload () {
 	git push
 }
 
+function dice () {
+	if [ -z $1 ]; then
+		echo "Error: missing dice value"
+	else
+		echo "$(($RANDOM % $1 + 1))"
+	fi
+}
+
 source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 
 # config
