@@ -312,6 +312,5 @@ function gethex () {
 HISTCONTROL=ignoreboth:erasedups
 HISTIGNORE="ls:pwd:clear:exit:shutdown:reboot:bconf:binit:i3c:xconf:xreload:please"
 
-
 # Load Angular CLI autocompletion.
 source <(ng completion script)
