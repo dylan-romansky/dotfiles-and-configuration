@@ -17,6 +17,7 @@ export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
 export LESS='-R '
 export STEAM_RUNTIME=1
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+export GH_TOKEN="$(cat $HOME/.config/git/token | grep password | cut -d= -f2)"
 
 # Source any of these files if they exist
 [ -f ~/.bash_extras ] && . ~/.bash_extras
