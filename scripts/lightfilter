@@ -53,12 +53,11 @@ function setup()	{
 	ONH=${ONH:1}
 	ONH=$((ONH + 12))
 	ONM="$(grep "sunset" <<< "$RESPONSE" | cut -d: -f3)"
-
-	echo "$ONM $ONH * * * /home/squirrels/scripts/lightfilter on" > /tmp/crontmp
-	echo "$OFFM $OFFH * * * /home/squirrels/scripts/lightfilter off" >> /tmp/crontmp
-	crontab -l | tail -n +3 >> /tmp/crontmp
-	cat /tmp/crontmp | crontab
-	rm /tmp/crontmp
+	crontab<<EOF
+$ONM $ONH * * * home/squirrels/scripts/lightfilter on
+$OFFM $OFFH * * * /home/squirrels/scripts/lightfilter off
+$(crontab -l | tail -n +3 >> /tmp/crontmp)
+EOF
 	TIME=$(date +%k%M)
 	if [ $TIME -gt ${ONH}${ONM} -o $TIME -lt ${OFFH}${OFFM} ]; then
 		on
