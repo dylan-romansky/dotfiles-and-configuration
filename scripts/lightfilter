@@ -54,7 +54,7 @@ function setup()	{
 	ONH=$((ONH + 12))
 	ONM="$(grep "sunset" <<< "$RESPONSE" | cut -d: -f3)"
 	crontab<<EOF
-$ONM $ONH * * * home/squirrels/scripts/lightfilter on
+$ONM $ONH * * * /home/squirrels/scripts/lightfilter on
 $OFFM $OFFH * * * /home/squirrels/scripts/lightfilter off
 $(crontab -l | tail -n +3 >> /tmp/crontmp)
 EOF
