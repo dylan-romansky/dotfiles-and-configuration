@@ -32,11 +32,11 @@ command=i3b_net.sh
 interval=5
 
 [cpu]
-command=echo -e "$(i3b_cpu_use.py) $(i3b_cpu_temp.sh)"
+command=echo -e "$(i3b_cpu_use.py) $(cpu_temp)"
 interval=1
 
 [ram]
-command=i3b_ram_use.sh
+command=ram_use
 interval=5
 
 [audio]
