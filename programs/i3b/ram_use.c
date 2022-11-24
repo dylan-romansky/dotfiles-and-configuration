@@ -1,23 +1,27 @@
-#include <linux/sysinfo.h>
-#include <sys/sysinfo.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int main()	{
-	struct sysinfo usage;
-	if (sysinfo(&usage))	{
-		printf("Error: couldn't get usage stats\n");
+	char buf[38];
+	int fd = open("/proc/meminfo", O_RDONLY);
+	if (fd < 0)	{
+		printf("Error: couldn't open file\n");
 		return 1;
 	}
-	char* col = "#FF0000";
-	unsigned long used = (usage.totalram - usage.freeram - usage.bufferram - usage.sharedram) / 1000000000;
-	unsigned long tot = usage.totalram / 1000000000;
-	printf("mycalc\nfree:%llu\ntotal:%llu\n\n", used, tot);
-	if (used < (tot / 4))
+	if (read(fd, &buf, 37) < 0)	{
+		printf("Error: couldn't read file\n");
+		return 2;
+	}
+	int total = atoi(buf + 9) / 1000000;
+	int free = atoi(buf + 27) / 1000000;
+	int quart = total / 4;
+	char *ico = "\xef\x94\xb8";
+	char *col = "#FF0000";
+	if (free < total / 4)
 		col = "#00FF00";
-	else if (used < (tot - (tot / 4)))
+	else if (free < (total - quart))
 		col = "#FFFF00";
-	printf("total:%llu\nfree:%llu\nshared:%llu\nbuffer:%llu\ntothigh:%llu\nfreehigh:%llu\n", usage.totalram, usage.freeram, usage.sharedram, usage.bufferram, usage.totalhigh, usage.freehigh);
-	for (int i = 0; i < 3; i++)
-		printf("load %i: %llu\n", i, usage.loads[i]);
-	//printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">\xef\x04\xb8</span: %lluGB/%lluGB</span>", col, used, tot);
+	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span: %dGB/%dGB</span>", col, ico, free, total);
 }

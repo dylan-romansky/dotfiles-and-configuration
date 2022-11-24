@@ -3,9 +3,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-//This program will plug straight into my i3blocks config
-//So that I can keep track of how hot my computer is getting
-
 int main()	{
 	char buf[7];
 	int fd = open("/sys/class/thermal/thermal_zone0/temp", O_RDONLY);
@@ -29,5 +26,5 @@ int main()	{
 		col = "#FFFF00";
 		ico = "\xef\x9d\xa9";
 	}
-	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span: %iC</span>", col, ico, temp);
+	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span>: %iC</span>", col, ico, temp);
 }
