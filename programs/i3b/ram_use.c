@@ -23,5 +23,5 @@ int main()	{
 		col = "#00FF00";
 	else if (free < (total - quart))
 		col = "#FFFF00";
-	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span: %dGB/%dGB</span>", col, ico, free, total);
+	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span>: %dGB/%dGB</span>", col, ico, free, total);
 }
