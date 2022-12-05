@@ -19,8 +19,8 @@ int main()	{
 		printf("Error: couldn't read file\n");
 		return 2;
 	}
-	int total = atoi(buf + 9) / 1000000;
-	int free = atoi(buf + LINESIZE + 10) / 1000000;
+	int total = atoi(buf + 9);
+	int free = atoi(buf + LINESIZE*2 + 14);
 	int quart = total / 4;
 	char *ico = "\xef\x94\xb8";
 	char *col = "#FF0000";
@@ -28,5 +28,5 @@ int main()	{
 		col = "#00FF00";
 	else if (free < (total - quart))
 		col = "#FFFF00";
-	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span>: %dGB/%dGB</span>", col, ico, free, total);
+	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span>: %dGB/%dGB</span>", col, ico, free / 1000000, total / 1000000);
 }
