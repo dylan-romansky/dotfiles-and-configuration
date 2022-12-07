@@ -20,13 +20,13 @@ int main()	{
 		return 2;
 	}
 	int total = atoi(buf + 9);
-	int free = atoi(buf + LINESIZE*2 + 14);
+	int used = total - atoi(buf + LINESIZE*2 + 14);
 	int quart = total / 4;
 	char *ico = "\xef\x94\xb8";
 	char *col = "#FF0000";
-	if (free < total / 4)
+	if (used < total / 4)
 		col = "#00FF00";
-	else if (free < (total - quart))
+	else if (used < (total - quart))
 		col = "#FFFF00";
-	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span>: %dGB/%dGB</span>", col, ico, free / 1000000, total / 1000000);
+	printf("<span color=\"%s\"><span font=\"Font Awesome 6 Free\">%s</span>: %dGB/%dGB</span>", col, ico, used / 1000000, total / 1000000);
 }

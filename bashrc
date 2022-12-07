@@ -87,7 +87,7 @@ function aur-install () {
 	fi
 	THISPWD="$PWD"
 	THISPREV="$OLDPWD"
-	cd $HOME/builds
+	builtin cd $HOME/builds
 	if [ $# -ge 1 ]; then
 		for repo in "${@}"; do
 			git clone $repo
@@ -96,7 +96,7 @@ function aur-install () {
 			builtin cd ..
 		done
 	fi
-	cd "$THISPWD"
+	builtin cd "$THISPWD"
 	OLDPWD="$THISPREV"
 }
 
