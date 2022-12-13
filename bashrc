@@ -285,7 +285,7 @@ function redeploy () {
 # complex tasks
 
 function jorb () {
-	cd $HOME/projects/Python/scraping
+	builtin cd $HOME/projects/Python/learning/scraping
 	case $1 in
 
 		CO)
