@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#Sometimes discord needs to be updated before the package makes it to
+#the linux package manager repos. This script handles downloading the
+#binary and creating the necessary symlinks
+
+builtin cd /opt
+sudo rm -rf *iscord*
+sudo wget -O discord.tar.gz "https://discord.com/api/download?platform=linux&format=tar.gz"
+sudo tar xzf discord.tar.gz
+builtin cd Discord
+sudo ln -sf /opt/Discord/Discord /usr/bin/discord
+builtin cd ..
+sudo rm discord.tar.gz
