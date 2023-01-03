@@ -294,8 +294,14 @@ function jorb () {
 		AB)
 			STATE="Alberta, Canada"
 			;;
-		*)
+		CA)
 			STATE="California, United States"
+			;;
+		*)
+			jorb CO
+			jorb AB
+			jorb CA
+			exit
 			;;
 	esac
 	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u sre
