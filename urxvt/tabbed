@@ -5,6 +5,8 @@
 #:META:RESOURCE:tab-fg:colour:tab foreground colour
 #:META:RESOURCE:tab-bg:colour:tab background colour
 
+##this file lives at /lib/urxvt/perl/tabbed
+
 =head1 NAME
 
 tabbed - tabbed interface to urxvt
