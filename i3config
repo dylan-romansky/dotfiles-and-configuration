@@ -44,6 +44,12 @@ bindsym Ctrl+Shift+XF86AudioRaiseVolume exec --no-startup-id volcont smicup
 bindsym Ctrl+Shift+XF86AudioLowerVolume exec --no-startup-id volcont smicdown
 bindsym XF86AudioMute exec --no-startup-id volcont mute #pactl set-sink-mute @DEFAULT_SINK@ toggle
 
+# Rotate screen
+bindsym Ctrl+shift+$mod+up xrandr -o invert
+bindsym Ctrl+shift+$mod+down xrandr -o normal
+bindsym Ctrl+shift+$mod+left xrandr -o left
+bindsym Ctrl+shift+$mod+right xrandr -o right
+
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id volcont smup
 bindsym XF86AudioLowerVolume exec --no-startup-id volcont smdown
