@@ -304,9 +304,10 @@ function jorb () {
 			exit
 			;;
 	esac
-	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u sre
-	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u it
-	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u software engineer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u sre
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u it
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u data entry
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u software engineer
 	./open_links.py output/linkedin/$(echo "$STATE" | cut -d, -f1)/sre/$(date -I)/* output/linkedin/$(echo "$STATE" | cut -d, -f1)/"software engineer"/$(date -I)/* output/linkedin/$(echo "$STATE" | cut -d, -f1)/it/$(date -I)/*
 	cd -
 }
