@@ -66,6 +66,17 @@ function mkcd () {
 	cd "$DIR"
 }
 
+function mkmv()	{
+	if [ $# -eq 1 ]; then
+		echo "error: no arguments specified"
+	else
+		DIR="$1"
+		[[ -d "$DIR" ]] || mkdir "$DIR"
+		shift
+		mv "$@" "$DIR"
+	fi
+}
+
 function vcp () {
 	if [ $# -eq 2 ]; then
 		cp $1 $2
