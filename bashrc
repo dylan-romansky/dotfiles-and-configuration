@@ -70,10 +70,9 @@ function mkmv()	{
 	if [ $# -eq 1 ]; then
 		echo "error: no arguments specified"
 	else
-		DIR="$1"
+		DIR="${!#}"
 		[[ -d "$DIR" ]] || mkdir "$DIR"
-		shift
-		mv "$@" "$DIR"
+		mv "${@:1:($#-1)}" "$DIR"
 	fi
 }
 
