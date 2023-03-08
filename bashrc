@@ -272,6 +272,29 @@ alias browse='(thunar "$PWD" &>/dev/null & disown)'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias update-clock='timedatectl set-ntp true'
 
+# docker related
+
+function d_container()	{
+	if [ -z "$1" ]; then
+		echo "Error: no container specified"
+		return
+	fi
+	CONTAINER="$(docker ps | grep "$1")"
+	if [ -z "$CONTAINER" ]; then
+		echo "Error: container $1 doesn't exist"
+		return
+	fi
+	echo "$CONTAINER" | awk '{print $1}' | cut -d: -f2
+}
+
+function d_log()	{
+	CONTAINER="$(d_container "$1")"
+	if [ -z "$CONTAINER" ] || [ "$CONTAINER" = "Error: $1 doesn't exist" ]; then
+		echo "$CONTAINER"
+	fi
+	docker logs "$CONTAINER"
+}
+
 # kubernetes related
 
 alias dockube='eval $(minikube -p minikube docker-env)'
@@ -315,9 +338,13 @@ function jorb () {
 			;;
 	esac
 	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u sre
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u devops engineer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u network engineer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u qa analyst tester
 	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u it
 	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u data entry
-	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u software engineer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u software engineer developer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u back end developer
 	./open_links.py output/linkedin/$(echo "$STATE" | cut -d, -f1)/sre/$(date -I)/* output/linkedin/$(echo "$STATE" | cut -d, -f1)/"software engineer"/$(date -I)/* output/linkedin/$(echo "$STATE" | cut -d, -f1)/it/$(date -I)/*
 	cd -
 }
