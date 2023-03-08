@@ -295,6 +295,14 @@ function d_log()	{
 	docker logs "$CONTAINER"
 }
 
+function d_ssh()	{
+	CONTAINER="$(d_container "$1")"
+	if [ -z "$CONTAINER" ] || [ "$CONTAINER" = "Error: $1 doesn't exist" ]; then
+		echo "$CONTAINER"
+	fi
+	docker exec -it "$CONTAINER" bash
+}
+
 # kubernetes related
 
 alias dockube='eval $(minikube -p minikube docker-env)'
