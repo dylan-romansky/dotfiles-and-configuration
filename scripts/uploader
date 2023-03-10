@@ -11,12 +11,6 @@
 ##          exist.
 ##          learn how to parse the directory tree in the api
 
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-from datetime import date
 import sys
 import os
 import drive_handling
@@ -25,11 +19,11 @@ SCOPE = [ 'https://www.googleapis.com/auth/drive' ]
 
 if len(sys.argv) == 1:
 	print("Usage: uploader [drive folder] [files]")
-	exit
+	exit()
 if len(sys.argv) <= 2:
 	print("Error: no files given")
 	exit()
-drive = drive_handling.drive_setup(SCOPES=SCOPE, token_dir='/tmp/')
+drive = drive_handling.drive_setup(SCOPES=SCOPE)
 for file in sys.argv[2:]:
 	if os.path.exists(file) == False:
 		print("Error: file '" + file + "' not found")
