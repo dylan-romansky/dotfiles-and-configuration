@@ -287,9 +287,22 @@ function d_container()	{
 	echo "$CONTAINER" | awk '{print $1}' | cut -d: -f2
 }
 
+function d_image()	{
+	if [ -z "$1" ]; then
+		echo "Error: no image specified"
+		return
+	fi
+	IMAGE="$(docker image ls | grep "$1")"
+	if [ -z "$IMAGE" ]; then
+		echo "Error: image $1 doesn't exist"
+		return
+	fi
+	echo "$IMAGE" | awk '{print $3}'
+}
+
 function d_log()	{
 	CONTAINER="$(d_container "$1")"
-	if [ -z "$CONTAINER" ] || [ "$CONTAINER" = "Error: $1 doesn't exist" ]; then
+	if [ -z "$CONTAINER" ] || [ "$CONTAINER" = "Error: container $1 doesn't exist" ]; then
 		echo "$CONTAINER"
 	fi
 	docker logs "$CONTAINER"
@@ -297,10 +310,32 @@ function d_log()	{
 
 function d_ssh()	{
 	CONTAINER="$(d_container "$1")"
-	if [ -z "$CONTAINER" ] || [ "$CONTAINER" = "Error: $1 doesn't exist" ]; then
+	if [ -z "$CONTAINER" ] || [ "$CONTAINER" = "Error: container $1 doesn't exist" ]; then
 		echo "$CONTAINER"
 	fi
 	docker exec -it "$CONTAINER" bash
+}
+
+function k_pod()	{
+	if [ -z "$1" ]; then
+		echo "Error: no pod specified"
+		return
+	fi
+	POD="$(kubectl get pods | grep "$1" | awk '{print $1}' | cut -d: -f2)"
+	if [ -z "$POD" ]; then
+		echo "Error: pod $1 doesn't exist"
+		return
+	fi
+	echo "$POD"
+
+}
+
+function k_log()	{
+	POD="$(k_pod "$1")"
+	if [ -z "$POD" ] || [ "$POD" = "Error: pod $1 doesn't exist" ]; then
+		echo "$POD"
+	fi
+	kubectl logs "$POD"
 }
 
 # kubernetes related

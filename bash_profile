@@ -8,7 +8,7 @@ export WINEDEBUG=-all
 export FREETYPE_PROPERTIES="truetype:interpreter-version=35"
 export LD_LIBRARY_PATH=/usr/local/lib
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export PATH="$PATH:$HOME/scripts:$HOME/.local/bin:$HOME/scripts/netutils:$Home/Work:$HOME/Documents/config/programs/out"
+export PATH="$PATH:$HOME/scripts:$HOME/.local/bin:$HOME/Documents/config/programs/out"
 export PROMPT_THEME=bigdigsquig
 export QT_QPA_PLATFORMTHEME=gtk2
 export PYTHONPATH="$PYTHONPATH:$HOME/Documents/config/python-user-modules"
