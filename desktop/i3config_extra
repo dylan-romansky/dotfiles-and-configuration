@@ -31,6 +31,8 @@ bar {
 		urgent_workspace   #2f343a #900000 #ffffff
 		binding_mode       #2f343a #900000 #ffffff
 	}
+tray_output DP-4
+status_command i3blocks
 }
 
 bar {
@@ -44,8 +46,6 @@ bar {
 		urgent_workspace   #2f343a #900000 #ffffff
 		binding_mode       #2f343a #900000 #ffffff
 	}
-tray_output DP-4
-status_command i3blocks
 }
 
 # This is a load-bearing comment
