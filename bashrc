@@ -66,6 +66,16 @@ function mkcd () {
 	cd "$DIR"
 }
 
+function mkmv()	{
+	if [ $# -eq 1 ]; then
+		echo "error: no arguments specified"
+	else
+		DIR="${!#}"
+		[[ -d "$DIR" ]] || mkdir "$DIR"
+		mv "${@:1:($#-1)}" "$DIR"
+	fi
+}
+
 function vcp () {
 	if [ $# -eq 2 ]; then
 		cp $1 $2
@@ -262,6 +272,72 @@ alias browse='(thunar "$PWD" &>/dev/null & disown)'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias update-clock='timedatectl set-ntp true'
 
+# docker related
+
+function d_container()	{
+	if [ -z "$1" ]; then
+		echo "Error: no container specified"
+		return
+	fi
+	CONTAINER="$(docker ps | grep "$1")"
+	if [ -z "$CONTAINER" ]; then
+		echo "Error: container $1 doesn't exist"
+		return
+	fi
+	echo "$CONTAINER" | awk '{print $1}' | cut -d: -f2
+}
+
+function d_image()	{
+	if [ -z "$1" ]; then
+		echo "Error: no image specified"
+		return
+	fi
+	IMAGE="$(docker image ls | grep "$1")"
+	if [ -z "$IMAGE" ]; then
+		echo "Error: image $1 doesn't exist"
+		return
+	fi
+	echo "$IMAGE" | awk '{print $3}'
+}
+
+function d_log()	{
+	CONTAINER="$(d_container "$1")"
+	if [ -z "$CONTAINER" ] || [ "$CONTAINER" = "Error: container $1 doesn't exist" ]; then
+		echo "$CONTAINER"
+	fi
+	docker logs "$CONTAINER"
+}
+
+function d_ssh()	{
+	CONTAINER="$(d_container "$1")"
+	if [ -z "$CONTAINER" ] || [ "$CONTAINER" = "Error: container $1 doesn't exist" ]; then
+		echo "$CONTAINER"
+	fi
+	docker exec -it "$CONTAINER" bash
+}
+
+function k_pod()	{
+	if [ -z "$1" ]; then
+		echo "Error: no pod specified"
+		return
+	fi
+	POD="$(kubectl get pods | grep "$1" | awk '{print $1}' | cut -d: -f2)"
+	if [ -z "$POD" ]; then
+		echo "Error: pod $1 doesn't exist"
+		return
+	fi
+	echo "$POD"
+
+}
+
+function k_log()	{
+	POD="$(k_pod "$1")"
+	if [ -z "$POD" ] || [ "$POD" = "Error: pod $1 doesn't exist" ]; then
+		echo "$POD"
+	fi
+	kubectl logs "$POD"
+}
+
 # kubernetes related
 
 alias dockube='eval $(minikube -p minikube docker-env)'
@@ -304,9 +380,14 @@ function jorb () {
 			exit
 			;;
 	esac
-	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u sre
-	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u it
-	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -t internship -l "$STATE" -u software engineer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u sre
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u devops engineer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u network engineer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u qa analyst tester
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u it
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u data entry
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u software engineer developer
+	./get_a_job.py -e "internship" -e "entry level" -t full-time -t part-time -l "$STATE" -u back end developer
 	./open_links.py output/linkedin/$(echo "$STATE" | cut -d, -f1)/sre/$(date -I)/* output/linkedin/$(echo "$STATE" | cut -d, -f1)/"software engineer"/$(date -I)/* output/linkedin/$(echo "$STATE" | cut -d, -f1)/it/$(date -I)/*
 	cd -
 }

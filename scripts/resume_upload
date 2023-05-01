@@ -12,6 +12,11 @@ if [[ $SUM != "$OSUM" ]]; then
 	echo "$SUM" > "$HOME/resume draft.md5"
 	unoconv -o "$HOME/resume - Romansky, Dylan.pdf" "$HOME/resume draft.docx"
 fi
+if [ $# -ne 0 ]; then
+	echo "Document conversion error"
+	rm "$HOME/*.md5"
+	return
+fi
 SUM=$(md5sum "$HOME/cover_letter.docx")
 OSUM=$(cat "$HOME/cover_letter.md5")
 echo "$SUM" "|" "$OSUM"

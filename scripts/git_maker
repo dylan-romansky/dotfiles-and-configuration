@@ -26,10 +26,12 @@ if [ "$PRIV" == "public" ]; then
 else
 	PRIV=true
 fi
-git init
-git remote add origin git@github.com:$USERNAME/$REPO.git
+if [ ! -d ".git" ]; then
+	git init
+	git remote add origin git@github.com:"$USERNAME"/"$REPO".git
+fi
 
-curl -u $USERNAME:$PASSWORD https://api.github.com/user/repos -d "{\"name\":\"$REPO\", \"private\":\"$PRIV\"}"
+curl -u "$USERNAME":"$PASSWORD" https://api.github.com/user/repos -d "{\"name\":\"$REPO\", \"private\":\"$PRIV\"}"
 
 for FILE in *; do
 	ITEMS+=("$FILE")
@@ -39,7 +41,9 @@ if [ -n "$ITEMS" ]; then
 	git commit
 	git push --set-upstream origin main
 fi
-cat << EOF > .gitignore
+if [ ! -f ".gitignore" ]; then
+	cat << EOF > .gitignore
 .gitignore
 tags
 EOF
+fi
