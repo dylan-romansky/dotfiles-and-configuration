@@ -51,5 +51,5 @@ command=[ -z $button ] && lightfilter || lightfilter toggle
 interval=once
 
 [time]
-command=echo -e "<span font=\"Font Awesome 6 Free\">\xef\x80\x97</span> $(date '+%c')"
+command=echo -e "<span font=\"Font Awesome 6 Free\">\xef\x80\x97</span> $(date '+%c') "
 interval=1

@@ -8,6 +8,21 @@ R=0.9
 G=0.7
 B=0.3
 
+#get the latitude and longitude from our config file if it exists.
+#receive user input to create the config file if it doesn't
+CONF="$HOME/.config/lightfilter.conf"
+if [ -f "$HOME/.config/lightfilter.conf" ]; then
+	LAT="$(grep latitude $CONF | sed 's/^.*=//')"
+	LNG="$(grep longitude $CONF | sed 's/^.*=//')"
+fi
+if [ -z "$LAT" ] || [ -z "$LNG" ]; then
+	echo "Enter latitude:"
+	read LAT
+	echo "Enter longitude:"
+	read LNG
+fi
+echo "latitude=$LAT" > "$CONF"
+echo "longitude=$LNG" >> "$CONF"
 
 function on()	{
 	#set our start and end points for our stepwise hue shifting later as well as the kind of math to perform
@@ -43,16 +58,18 @@ function toggle()	{
 }
 
 function setup()	{
-	RESPONSE="$(curl https://api.sunrise-sunset.org/json |
+	echo $URL
+	RESPONSE="$(curl "https://api.sunrise-sunset.org/json?lat=${LAT}i"'&'"lng=${LNG}" |
 		sed -e 's/[{}]/''/g' |
 		awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
-	OFFH="$(grep "sunrise" <<< "$RESPONSE" | cut -d: -f3)"
-	OFFH="${OFFH:1}"
-	OFFM="$(grep "sunrise" <<< "$RESPONSE" | cut -d: -f4)"
-	ONH="$(grep "sunset" <<< "$RESPONSE" | cut -d: -f2)"
-	ONH=${ONH:1}
-	ONH=$((ONH + 12))
-	ONM="$(grep "sunset" <<< "$RESPONSE" | cut -d: -f3)"
+	OFF=$(grep "sunrise" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"results":"sunrise":"//')
+	OFF=$(date -d "$OFF UTC" '+%R')
+	OFFH="$(cut -d: -f1 <<< $OFF)"
+	OFFM="$(cut -d: -f2 <<< $OFF)"
+	ON=$(grep "sunset" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"sunset":"//')
+	ON=$(date -d "$ON UTC" '+%R')
+	ONH="$(cut -d: -f1 <<< $ON)"
+	ONM="$(cut -d: -f2 <<< $ON)"
 	#right now this assumes that the crontab entries for this script are going to be the first two entries
 	#TODO: filter crontab entries to remove duplicate entries for this script instead of ensuring absolute
 	#      position in the crontab
