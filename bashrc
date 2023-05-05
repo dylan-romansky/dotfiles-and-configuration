@@ -184,6 +184,7 @@ alias xconf='vim $HOME/.Xresources'
 alias xreload='xrdb $HOME/.Xresources'
 alias xmerge='xrdb merge $HOME/.Xresources'
 alias piconf='vim $HOME/.config/picom/picom.conf'
+alias printers='xdg-open http://localhost:631'
 
 # always needs sudo
 
