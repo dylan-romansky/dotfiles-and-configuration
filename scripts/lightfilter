@@ -15,12 +15,15 @@ if [ -f "$HOME/.config/lightfilter.conf" ]; then
 	LAT="$(grep latitude $CONF | sed 's/^.*=//')"
 	LNG="$(grep longitude $CONF | sed 's/^.*=//')"
 fi
-if [ -z "$LAT" ] || [ -z "$LNG" ]; then
+#I could make this user input more robust but I don't actually care
+#since I'm likely the only person who's going to use this
+while [ -z "$LAT" ] || [ -z "$LNG" ]; do
 	echo "Enter latitude:"
 	read LAT
 	echo "Enter longitude:"
 	read LNG
-fi
+done
+URL='https://api.sunrise-sunset.org/json?lat='"${LAT}i"'&'"lng=${LNG}"
 echo "latitude=$LAT" > "$CONF"
 echo "longitude=$LNG" >> "$CONF"
 
@@ -59,7 +62,7 @@ function toggle()	{
 
 function setup()	{
 	echo $URL
-	RESPONSE="$(curl "https://api.sunrise-sunset.org/json?lat=${LAT}i"'&'"lng=${LNG}" |
+	RESPONSE="$(curl "$URL" |
 		sed -e 's/[{}]/''/g' |
 		awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
 	OFF=$(grep "sunrise" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"results":"sunrise":"//')
