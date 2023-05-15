@@ -203,6 +203,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 mode "launcher" {
 		bindsym g exec --no-startup-id google-chrome-stable
 		bindsym d exec --no-startup-id discord
+bindsym w exec --no-startup-id whatsdesk
 		bindsym t exec --no-startup-id deluge
 		bindsym m exec --no-startup-id wine ~/Desktop/mtgo.exe
 		bindsym f exec --no-startup-id thunar
