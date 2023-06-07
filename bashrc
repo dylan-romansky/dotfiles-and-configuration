@@ -185,6 +185,7 @@ alias xreload='xrdb $HOME/.Xresources'
 alias xmerge='xrdb merge $HOME/.Xresources'
 alias piconf='vim $HOME/.config/picom/picom.conf'
 alias printers='xdg-open http://localhost:631'
+alias kube-cht='xdg-open https://kubernetes.io/docs/reference/kubectl/cheatsheet/ > /dev/null 2>&1'
 
 # always needs sudo
 
