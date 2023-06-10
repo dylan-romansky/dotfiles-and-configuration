@@ -330,7 +330,14 @@ function k_pod()	{
 		return
 	fi
 	echo "$POD"
+}
 
+function k_ssh()	{
+	POD="$(k_pod "$1")"
+	if [ -z "$POD" ] || [ "$POD" = "Error: pod $1 doesn't exist" ]; then
+		echo "$POD"
+	fi
+	kubectl exec --stdin --tty "$POD" -- /bin/bash
 }
 
 function k_log()	{
