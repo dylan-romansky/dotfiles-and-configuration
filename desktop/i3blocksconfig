@@ -44,7 +44,6 @@ command=i3b_vol_mic.sh
 interval=once
 signal=1
 
-
 [light]
 full_text=
 command=[ -z $button ] && lightfilter || lightfilter toggle
