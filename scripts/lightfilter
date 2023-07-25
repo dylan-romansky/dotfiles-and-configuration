@@ -60,31 +60,38 @@ function toggle()	{
 	[ "$CURR" = "1.0:1.0:1.0" ] && on || off
 }
 
-#TODO: read the values from the crontab to determine which mode to use when no internet
-#------attempt to split the string into a bash array and access the values that way
 function setup()	{
 	RESPONSE="$(curl "$URL")"
 	if [ -z "$RESPONSE" ]; then
-		exit
-	fi
-	RESPONSE="$(sed -e 's/[{}]/''/g' <<< "$RESPONSE" |
-		awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
-	OFF=$(grep "sunrise" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"results":"sunrise":"//')
-	OFF=$(date -d "$OFF UTC" '+%R')
-	OFFH="$(cut -d: -f1 <<< $OFF)"
-	OFFM="$(cut -d: -f2 <<< $OFF)"
-	ON=$(grep "sunset" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"sunset":"//')
-	ON=$(date -d "$ON UTC" '+%R')
-	ONH="$(cut -d: -f1 <<< $ON)"
-	ONM="$(cut -d: -f2 <<< $ON)"
-	#right now this assumes that the crontab entries for this script are going to be the first two entries
-	#TODO: filter crontab entries to remove duplicate entries for this script instead of ensuring absolute
-	#      position in the crontab
-	crontab<<EOF
+		#exit
+		SAVE=$IFS #determine if this is necessary
+		IFS=' ' read -r -a array <<< "$(crontab -l | grep 'lightfilter on')"
+		ONM="${array[0]}"
+		ONH="${array[1]}"
+		IFS=' ' read -r -a array <<< "$(crontab -l | grep 'lightfilter off')"
+		OFFM="${array[0]}"
+		OFFH="${array[1]}"
+		IFS=$SAVE
+	else
+		RESPONSE="$(sed -e 's/[{}]/''/g' <<< "$RESPONSE" |
+			awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
+		OFF=$(grep "sunrise" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"results":"sunrise":"//')
+		OFF=$(date -d "$OFF UTC" '+%R')
+		OFFH="$(cut -d: -f1 <<< $OFF)"
+		OFFM="$(cut -d: -f2 <<< $OFF)"
+		ON=$(grep "sunset" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"sunset":"//')
+		ON=$(date -d "$ON UTC" '+%R')
+		ONH="$(cut -d: -f1 <<< $ON)"
+		ONM="$(cut -d: -f2 <<< $ON)"
+		#right now this assumes that the crontab entries for this script are going to be the first two entries
+		#TODO: filter crontab entries to remove duplicate entries for this script instead of ensuring absolute
+		#      position in the crontab
+		crontab<<EOF
 $ONM $ONH * * * $HOME/scripts/lightfilter on
 $OFFM $OFFH * * * $HOME/scripts/lightfilter off
 $(crontab -l | tail -n +3)
 EOF
+	fi
 	TIME=$(date +%k%M)
 	if [ $TIME -gt ${ONH}${ONM} -o $TIME -lt ${OFFH}${OFFM} ]; then
 		on
