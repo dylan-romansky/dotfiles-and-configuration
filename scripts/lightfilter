@@ -61,6 +61,7 @@ function toggle()	{
 }
 
 #TODO: read the values from the crontab to determine which mode to use when no internet
+#------attempt to split the string into a bash array and access the values that way
 function setup()	{
 	RESPONSE="$(curl "$URL")"
 	if [ -z "$RESPONSE" ]; then
