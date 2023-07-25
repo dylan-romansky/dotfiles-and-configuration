@@ -173,6 +173,54 @@ function dice () {
 	fi
 }
 
+function proxy_on() {
+	export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+	if (( $# > 0 )); then
+		valid=$(echo $@ | sed -n 's/\([0-9])\{1,3\}.\?\)\{4\}:\([0-9])\+\)/&/p')
+		if [[ $valid != $@ ]]; then
+			>&2 echo "Invalid address"
+			return 1
+		fi
+		local proxy=$1
+		export	http_proxy="$proxy" \
+				https_proxy="$proxy" \
+				ftp_proxy="$proxy" \
+				rsync_proxy="$proxy"
+		echo "Proxy environment variables set"
+		return 0
+	fi
+
+	echo -n "username: "
+	read -r username
+	if [[ $username != "" ]]; then
+		echo -n "password: "
+		read -r password
+		local pre="$username:$password@"
+	fi
+
+	echo -n "server: "
+	read -r server
+	echo -n "port: "
+	read -r port
+	local proxy=$pre$server:$port
+	export	http_proxy="$proxy" \
+			https_proxy="$proxy" \
+			ftp_proxy="$proxy" \
+			rsync_proxy="$proxy" \
+			HTTP_PROXY="$proxy" \
+			HTTPS_PROXY="$proxy" \
+			FTP_PROXY="$proxy" \
+			RSYNC_PROXY="$proxy" 
+	echo "Proxy environment variables set"
+}
+
+function proxy_off() {
+	unset http_proxy https_proxy ftp_proxy rsync_proxy \
+		HTTP_PROXY HTTPS_PROXY FTP_PROXY RSYNC PROXY
+	echo "Proxy environment variables removed"
+}
+
 source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 
 # config
