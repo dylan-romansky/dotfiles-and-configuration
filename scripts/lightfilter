@@ -60,9 +60,13 @@ function toggle()	{
 	[ "$CURR" = "1.0:1.0:1.0" ] && on || off
 }
 
+#TODO: read the values from the crontab to determine which mode to use when no internet
 function setup()	{
-	RESPONSE="$(curl "$URL" |
-		sed -e 's/[{}]/''/g' |
+	RESPONSE="$(curl "$URL")"
+	if [ -z "$RESPONSE" ]; then
+		exit
+	fi
+	RESPONSE="$(sed -e 's/[{}]/''/g' <<< "$RESPONSE" |
 		awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
 	OFF=$(grep "sunrise" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"results":"sunrise":"//')
 	OFF=$(date -d "$OFF UTC" '+%R')
