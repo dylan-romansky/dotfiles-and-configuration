@@ -64,14 +64,12 @@ function setup()	{
 	RESPONSE="$(curl "$URL")"
 	if [ -z "$RESPONSE" ]; then
 		#exit
-		SAVE=$IFS #determine if this is necessary
 		IFS=' ' read -r -a array <<< "$(crontab -l | grep 'lightfilter on')"
 		ONM="${array[0]}"
 		ONH="${array[1]}"
 		IFS=' ' read -r -a array <<< "$(crontab -l | grep 'lightfilter off')"
 		OFFM="${array[0]}"
 		OFFH="${array[1]}"
-		IFS=$SAVE
 	else
 		RESPONSE="$(sed -e 's/[{}]/''/g' <<< "$RESPONSE" |
 			awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
