@@ -60,6 +60,7 @@ function toggle()	{
 	[ "$CURR" = "1.0:1.0:1.0" ] && on || off
 }
 
+#TODO: sed statement to modify the crontab entries without having them have to be at a specific line
 function setup()	{
 	RESPONSE="$(curl "$URL")"
 	if [ -z "$RESPONSE" ]; then
