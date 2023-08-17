@@ -16,15 +16,14 @@ function noty {
 				sendstr+=" (Mute)"
 			fi
 			notify-send "$sendstr"
-			pkill -SIGRTMIN+1 i3blocks #so that i3blocks knows to update its volume block
 			;;
 
 		Mic)
 			notify-send "$1: $(pactl get-source-volume @DEFAULT_SOURCE@ | awk 'FNR==1{ print $5 }')"
-			pkill -SIGRTMIN+2 i3blocks #so that i3blocks knows to update its mic level block
 			;;
 	esac
-}	
+	pkill -SIGRTMIN+1 i3blocks #so that i3blocks knows to update its audio block
+}
 
 case $1 in
 
@@ -32,7 +31,7 @@ case $1 in
 		pactl set-sink-volume @DEFAULT_SINK@ +10%
 		noty Volume
 		;;
-	
+
 	down)
 		pactl set-sink-volume @DEFAULT_SINK@ -10%
 		noty Volume
@@ -42,12 +41,12 @@ case $1 in
 		pactl set-sink-volume @DEFAULT_SINK@ +5%
 		noty Volume
 		;;
-	
+
 	smdown)
 		pactl set-sink-volume @DEFAULT_SINK@ -5%
 		noty Volume
 		;;
-	
+
 	micup)
 		pactl set-source-volume @DEFAULT_SOURCE@ +10%
 		noty Mic
@@ -76,6 +75,6 @@ case $1 in
 		else
 			notify-send "Volume: Unmute"
 		fi
-		pkill -SIGRTMIN+1 i3blocks #so i3blocks knows to update its volume block
 		;;
 esac
+pkill -SIGRTMIN+1 i3blocks #so i3blocks knows to update its volume block
