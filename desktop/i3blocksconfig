@@ -27,9 +27,9 @@ color=#91E78B
 command=echo "$(xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5) WM_NAME | cut -d '"' -f 2)"
 interval=1
 
-[network]
-command=i3b_net.sh
-interval=5
+#[network]
+#command=i3b_net.sh
+#interval=5
 
 [cpu]
 command=echo -e "$(i3b_cpu_use.py) $(cpu_temp)"

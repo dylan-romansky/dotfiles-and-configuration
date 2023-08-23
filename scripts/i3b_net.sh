@@ -19,7 +19,7 @@ function STR () {
 }
 
 function SSID () {
-	if [ "${BLOCK_BUTTON}" == 1 ]; then 
+	if [ "${BLOCK_BUTTON}" == 1 ]; then
 		killall notify-osd
 		notify-send $(nmcli -p device show | grep IP4.ADDRESS | awk 'FNR==1 { print $2 }')
 	fi
