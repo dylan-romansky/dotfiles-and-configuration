@@ -36,7 +36,7 @@ command=echo -e "$(i3b_cpu_use.py) $(cpu_temp)"
 interval=1
 
 [ram]
-command=ram_use
+command=i3b_ram_use.sh
 interval=5
 
 [audio]
