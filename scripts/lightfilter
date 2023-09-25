@@ -64,7 +64,6 @@ function toggle()	{
 function setup()	{
 	RESPONSE="$(curl "$URL")"
 	if [ -z "$RESPONSE" ]; then
-		#exit
 		IFS=' ' read -r -a array <<< "$(crontab -l | grep 'lightfilter on')"
 		ONM="${array[0]}"
 		ONH="${array[1]}"
@@ -75,10 +74,12 @@ function setup()	{
 		RESPONSE="$(sed -e 's/[{}]/''/g' <<< "$RESPONSE" |
 			awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
 		OFF=$(grep "sunrise" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"results":"sunrise":"//')
+		OFF="$OFF PM"
 		OFF=$(date -d "$OFF UTC" '+%R')
 		OFFH="$(cut -d: -f1 <<< $OFF)"
 		OFFM="$(cut -d: -f2 <<< $OFF)"
 		ON=$(grep "sunset" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"sunset":"//')
+		ON="$ON AM"
 		ON=$(date -d "$ON UTC" '+%R')
 		ONH="$(cut -d: -f1 <<< $ON)"
 		ONM="$(cut -d: -f2 <<< $ON)"
