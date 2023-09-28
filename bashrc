@@ -315,7 +315,7 @@ alias phone='ssh -i ~/.ssh/id_phone -p 8022'
 
 # system related
 
-alias sys-update='repac; aur-update; pip-update; sudo mkinitcpio -P; sudo ln -sf $HOME/Documents/config/urxvt/tabbed /lib/urxvt/perl/tabbed'
+alias sys-update='repac; aur-update; sudo mkinitcpio -P; sudo ln -sf $HOME/Documents/config/urxvt/tabbed /lib/urxvt/perl/tabbed'
 alias disk='sudo du -hd1 /'
 alias jctl='mate-terminal -t jctl -e "journalctl -f"; asciiquarium'
 alias browse='(thunar "$PWD" &>/dev/null & disown)'
