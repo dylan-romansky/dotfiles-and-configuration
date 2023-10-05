@@ -18,7 +18,7 @@ for REPO in *; do
 	builtin cd $REPO
 	echo $REPO
 	STATUS=$(git pull)
-	if [[ $STATUS != *"Already up to date."* ]] || [[ "$(grep -F pkgver= PKGBUILD | cut -d= -f2)" != "$(pacman -Qi "$REPO" | awk 'NR==2{ print $3 }')" ]]; then
+	if [[ $STATUS != *"Already up to date."* ]]; then # || [[ "$(grep -F pkgver= PKGBUILD | cut -d= -f2)" != "$(pacman -Qi "$REPO" | awk 'NR==2{ print $3 }')" ]]; then
 		echo "Updating..."
 		git fetch origin
 		git reset --hard origin/master
