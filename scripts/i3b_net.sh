@@ -22,6 +22,9 @@ function SSID () {
 	if [ "${BLOCK_BUTTON}" == 1 ]; then
 		killall notify-osd
 		notify-send $(nmcli -p device show | grep IP4.ADDRESS | awk 'FNR==1 { print $2 }')
+	elif [ "${BLOCK_BUTTON}" == 3 ]; then
+		killall notify-osd
+		notify-send $(curl -4 icanhazip.com)
 	fi
 	SSID=$(iwgetid -r)
 	if [ -z "$SSID" ]; then
