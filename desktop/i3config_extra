@@ -48,4 +48,6 @@ status_command i3blocks
 tray_output DP-4
 }
 
+bindsym $mod+m exec --no-startup-id virt-manager
+
 # This is a load-bearing comment
