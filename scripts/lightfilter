@@ -61,6 +61,7 @@ function toggle()	{
 }
 
 #TODO: sed statement to modify the crontab entries without having them have to be at a specific line
+#TODO: make the date conversions look like less of an atrocity
 function setup()	{
 	RESPONSE="$(curl "$URL")"
 	if [ -z "$RESPONSE" ]; then
@@ -74,19 +75,17 @@ function setup()	{
 		RESPONSE="$(sed -e 's/[{}]/''/g' <<< "$RESPONSE" |
 			awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}')"
 		echo $RESPONSE
-		OFF=$(grep "sunrise" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"results":"sunrise":"//')
-## The api keeps changing which time zone it returns the results in
-		#OFF="$OFF AM"
-		#echo $OFF
-		#OFF=$(date -d "$OFF UTC" '+%R')
-		#echo $OFF
+		OFF=$(grep "sunrise" <<< "$RESPONSE" | sed 's/"results":"sunrise":"//' | sed 's/"//')
+		echo $OFF
+		OFF=$(date -d "$(date -d "$OFF" '+%R') UTC" '+%R')
+		echo $OFF
 		OFFH="$(cut -d: -f1 <<< $OFF)"
 		OFFM="$(cut -d: -f2 <<< $OFF)"
-		ON=$(grep "sunset" <<< "$RESPONSE" | cut -d' ' -f1 | sed 's/"sunset":"//')
-		#ON="$ON PM"
-		#echo $ON
-		#ON=$(date -d "$ON UTC" '+%R')
-		#echo $ON
+		ON=$(grep "sunset" <<< "$RESPONSE" | sed 's/"sunset":"//' | sed 's/"//')
+		ON="$ON"
+		echo $ON
+		ON=$(date -d "$(date -d "$ON" '+%R') UTC" '+%R')
+		echo $ON
 		ONH="$(cut -d: -f1 <<< $ON)"
 		ONM="$(cut -d: -f2 <<< $ON)"
 		#right now this assumes that the crontab entries for this script are going to be the first two entries
