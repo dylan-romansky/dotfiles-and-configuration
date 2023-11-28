@@ -21,13 +21,6 @@ function STR () {
 }
 
 function SSID () {
-	if [ "${BLOCK_BUTTON}" == 1 ]; then
-		killall notify-osd
-		notify-send $(nmcli -p device show | grep IP4.ADDRESS | awk 'FNR==1 { print $2 }')
-	elif [ "${BLOCK_BUTTON}" == 3 ]; then
-		killall notify-osd
-		notify-send $(curl -4 icanhazip.com)
-	fi
 	SSID=$(iwgetid -r)
 	if [ -z "$SSID" ]; then
 		echo -n -e "<span color=\"#FF0000\" font=\"Font Awesome 6 Free\">\xef\x9e\x94</span>"
@@ -35,7 +28,14 @@ function SSID () {
 		echo -n -e "<span color=\"#91E78B\" font=\"Font Awesome 6 Free\">\xef\x87\xab</span> $SSID:</span>"
 	fi
 }
-
+# TODO: check if networking is available before doing the following
+if [ "${BLOCK_BUTTON}" == 1 ]; then
+	killall notify-osd
+	notify-send $(nmcli -p device show | grep IP4.ADDRESS | awk 'FNR==1 { print $2 }')
+elif [ "${BLOCK_BUTTON}" == 3 ]; then
+	killall notify-osd
+	notify-send $(curl -4 icanhazip.com)
+fi
 if [ -n "$(nmcli device status | grep ethernet | grep connected)" ]; then
 	#I have to echo the result of an echo statement for i3_blocks
 	#to properly print what I want it to. Hence this nested echo
