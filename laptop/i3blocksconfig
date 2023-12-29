@@ -24,7 +24,7 @@ interval=1
 #interval=once
 
 [network]
-command=i3b_net.sh
+command=echo -e "$(i3b_net.sh)"
 interval=5
 
 [cpu]
