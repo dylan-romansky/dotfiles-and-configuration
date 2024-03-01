@@ -313,6 +313,8 @@ alias blipblop='cd $HOME/Documents/games/blip-blop/vc-projects/Blip_n_Blop_3/; .
 
 alias skoger='VBoxManage startvm "skoger ryline" --type headless; ssh Nuthouse'
 alias phone='ssh -i ~/.ssh/id_phone -p 8022'
+alias scpi='scp -i ~/.ssh/id_rsa_rasp squirrels@raspberrypi.local:'
+alias rscpi='scp -r -i ~/.ssh/id_rsa_rasp squirrels@raspberrypi.local:'
 
 # system related
 
