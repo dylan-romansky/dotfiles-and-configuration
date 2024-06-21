@@ -39,6 +39,7 @@ if [ -z "$DIFFS" ]; then
 else
 	echo "Unresolved changes detected. Resolving."
 	echo "If you still want to make changes, please run this script again after completion."
+	i3restart
 	exit
 fi
 
