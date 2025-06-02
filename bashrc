@@ -227,7 +227,7 @@ source $HOME/bin/ptheme/prompt_bigdigsquig.sh
 
 alias bconf='vim $HOME/.bashrc'
 alias binit='source $HOME/.bashrc'
-alias i3c='i3-var-update'
+alias i3c='i3-var-update; i3restart'
 alias xconf='vim $HOME/.Xresources'
 alias xreload='xrdb $HOME/.Xresources'
 alias xmerge='xrdb merge $HOME/.Xresources'
